@@ -3,8 +3,9 @@ import { Provider } from 'react-redux'
 import { createStackNavigator } from 'react-navigation';
 import Home from './src/components/Home'
 import SinglePost from './src/components/SinglePost'
-
 import store from './src/store/index'
+import MyMap from './components/MyMap'
+
 
 class App extends React.Component {
   render() {
@@ -19,6 +20,15 @@ class App extends React.Component {
 const StackNav = createStackNavigator({
   Home: {
     screen: Home,
+    navigationOptions: ({ navigation, header }) => ({
+      ...header,
+      headerTintColor: 'white',
+      title: 'Welcome',
+      headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 },
+    })
+  },
+  MyMap: {
+    screen: MyMap,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
       headerTintColor: 'white',
