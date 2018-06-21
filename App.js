@@ -1,23 +1,29 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Provider } from 'react-redux'
+import { createStackNavigator } from 'react-navigation';
+import Home from './src/components/Home'
+import store from './src/store/index'
 
-export default class App extends React.Component {
+class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+      // <Provider store={store}>
+        <StackNav />
+      // </Provider>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const StackNav = createStackNavigator({
+  Home: {
+    screen: Home,
+    navigationOptions: ({ navigation, header }) => ({
+      ...header,
+      headerTintColor: 'white',
+      title: 'Welcome',
+      headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 },
+    })
   },
-});
+})
+
+export default App
