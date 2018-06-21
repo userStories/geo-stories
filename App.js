@@ -2,14 +2,16 @@ import React from 'react';
 import { Provider } from 'react-redux'
 import { createStackNavigator } from 'react-navigation';
 import Home from './src/components/Home'
+import SinglePost from './src/components/SinglePost'
+
 import store from './src/store/index'
 
 class App extends React.Component {
   render() {
     return (
-      // <Provider store={store}>
+      <Provider store={store}>
         <StackNav />
-      // </Provider>
+      </Provider>
     );
   }
 }
@@ -17,6 +19,15 @@ class App extends React.Component {
 const StackNav = createStackNavigator({
   Home: {
     screen: Home,
+    navigationOptions: ({ navigation, header }) => ({
+      ...header,
+      headerTintColor: 'white',
+      title: 'Welcome',
+      headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 },
+    })
+  },
+  SinglePost: {
+    screen: SinglePost,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
       headerTintColor: 'white',
