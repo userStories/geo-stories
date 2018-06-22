@@ -13,11 +13,14 @@ class SinglePost extends Component {
         this.props.singlePostMaker(id)
     }
     render(){
+        const imageExt = ['jpeg', 'jpg', 'png', 'gif']
+        const videoExt = ['mp4', 'mp3', 'avi', 'flv', 'mov', 'wmv'];
         console.log('this.props.singlePost.mediaLink.length: ', this.props.singlePost.mediaLink)
         return (
+            this.props.singlePost.mediaLink ?
             <View style={styles.OuterViewWrap}>
-                <Text>Title</Text>
-            {this.props.singlePost.mediaLink ?
+                <Text>{this.props.singlePost.title}</Text>
+                {videoExt.indexOf(this.props.singlePost.mediaLink.slice(-3)) !== -1 || videoExt.indexOf(this.props.singlePost.mediaLink.slice(-4)) !== -1 ? 
                 <Video 
                 source={{uri: this.props.singlePost.mediaLink}} 
                 rate={1.0}
@@ -27,7 +30,13 @@ class SinglePost extends Component {
                 shouldPlay
                 isLooping
                 style={styles.imageWrap} 
-                />: null}
+                />: 
+                <Image style={styles.imageWrap}source={{uri: this.props.singlePost.mediaLink}} /> 
+                }
+                <Text>{this.props.singlePost.text}</Text>
+            </View>:
+            <View style={styles.OuterViewWrap}>
+                <Text>{this.props.singlePost.title}</Text>
                 <Text>{this.props.singlePost.text}</Text>
             </View>
 
