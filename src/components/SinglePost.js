@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     imageWrap: {
-        width: 150,
-        height: 100,
+        width: 350,
+        height: 300,
     }
 })
 const mapStateToProps = state =>{

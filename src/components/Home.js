@@ -12,6 +12,7 @@ export default class Home extends React.Component {
           <View>
             <Text style={styles.titleText}>Home Component</Text>
             <Button onPress={this.handlePress} title="SinglePost" />
+            <Button onPress={()=> this.props.navigation.navigate('MyMap')} title="Map" />
           </View>
     );
   }

@@ -4,7 +4,7 @@ import { createStackNavigator } from 'react-navigation';
 import Home from './src/components/Home'
 import SinglePost from './src/components/SinglePost'
 import store from './src/store/index'
-import MyMap from './components/MyMap'
+import MyMap from './src/components/MyMap'
 
 
 class App extends React.Component {

@@ -19,14 +19,8 @@ export const getSinglePostThunk = postId =>{
     return async dispatch => {
         try{
             console.log('postId in thunk: ', postId)
-            // const res = await fetch(`/localhost:8080/api/posts/${postId}`, {
-            //     method: 'GET',
-            //     headers: {
-            //         'content-type': 'application/json'
-            //     }
-            // })
-            // const data = await res.json()
             const {data} = await axios.get(`http://localhost:8080/api/posts/${postId}`)
+            // const {data} = await axios.get(`http://172.17.20.201:8080/api/posts/${postId}`)
             console.log('data in thunk: ', data)
             dispatch(getSinglePost(data))
         } catch(err){
