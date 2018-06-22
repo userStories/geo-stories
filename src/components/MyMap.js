@@ -1,54 +1,14 @@
 import React, {Component} from "react";
-import { Button, Image, Dimensions, StyleSheet, Text, View } from "react-native";
+import { Button, Image, Dimensions, StyleSheet, Text, View, Linking } from "react-native";
 import { MapView } from "expo";
-
-const tempMarkers = [
-  {
-    coordinate: {
-      latitude: 41.89671271,
-      longitude: -87.63702022,
-    },
-    title: 'Beer Fest',
-    description: 'German beer festival'
-  },
-  {
-    coordinate: {
-      latitude: 41.89536942,
-      longitude: -87.63687061,
-    },
-    title: 'Tomato fest',
-    description: 'Little Italia tomato festival'
-  },
-  {
-    coordinate: {
-      latitude: 41.89470126,
-      longitude: -87.63738955,
-    },
-    title: 'Cuban Cigar',
-    description: 'Little Havana Cuban fest'
-  },
-  {
-    coordinate: {
-      latitude: 41.89470126,
-      longitude: -87.63738955,
-    },
-    title: 'Bike Race',
-    description: 'Bicycle racing'
-  },
-  {
-    coordinate: {
-      latitude: 41.89580093,
-      longitude: -87.63959151,
-    },
-    title: 'Chicago Marathon',
-    description: '45th Chicago marthon'
-  },
-]
+import {connect} from "react-redux"
+import {getAllPostsThunk} from '../store'
+import PopupDialog from 'react-native-popup-dialog'
 
 
-export default class MyMap extends Component{
+class MyMap extends Component{
+  
   state = {
-    markers: tempMarkers,
     focusedLocation: {
       latitude: 41.89557129,
       longitude: -87.6386050932,
@@ -58,6 +18,10 @@ export default class MyMap extends Component{
         Dimensions.get('window').height * 0.00522
       
     }
+  }
+
+  componentDidMount(){
+    this.props.viewAllPosts()
   }
   pickLocationHandler = (event) => {
     const coords = event.nativeEvent.coordinate;
@@ -72,21 +36,8 @@ export default class MyMap extends Component{
     })
   }
 
-  genAllMarkers = () => {
-    let outMarkers = tempMarkers.map((marker, id) => {
-      return (
-        <MapView.Marker
-        key={id}
-        coordinate={marker.location}
-        title={marker.title}
-        description={marker.description}
-        />
-      )
-    });
-    return outMarkers;
-  }
-
   render() {
+    console.log('this.props.allPosts in MyMap component: ', this.props.allPosts)
     return (
       <View style={styles.container}>
         <MapView
@@ -94,17 +45,25 @@ export default class MyMap extends Component{
           region = {this.state.focusedLocation}
           style={styles.map}
           onPress={this.pickLocationHandler}
-        >
+          >
 
-          {this.state.markers.map((marker, index) => {
+          {this.props.allPosts.map((marker, index) => {
+              let newCoord = {
+                latitude: marker.latitude,
+                longitude: marker.longitude
+              }
+              console.log('(marker id, coord): ', `(${marker.id}, (latitude: ${newCoord.latitude}, longitude: ${newCoord.longitude}`)
+
             return (
               <MapView.Marker
                 key={index}
-                coordinate={marker.coordinate}
-                title={marker.title}
-                description={marker.description}
+                coordinate={newCoord}
+                // title={marker.title}
+                // description={marker.text}
+                onPress={() => this.props.navigation.navigate('SinglePost', {id: marker.id})}
               >
               </MapView.Marker>
+          
             );
           })}
         </MapView>
@@ -134,4 +93,18 @@ const styles = StyleSheet.create({
   }
 });
 
+
+const mapStateToProps = state => {
+  return {
+    allPosts: state.postReducer.allPosts
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    viewAllPosts: () => dispatch(getAllPostsThunk())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyMap)
 
