@@ -5,6 +5,7 @@ import Home from './src/components/Home'
 import SinglePost from './src/components/SinglePost'
 import store from './src/store/index'
 import MyMap from './src/components/MyMap'
+import UserProfile from './src/components/UserProfile'
 
 
 class App extends React.Component {
@@ -38,6 +39,15 @@ const StackNav = createStackNavigator({
   },
   SinglePost: {
     screen: SinglePost,
+    navigationOptions: ({ navigation, header }) => ({
+      ...header,
+      headerTintColor: 'white',
+      title: 'Welcome',
+      headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 },
+    })
+  },
+  UserProfile: {
+    screen: UserProfile,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
       headerTintColor: 'white',
