@@ -15,12 +15,12 @@ class SinglePost extends Component {
     render(){
         const imageExt = ['jpeg', 'jpg', 'png', 'gif']
         const videoExt = ['mp4', 'mp3', 'avi', 'flv', 'mov', 'wmv'];
-        console.log('this.props.singlePost.mediaLink.length: ', this.props.singlePost.mediaLink)
+        console.log('this.props.singlePost.mediaLink: ', this.props.singlePost.mediaLink)
         return (
             this.props.singlePost.mediaLink ?
             <View style={styles.OuterViewWrap}>
                 <Text>{this.props.singlePost.title}</Text>
-                {videoExt.indexOf(this.props.singlePost.mediaLink.slice(-3)) !== -1 || videoExt.indexOf(this.props.singlePost.mediaLink.slice(-4)) !== -1 ? 
+                {videoExt.indexOf(this.props.singlePost.mediaLink.slice(-3)) !== -1 ? 
                 <Video 
                 source={{uri: this.props.singlePost.mediaLink}} 
                 rate={1.0}

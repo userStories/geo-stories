@@ -1,13 +1,13 @@
-import React, {Component} from "react";
-import { Button, Image, Dimensions, StyleSheet, Text, View, Linking } from "react-native";
+import React, { Component } from "react";
+import { Button, Image, Dimensions, StyleSheet, Text, View, Linking, Overlay } from "react-native";
 import { MapView } from "expo";
-import {connect} from "react-redux"
-import {getAllPostsThunk} from '../store'
-import PopupDialog from 'react-native-popup-dialog'
+import { connect } from "react-redux"
+import { getAllPostsThunk, getSinglePostThunk } from '../store'
+import PopupDialog, {DialogTitle} from 'react-native-popup-dialog'
 
 
-class MyMap extends Component{
-  
+class MyMap extends Component {
+
   state = {
     focusedLocation: {
       latitude: 41.89557129,
@@ -16,11 +16,11 @@ class MyMap extends Component{
       longitudeDelta:
         Dimensions.get('window').width /
         Dimensions.get('window').height * 0.00522
-      
+
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.viewAllPosts()
   }
   pickLocationHandler = (event) => {
@@ -38,38 +38,55 @@ class MyMap extends Component{
 
   render() {
     console.log('this.props.allPosts in MyMap component: ', this.props.allPosts)
+    let popupTitle;
+    let popupText;
+    let popupNavId;
     return (
       <View style={styles.container}>
         <MapView
-          initialRegion = {this.state.focusedLocation}
-          region = {this.state.focusedLocation}
+          initialRegion={this.state.focusedLocation}
+          region={this.state.focusedLocation}
           style={styles.map}
           onPress={this.pickLocationHandler}
-          >
+        >
 
           {this.props.allPosts.map((marker, index) => {
-              let newCoord = {
-                latitude: marker.latitude,
-                longitude: marker.longitude
-              }
-              console.log('(marker id, coord): ', `(${marker.id}, (latitude: ${newCoord.latitude}, longitude: ${newCoord.longitude}`)
-
+            let newCoord = {
+              latitude: marker.latitude,
+              longitude: marker.longitude
+            }
             return (
               <MapView.Marker
-                key={index}
-                coordinate={newCoord}
-                // title={marker.title}
-                // description={marker.text}
-                onPress={() => this.props.navigation.navigate('SinglePost', {id: marker.id})}
+              key={index}
+              coordinate={newCoord}
+              // title={marker.title}
+              // description={marker.text}
+              // onPress={() => this.props.navigation.navigate('SinglePost', { id: marker.id })}
+              onPress={() => {
+                console.log('marker.id: ', marker.id)
+                this.props.viewSinglePost(marker.id)
+                this.popupDialog.show();
+              }}
               >
               </MapView.Marker>
-          
+
             );
           })}
         </MapView>
-
+              <PopupDialog 
+              width={0.7}
+              height={0.07}
+              overlayOpacity={0.6}
+              haveTitleBar={true}
+              ref={(popupDialog) => { this.popupDialog = popupDialog }}>
+                <View style={styles.container}>
+                  <Text style={styles.title}>{this.props.singlePost.title}</Text>
+                  {/* <Text>{this.props.singlePost.text}</Text> */}
+                  <Text style={styles.link} onPress={() => this.props.navigation.navigate('SinglePost', { id: this.props.singlePost.id })}>Post Link</Text>
+                </View>
+              </PopupDialog>
         <View style={styles.button}>
-          <Button title="Locate Me" onPress={() => alert('Pick Location lat:'+this.state.focusedLocation.latitude + ' long:' + this.state.focusedLocation.longitude)} />
+          <Button title="Locate Me" onPress={() => alert('Pick Location lat:' + this.state.focusedLocation.latitude + ' long:' + this.state.focusedLocation.longitude)} />
         </View>
       </View>
     )
@@ -90,19 +107,29 @@ const styles = StyleSheet.create({
   },
   button: {
     margin: 8
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+  link: {
+    color: 'black',
+    fontSize: 16
   }
 });
 
 
 const mapStateToProps = state => {
   return {
-    allPosts: state.postReducer.allPosts
+    allPosts: state.postReducer.allPosts,
+    singlePost: state.postReducer.singlePost
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    viewAllPosts: () => dispatch(getAllPostsThunk())
+    viewAllPosts: () => dispatch(getAllPostsThunk()),
+    viewSinglePost: (postId) => dispatch(getSinglePostThunk(postId))
   }
 }
 
