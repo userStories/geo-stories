@@ -36,8 +36,7 @@ class UserProfile extends Component {
               height: height + 338,
               flexDirection: 'row',
               flexWrap: 'wrap',
-              justifyContent: 'space-evenly',
-              
+              justifyContent: 'space-evenly'
             }}>
             {
               user.myPhotoArr.map(photo =>

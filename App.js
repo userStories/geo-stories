@@ -18,13 +18,15 @@ class App extends React.Component {
   }
 }
 
+
+console.log('store: ', store)
 const StackNav = createStackNavigator({
   Home: {
     screen: Home,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
       headerTintColor: 'white',
-      title: 'Welcome',
+      title: 'Home',
       headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 },
     })
   },
@@ -33,7 +35,7 @@ const StackNav = createStackNavigator({
     navigationOptions: ({ navigation, header }) => ({
       ...header,
       headerTintColor: 'white',
-      title: 'Welcome',
+      title: 'Map',
       headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 },
     })
   },
@@ -42,7 +44,7 @@ const StackNav = createStackNavigator({
     navigationOptions: ({ navigation, header }) => ({
       ...header,
       headerTintColor: 'white',
-      title: 'Welcome',
+      title: 'Post',
       headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 },
     })
   },
