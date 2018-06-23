@@ -9,8 +9,8 @@ console.log(Dimensions.get('window'))
 
 const user = {
   email: 'user@gmail.com',
-  firstName: 'Sumpy',
-  lastName: 'Pete',
+  firstName: 'Pete',
+  lastName: 'Sumpy',
   profileImg: 'https://i1.wp.com/www.thisblogrules.com/wp-content/uploads/2010/02/batman-for-facebook.jpg?resize=250%2C280',
   tagline: 'woohoo',
   locationStr: 'Chicago',
