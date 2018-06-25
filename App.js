@@ -1,7 +1,10 @@
 import React from 'react';
 import { Provider } from 'react-redux'
 import { createStackNavigator } from 'react-navigation';
-import Home from './src/components/Home'
+import NewPost from './src/components/NewPost'
+import TakePicture from './src/components/TakePicture'
+import RecordVideo from './src/components/RecordVideo'
+// import Home from './src/components/Home'
 import SinglePost from './src/components/SinglePost'
 import store from './src/store/index'
 import MyMap from './src/components/MyMap'
@@ -21,15 +24,6 @@ class App extends React.Component {
 
 console.log('store: ', store)
 const StackNav = createStackNavigator({
-  Home: {
-    screen: Home,
-    navigationOptions: ({ navigation, header }) => ({
-      ...header,
-      headerTintColor: 'white',
-      title: 'Home',
-      headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 },
-    })
-  },
   MyMap: {
     screen: MyMap,
     navigationOptions: ({ navigation, header }) => ({
@@ -55,6 +49,21 @@ const StackNav = createStackNavigator({
       headerTintColor: 'white',
       title: 'Welcome',
       headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 },
+    })
+  },
+  TakePicture: {
+    screen: TakePicture,
+  },
+  RecordVideo: {
+    screen: RecordVideo,
+  },
+  NewPost: {
+    screen: NewPost,
+    navigationOptions: ({ navigation, header }) => ({
+      ...header,
+      headerTintColor: 'black',
+      title: 'Add New Post',
+      headerStyle: { backgroundColor: 'white', borderWidth: 1, height: 60 },
     })
   },
 })

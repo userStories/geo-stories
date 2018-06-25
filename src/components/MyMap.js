@@ -41,11 +41,9 @@ class MyMap extends Component {
         console.log('this.props.allPosts in MyMap component: ', this.props.allPosts)
         console.log('this.props.allCategories: ', this.props.allCategories)
         // let filter = null;
-        const categoryFilterButton = () => <Text>Category Filter</Text>
-        const postButton = () => <Text>Post</Text>
-        const locateButton = () => <Text>Locate Me</Text>
-        const buttonGroup = [{element: categoryFilterButton}, {element: postButton}, {element: locateButton}]
+        console.log('this.props.allPosts', this.props.allPosts)
         return (
+            this.props.allPosts.length ?
             <View style={styles.container}>
                 <MapView
                     initialRegion={this.state.focusedLocation}
@@ -117,7 +115,7 @@ class MyMap extends Component {
                 </PopupDialog>
                 <View style={styles.button}>
                     <View><Button title='Category Filter' buttonStyle={styles.filterButton} onPress={() => this.popupDialog2.show()}/></View>
-                    <View><Button title="Post" buttonStyle={styles.buttonPost} /></View>
+                    <View><Button title="Post" buttonStyle={styles.buttonPost} onPress={() => this.props.navigation.navigate('NewPost')} /></View>
                     <View><Button title="Locate Me" buttonStyle={styles.buttonLocate} onPress={() => alert('Pick Location lat:' + this.state.focusedLocation.latitude + ' long:' + this.state.focusedLocation.longitude)} /></View>
                 </View>
                     <PopupDialog
@@ -143,7 +141,7 @@ class MyMap extends Component {
                           </Picker> 
                         </View>
                     </PopupDialog>
-            </View>
+            </View> : null
         )
     }
 }
