@@ -40,10 +40,8 @@ class MyMap extends Component {
     render() {
         console.log('this.props.allPosts in MyMap component: ', this.props.allPosts)
         console.log('this.props.allCategories: ', this.props.allCategories)
-        // let filter = null;
         console.log('this.props.allPosts', this.props.allPosts)
         return (
-            this.props.allPosts.length ?
             <View style={styles.container}>
                 <MapView
                     initialRegion={this.state.focusedLocation}
@@ -60,14 +58,9 @@ class MyMap extends Component {
                             <MapView.Marker
                                 key={index}
                                 coordinate={newCoord}
-                                // title={marker.title}
-                                // description={marker.text}
-                                // onPress={() => this.props.navigation.navigate('SinglePost', { id: marker.id })}
-                                onPress={() => {
-                                    console.log('marker.id: ', marker.id)
-                                    this.props.viewSinglePost(marker.id)
-                                    this.popupDialog.show();
-                                }}
+                                title={marker.title}
+                                description={marker.text}
+                                onCalloutPress={() => this.props.navigation.navigate('SinglePost', { id: marker.id })}
                             >
                             </MapView.Marker>
 
@@ -80,39 +73,21 @@ class MyMap extends Component {
                             }
                             if (marker.categoryId === this.props.filterId) {
                                 return (
-
                                     <MapView.Marker
                                         key={index}
+                                        styles={{alignItems: "center"}}
                                         coordinate={newCoord}
-                                        // title={marker.title}
-                                        // description={marker.text}
-                                        // onPress={() => this.props.navigation.navigate('SinglePost', { id: marker.id })}
-                                        onPress={() => {
-                                            console.log('marker.id: ', marker.id)
-                                            this.props.viewSinglePost(marker.id)
-                                            this.popupDialog.show();
-                                        }}
+                                        title={marker.title}
+                                        description={marker.text}
+                                        onCalloutPress={() => this.props.navigation.navigate('SinglePost', { id: marker.id })}
                                     >
                                     </MapView.Marker>
-
                                 );
                             }
                         })
 
                     }
                 </MapView>
-                <PopupDialog
-                    width={0.7}
-                    height={0.07}
-                    overlayOpacity={0.6}
-                    haveTitleBar={true}
-                    ref={(popupDialog) => { this.popupDialog = popupDialog }}>
-                    <View style={styles.container}>
-                        <Text style={styles.title}>{this.props.singlePost.title}</Text>
-                        {/* <Text>{this.props.singlePost.text}</Text> */}
-                        <Text style={styles.link} onPress={() => this.props.navigation.navigate('SinglePost', { id: this.props.singlePost.id })}>Post Link</Text>
-                    </View>
-                </PopupDialog>
                 <View style={styles.button}>
                     <View><Button title='Category Filter' buttonStyle={styles.filterButton} onPress={() => this.popupDialog2.show()}/></View>
                     <View><Button title="Post" buttonStyle={styles.buttonPost} onPress={() => this.props.navigation.navigate('NewPost')} /></View>
@@ -126,13 +101,9 @@ class MyMap extends Component {
                         ref={(popupDialog) => { this.popupDialog2 = popupDialog }}>
                         <View style={styles.container}>
                             <Text style={styles.title}>Category Filter</Text>
-                            {/* <Text onPress={() => this.props.changeFilterId(0)}>All</Text>
-                            {this.props.allCategories.map(category =>{
-                                return <Text style={styles.filterText} onPress={() => this.props.changeFilterId(category.id)}>{category.title}</Text>
-                            })} */}
                              <Picker
                               selectedValue={this.props.filterId}
-                              style={{ height: 100, width: 100 }}
+                              style={{ height: 100, width: 100}}
                               onValueChange={(itemValue, itemIndex) => this.props.changeFilterId(itemValue)}>
                               <Picker.Item label="All" value={0} />
                               {this.props.allCategories.map(category =>{
@@ -141,7 +112,7 @@ class MyMap extends Component {
                           </Picker> 
                         </View>
                     </PopupDialog>
-            </View> : null
+            </View> 
         )
     }
 }

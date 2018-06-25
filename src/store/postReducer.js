@@ -37,8 +37,8 @@ export const getSinglePostThunk = postId =>{
     return async dispatch => {
         try{
             console.log('postId in thunk: ', postId)
-            const {data} = await axios.get(`http://localhost:8080/api/posts/${postId}`)
-            // const {data} = await axios.get(`http://172.17.20.159:8080/api/posts/${postId}`)
+            // const {data} = await axios.get(`http://localhost:8080/api/posts/${postId}`)
+            const {data} = await axios.get(`http://172.17.20.159:8080/api/posts/${postId}`)
             // const {data} = await axios.get(`http://192.168.1.106:8080/api/posts/${postId}`)
             // const {data} = await axios.get(`http://172.31.98.214:8080/api/posts/${postId}`)
 
@@ -64,8 +64,8 @@ export const popupThunk = postId =>{
 export const getAllPostsThunk = () => {
     return async (dispatch) =>{
         try{
-            const {data} = await axios.get('http://localhost:8080/api/posts')
-            // const {data} = await axios.get(`http://172.17.20.159:8080/api/posts`)
+            // const {data} = await axios.get('http://localhost:8080/api/posts')
+            const {data} = await axios.get(`http://172.17.20.159:8080/api/posts`)
             // const {data} = await axios.get(`http://192.168.1.106:8080/api/posts`)
             // const {data} = await axios.get(`http://172.31.98.214:8080/api/posts)
 

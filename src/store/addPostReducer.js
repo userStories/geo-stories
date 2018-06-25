@@ -29,7 +29,7 @@ export const addNewPostThunk = (info) => {
 
 
 
-      const rawResponse = await fetch('http://localhost:8080/api/posts/', {
+      const rawResponse = await fetch('http://172.17.20.159:8080/api/posts/', {
         method: 'POST',
         headers: {
           'X-AYLIEN-TextAPI-Application-ID': '6aca562c',

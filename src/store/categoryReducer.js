@@ -20,9 +20,10 @@ const changeFilterId = filterId => {
 export const getAllCategoriesThunk = () =>{
     return async dispatch => {
         try {
-            const {data} = await axios.get('http://localhost:8080/api/categories')
+            // const {data} = await axios.get('http://localhost:8080/api/categories')
             // const {data} = await axios.get('http://172.31.98.214:8080/api/categories')
             // const {data} = await axios.get('http://192.168.1.106:8080/api/categories')
+            const {data} = await axios.get('http://172.17.20.159:8080/api/categories')
             dispatch(getAllCategories(data))
         }catch(err){
             console.error(err)
