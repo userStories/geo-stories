@@ -1,7 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux'
 import { createStackNavigator } from 'react-navigation';
-import store from './src/store/index'
 import NewPost from './src/components/NewPost'
 import TakePicture from './src/components/TakePicture'
 import RecordVideo from './src/components/RecordVideo'
