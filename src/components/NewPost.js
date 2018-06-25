@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Button, TextInput, Image, Picker, Text } from 'react-native';
 import { Camera, Permissions, ImagePicker, ImageManipulator, Video } from 'expo';
 import { connect } from 'react-redux'
-import { addNewPostThunk } from '../store/addPostReducer'
+import { addNewPostThunk } from '../store'
 
 class NewPost extends React.Component {
   constructor() {
