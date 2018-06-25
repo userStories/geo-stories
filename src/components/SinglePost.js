@@ -7,6 +7,35 @@ import { getSinglePostThunk } from '../store'
 
 class SinglePost extends Component {
 
+<<<<<<< HEAD
+  componentDidMount() {
+    const id = this.props.navigation.getParam('id', 'no input')
+    console.log('id in componentDidMount: ', id)
+    this.props.singlePostMaker(id)
+  }
+  
+  render() {
+    console.log('this.props.singlePost.mediaLink.length: ', this.props.singlePost.mediaLink)
+    return (
+      <View style={styles.OuterViewWrap}>
+        <Text>Title</Text>
+        {this.props.singlePost.mediaLink ?
+          <Video
+            source={{ uri: this.props.singlePost.mediaLink }}
+            rate={1.0}
+            volume={1.0}
+            muted={false}
+            resizeMode="cover"
+            shouldPlay
+            isLooping
+            style={styles.imageWrap}
+          /> : null}
+        <Text>{this.props.singlePost.text}</Text>
+      </View>
+
+    )
+  }
+=======
     componentDidMount(){
         const id = this.props.navigation.getParam('id', 'no input')
         console.log('id in componentDidMount: ', id)
@@ -42,6 +71,7 @@ class SinglePost extends Component {
 
         )
     }
+>>>>>>> 3b87fb941d645e73ef136066d9a01b141dd1b067
 }
 
 
