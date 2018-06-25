@@ -16,6 +16,8 @@ class NewPost extends React.Component {
     }
   }
 
+  // "plase work"
+
   async componentDidMount() {
     const permissions = Permissions.CAMERA_ROLL;
     const permissionsTwo = Permissions.CAMERA;
