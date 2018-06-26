@@ -14,6 +14,10 @@ export default class Home extends React.Component {
   }
 
   handlePressLoginScreen = () => {
+    this.props.navigation.navigate('Login')
+  }
+
+  handlePressSignupScreen = () => {
     this.props.navigation.navigate('Signup')
   }
 
@@ -24,8 +28,8 @@ export default class Home extends React.Component {
         <Button onPress={this.handlePress} title="SinglePost" />
         <Button onPress={this.handlePressUserProfile} title="UserProfile" />
         <Button onPress={()=> this.props.navigation.navigate('MyMap')} title="Map" />
-        <Button onPress={this.handlePressLoginScreen} title="Signup" />
-
+        <Button onPress={this.handlePressLoginScreen} title="Login" />
+        <Button onPress={this.handlePressSignupScreen} title="Signup" /> 
       </View>
     );
   }

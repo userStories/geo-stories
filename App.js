@@ -11,6 +11,7 @@ import MyMap from './src/components/MyMap'
 import UserProfile from './src/components/UserProfile'
 // import Login from './src/components/auth-form'
 import Signup from './src/components/Signup'
+import Login from './src/components/Login'
 import Home from './src/components/Home'
 
 
@@ -71,6 +72,15 @@ const StackNav = createStackNavigator({
       headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 },
     })
   },
+  Login: {
+    screen: Login,
+    navigationOptions: ({ navigation, header }) => ({
+      ...header,
+      headerTintColor: 'white',
+      title: 'Welcome',
+      headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 },
+    })
+  },
   TakePicture: {
     screen: TakePicture,
   },
@@ -85,7 +95,7 @@ const StackNav = createStackNavigator({
       title: 'Add New Post',
       headerStyle: { backgroundColor: 'white', borderWidth: 1, height: 60 },
     })
-  },
+  }
 })
 
 export default App
