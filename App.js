@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet } from "react-native";
 import { Provider } from 'react-redux'
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 import NewPost from './src/components/NewPost'
 import TakePicture from './src/components/TakePicture'
 import RecordVideo from './src/components/RecordVideo'
@@ -10,12 +10,15 @@ import SinglePost from './src/components/SinglePost'
 import store from './src/store/index'
 import MyMap, { MyLocation } from './src/components/MyMap'
 import UserProfile from './src/components/UserProfile'
+import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs'
 
 class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
+        {/* <Tabs /> */}
         <StackNav />
+        {/* <MainStack /> */}
       </Provider>
     );
   }
@@ -24,11 +27,28 @@ class App extends React.Component {
 
 console.log('store: ', store)
 
-const Tabs = createBottomTabNavigator({
-  post: NewPost,
-  location: MyLocation,
-  profile: UserProfile,
+const Tabs = createMaterialBottomTabNavigator({
+  Home: {screen: MyMap},
+  Post: {screen: NewPost},
+  Profile: {screen: UserProfile},
+  // Location: {screen: MyLocation},
+}, {
+  initialRouteName: 'Home',
+  activeTintColor: '#F44336',
+  barStyle: { paddingBottom: 20 }
+  
 })
+
+// const MainStack = createSwitchNavigator({
+//   map: { 
+//     screen: MyMap
+//   },
+//   main: {
+//     screen: Tabs
+//   },
+// }, {
+//   animationEnabled: true
+// })
 
 const StackNav = createStackNavigator({
   MyMap: {

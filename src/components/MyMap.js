@@ -25,19 +25,24 @@ const CARD_HEIGHT = 105;
 const CARD_WIDTH = 140;
 
 class MyMap extends Component {
-
-    state = {
+		// constructor(){
+		// 	super()
+			state = {
+				currentMarker: null,
         focusedLocation: {
-            latitude: 41.89557129,
-            longitude: -87.6386050932,
-            latitudeDelta: 0.00522,
-            longitudeDelta:
-                Dimensions.get('window').width /
-                Dimensions.get('window').height * 0.00522
-
-        }
-		}
-		
+					latitude: 41.89557129,
+					longitude: -87.6386050932,
+					latitudeDelta: 0.00522,
+					longitudeDelta:
+					Dimensions.get('window').width /
+					Dimensions.get('window').height * 0.00522
+					
+				}
+			}
+			// this.callOutHide = this.callOutHide.bind(this)
+			// this.callOutShow = this.callOutShow.bind(this)
+		// }
+			
 		callOutShow = () => {
 			this.currentMarker.showCallout();
 		}
@@ -61,8 +66,8 @@ class MyMap extends Component {
 			// We should just debounce the event listener here
 			this.animation.addListener(({ value }) => {
 				let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
-				if (index >= posts.length) {
-					index = posts.length - 1;
+				if (index >= this.props.allPosts.length) {
+					index = this.props.allPosts.length - 1;
 				}
 				if (index <= 0) {
 					index = 0;
@@ -73,36 +78,32 @@ class MyMap extends Component {
 					if (this.index !== index) {
 						// this.callOutHide();
 						this.index = index;
-						const { coordinate } = posts[index];
+						const post = this.props.allPosts[index];
 
 						
-						this.setState( () => {
-							return {
+						this.setState({
 								focusedLocation: {
 									...this.state.focusedLocation,
-									latitude: coordinate.latitude,
-									longitude: coordinate.longitude,
+									latitude: this.props.allPosts[index].latitude,
+									longitude: this.props.allPosts[index].longitude,
 								}
-							}
 						})
 						
-						alert( 'Pick Location lat:' + 
+						console.log( 'Pick Location lat:' + 
 							this.state.focusedLocation.latitude + ' long:' + 
 							this.state.focusedLocation.longitude
 						)
 
 						this.map.animateToRegion(
 							{
-								...coordinate,
+								latitude: this.props.allPosts[index].latitude,
+								longitude: this.props.allPosts[index].longitude,
 								latitudeDelta: this.state.focusedLocation.latitudeDelta,
 								longitudeDelta: this.state.focusedLocation.longitudeDelta,
 							},
 							350
 						);
-						// this.setState({
-						// 	currentMarker: this.state.markers[index]
-						// })
-						// this.callOutShow();
+						this.callOutShow();
 					}
 				}, 10);
 			});
@@ -141,9 +142,11 @@ class MyMap extends Component {
                             latitude: marker.latitude,
                             longitude: marker.longitude
                         }
+												console.log('New Marker index: ', this.index )
                         return (
                             <MapView.Marker
-								                ref={ref => { this.currentMarker = ref; }}
+								                // ref={ref => { this.currentMarker = ref; }}
+								                ref={ref => { if(this.index === index) { this.currentMarker = ref; /* this.callOutShow();*/ } }}
 																style={styles.mapMarker}
                                 key={index}
                                 coordinate={newCoord}
@@ -160,10 +163,12 @@ class MyMap extends Component {
                                 latitude: marker.latitude,
                                 longitude: marker.longitude
                             }
+														console.log('New Marker index: ', this.index )
                             if (marker.categoryId === this.props.filterId) {
                                 return (
                                     <MapView.Marker
-												                ref={ref => { this.currentMarker = ref; }}
+												                // ref={ref => { if(this.index === index) { this.currentMarker = ref} }}
+																				ref={ref => { if(this.index === index) { this.currentMarker = ref; /* this.callOutShow(); */ } }}
                                         key={index}
 																				style={styles.mapMarker}
                                         coordinate={newCoord}
@@ -376,95 +381,6 @@ scrollViewContainer: {
     color: "#444",
   },
 });
-
-// const styles = StyleSheet.create({
-//     container: {
-//         width: "100%",
-//         alignItems: "center"
-//     },
-//     map: {
-//         borderWidth: 1,
-//         borderColor: "black",
-//         backgroundColor: "#eee",
-//         width: "100%",
-//         height: "90%"
-//     },
-//     button: {
-//         margin: 8,
-//         flexDirection: 'row',
-//         // alignSelf: 'flex-start',
-//         alignItems: "center"
-//     },
-//     filterButton: {
-//         backgroundColor: "green",
-//     },
-//     title: {
-//         fontSize: 20,
-//         fontWeight: 'bold'
-//     },
-//     link: {
-//         color: 'black',
-//         fontSize: 16
-//     },
-//     buttonPost: {
-//         backgroundColor: "red",
-//     },
-//     buttonLocate: {
-//         backgroundColor: "blue",
-//     },
-//     filterText: {
-        
-//     },
-// 		scrollViewContainer: {
-// 			flex: 1,
-// 		},
-// 		scrollView: {
-// 			position: 'absolute',
-// 			// bottom: 30,
-// 			left: 0,
-// 			right: 0,
-// 			paddingVertical: 5,
-// 			// borderWidth: 1,
-// 			// borderColor: 'red',
-// 		},
-// 		endPadding: {
-// 			paddingRight: width - CARD_WIDTH,
-// 		},
-// 		card: {
-// 			padding: 3,
-// 			elevation: 2,
-// 			backgroundColor: '#FFF',
-// 			marginHorizontal: 3,
-// 			shadowColor: '#000',
-// 			shadowRadius: 5,
-// 			shadowOpacity: 0.3,
-// 			shadowOffset: { x : 2, y : -2 },
-// 			height: CARD_HEIGHT,
-// 			width: CARD_WIDTH,
-// 			overflow: 'hidden',
-// 			// borderWidth: 1,
-// 			// borderColor: 'red',
-// 		},
-// 		cardImage: {
-// 			flex: 3,
-// 			width: '100%',
-// 			height: '100%',
-// 			alignSelf: 'center',
-// 		},
-// 		textContent: {
-// 			flex: 1,
-// 		},
-// 		cardtitle: {
-// 			fontSize: 8,
-// 			marginTop: 3,
-// 			fontWeight: "bold",
-// 		},
-// 		cardDescription: {
-// 			fontSize: 8,
-// 			color: "#444",
-// 		},
-// 	});
-
 
 const mapStateToProps = state => {
     return {
