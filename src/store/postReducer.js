@@ -13,10 +13,10 @@ const getSinglePost = post => {
   }
 }
 
-const getAllUserPosts = posts => {
+const getAllUserPosts = userPosts => {
   return {
     type: GET_ALL_USER_POSTS,
-    posts
+    userPosts
   }
 }
 
@@ -103,7 +103,7 @@ export const postReducer = (state = initialState, action) => {
     case GET_ALL_POSTS:
       return { ...state, allPosts: action.posts }
     case GET_ALL_USER_POSTS:
-      return { ...state, allPosts: action.posts }
+      return { ...state, allPosts: action.userPosts }
     case GET_POST_ID:
       return { ...state, postId: action.postId }
     default:

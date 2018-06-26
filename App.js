@@ -6,6 +6,8 @@ import SinglePost from './src/components/SinglePost'
 import store from './src/store/index'
 import MyMap from './src/components/MyMap'
 import UserProfile from './src/components/UserProfile'
+// import Login from './src/components/auth-form'
+import Signup from './src/components/Signup'
 
 
 class App extends React.Component {
@@ -17,7 +19,6 @@ class App extends React.Component {
     );
   }
 }
-
 
 console.log('store: ', store)
 const StackNav = createStackNavigator({
@@ -57,6 +58,15 @@ const StackNav = createStackNavigator({
       headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 },
     })
   },
+  Signup: {
+    screen: Signup,
+    navigationOptions: ({ navigation, header }) => ({
+      ...header,
+      headerTintColor: 'white',
+      title: 'Welcome',
+      headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 },
+    })
+  }
 })
 
 export default App

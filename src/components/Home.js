@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, ImageBackground, View, Button, Text } from 'react-native';
+import Signup from './Signup'
 
 
 export default class Home extends React.Component {
@@ -12,6 +13,11 @@ export default class Home extends React.Component {
     this.props.navigation.navigate('UserProfile', {id: 5})
   }
 
+  handlePressLoginScreen = () => {
+    console.log('home.js')
+    this.props.navigation.navigate('Signup')
+  }
+
   render() {
     return (
       <View>
@@ -19,6 +25,8 @@ export default class Home extends React.Component {
         <Button onPress={this.handlePress} title="SinglePost" />
         <Button onPress={this.handlePressUserProfile} title="UserProfile" />
         <Button onPress={()=> this.props.navigation.navigate('MyMap')} title="Map" />
+        <Button onPress={this.handlePressLoginScreen} title="Signup" />
+
       </View>
     );
   }
