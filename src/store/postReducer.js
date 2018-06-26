@@ -5,6 +5,7 @@ const GET_SINGLE_POST = "GET_SINGLE_POST"
 const GET_ALL_POSTS = "GET_ALL_POSTS"
 const GET_POST_ID = "GET_POST_ID"
 const GET_ALL_USER_POSTS = "GET_ALL_USER_POSTS"
+const MASTER_IP_ADDRESS = "172.17.20.35"
 
 const getSinglePost = post => {
   return {
@@ -37,18 +38,14 @@ const getPostId = postId => {
 const initialState = {
   singlePost: {},
   allPosts: [],
-  postId: null,
+  postId: null
 }
 
 export const getSinglePostThunk = postId => {
   return async dispatch => {
     try {
       console.log('postId in thunk: ', postId)
-      // const {data} = await axios.get(`http://localhost:8080/api/posts/${postId}`)
-      const { data } = await axios.get(`http://198.176.45.2:8080/api/posts/${postId}`)
-      // const {data} = await axios.get(`http://192.168.1.106:8080/api/posts/${postId}`)
-      // const {data} = await axios.get(`http://172.31.98.214:8080/api/posts/${postId}`)
-
+      const {data} = await axios.get(`http://${MASTER_IP_ADDRESS}:8080/api/posts/${postId}`)
       console.log('data in thunk: ', data)
       dispatch(getSinglePost(data))
     } catch (err) {
@@ -71,11 +68,7 @@ export const popupThunk = postId => {
 export const getAllPostsThunk = () => {
   return async (dispatch) => {
     try {
-      // const {data} = await axios.get('http://localhost:8080/api/posts')
-      const { data } = await axios.get(`http://198.176.45.2:8080/api/posts`)
-      // const {data} = await axios.get(`http://192.168.1.106:8080/api/posts`)
-      // const {data} = await axios.get(`http://172.31.98.214:8080/api/posts)
-
+      const { data } = await axios.get(`http://${MASTER_IP_ADDRESS}:8080/api/posts`)
       console.log('data in all posts thunk: ', data)
       dispatch(getAllPosts(data))
     } catch (err) {
@@ -87,7 +80,7 @@ export const getAllPostsThunk = () => {
 export const getAllUserPostsThunk = userId => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`http://198.176.45.2:8080/api/posts/user/${userId}`)
+      const { data } = await axios.get(`http://${MASTER_IP_ADDRESS}/api/posts/user/${userId}`)
       console.log('data from getalluserpost thunk', data)
       dispatch(getAllUserPosts(data))
     } catch (err) {

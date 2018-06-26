@@ -14,7 +14,6 @@ export default class Home extends React.Component {
   }
 
   handlePressLoginScreen = () => {
-    console.log('home.js')
     this.props.navigation.navigate('Signup')
   }
 

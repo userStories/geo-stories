@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
+import { auth } from '../store/user'
 
-
-
-export default class Signup extends Component {
+class Signup extends Component {
   constructor () {
     super()
     this.state = {
@@ -17,9 +16,11 @@ export default class Signup extends Component {
     }
   }
 
-  // signup = () => {
-
-  // }
+  signup = () => {
+    const email = this.state.email
+    const password = this.state.password
+    this.props.submitNewUser(email, password, 'signup')
+  }
 
   render () {
     const {
@@ -64,6 +65,8 @@ export default class Signup extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    submitNewUser: () => dispatch()
+    submitNewUser: (email, password, method) => dispatch(auth(email, password, method))
   }
 }
+
+export default connect(null, mapDispatchToProps)(Signup)

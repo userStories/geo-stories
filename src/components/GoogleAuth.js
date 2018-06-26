@@ -17,8 +17,7 @@ const Signup = props => {
         onPress={() => {
           console.log('here')
           Linking.openURL("http://198.176.45.2:8080/auth/google")
-        }
-        } >
+        }} >
         {displayName} with Google
       </Text>
     </View>
