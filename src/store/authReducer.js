@@ -36,19 +36,12 @@ export const auth = (email, password, method, locationStr, firstName, lastName) 
   } catch (authError) {
     return dispatch(getUser({error: authError}))
   }
-  // try {
-    //   dispatch(getUser(res.data))
-    //   history.push('/home')
-    // } catch (dispatchOrHistoryErr) {
-      //   console.error(dispatchOrHistoryErr)
-      // }
 }
 
 export const logout = () => async dispatch => {
   try {
     await axios.post(`http://${MASTER_IP_ADDRESS}:8080/auth/logout`)
     dispatch(removeUser())
-    // history.push('/login')
   } catch (err) {
     console.error(err)
   }

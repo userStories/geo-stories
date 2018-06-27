@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Button, Text } from 'react-native';
 import { FormInput } from 'react-native-elements';
-import { auth } from '../store/userReducer';
+import { auth } from '../store/authReducer';
 
 class Login extends Component {
   constructor () {

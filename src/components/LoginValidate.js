@@ -4,7 +4,6 @@ import { View, Button, Text } from 'react-native';
 
 class LoginValidate extends Component {
   render () {
-    console.log(this.props)
     const user = this.props.fetchLoggedInUser
     return (
       <View>
@@ -18,7 +17,7 @@ class LoginValidate extends Component {
 
 const mapStateToProps = state => {
   return {
-    fetchLoggedInUser: state.userReducer
+    fetchLoggedInUser: state.authReducer
   }
 }
 

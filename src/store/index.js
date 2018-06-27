@@ -5,7 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { createLogger } from 'redux-logger'
 import { postReducer } from './postReducer'
 import { categoryReducer } from './categoryReducer'
-import userReducer from './userReducer'
+import authReducer from './authReducer'
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
@@ -17,7 +17,7 @@ const persistConfig = {
 };
 
 const reducer = combineReducers({
-    postReducer, categoryReducer, newPost, userReducer
+    postReducer, categoryReducer, newPost, authReducer
 })
 
 const pReducer = persistReducer(persistConfig, reducer);
@@ -37,4 +37,4 @@ export default store
 export * from './addPostReducer'
 export * from './postReducer'
 export * from './categoryReducer'
-export * from './userReducer'
+export * from './authReducer'
