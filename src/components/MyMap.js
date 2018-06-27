@@ -127,7 +127,6 @@ class MyMap extends Component {
 
         console.log('this.props.allPosts in MyMap component: ', this.props.allPosts)
         console.log('this.props.allCategories: ', this.props.allCategories)
-        console.log('this.props.allPosts', this.props.allPosts)
         return (
             <View style={styles.container}>
                 <MapView
@@ -296,7 +295,6 @@ const styles = StyleSheet.create({
 	mapMarker:{
 		alignItems: 'center',
 	},
-
   // containerButton: {
 	// 	flex: 2,
 	// 	flexDirection: 'row',
