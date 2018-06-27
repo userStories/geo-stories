@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, ImageBackground, View, Button, Text } from 'react-native';
+import LoginValidate from './LoginValidate'
 import Signup from './Signup'
+import store from '../store/index'
 
 
 export default class Home extends React.Component {
@@ -22,9 +24,11 @@ export default class Home extends React.Component {
   }
 
   render() {
+    console.log(store.getState())
     return (
       <View>
         <Text style={styles.titleText}>Home Component</Text>
+        <LoginValidate store={store}/>
         <Button onPress={this.handlePress} title="SinglePost" />
         <Button onPress={this.handlePressUserProfile} title="UserProfile" />
         <Button onPress={()=> this.props.navigation.navigate('MyMap')} title="Map" />

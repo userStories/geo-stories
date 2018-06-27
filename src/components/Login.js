@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Button, Text } from 'react-native';
 import { FormInput } from 'react-native-elements';
-import { auth } from '../store/user';
+import { auth } from '../store/userReducer';
 
 class Login extends Component {
   constructor () {
@@ -45,7 +45,7 @@ class Login extends Component {
           placeholder="Password"
           secureTextEntry
         />
-        {this.state.error &&
+        {this.state.formError &&
           (
           <Text>
           Username or password incorrect
@@ -61,11 +61,11 @@ class Login extends Component {
   }
 }
 
-  const mapDispatchToProps = dispatch => {
-    return {
-      submitLoginData: (email, password, method) => dispatch(auth(email, password, method))
-    }
+const mapDispatchToProps = dispatch => {
+  return {
+    submitLoginData: (email, password, method) => dispatch(auth(email, password, method))
   }
+}
 
   export default connect(null, mapDispatchToProps)(Login)
 

@@ -29,9 +29,9 @@ export const me = () => async dispatch => {
 
 export const auth = (email, password, method, locationStr, firstName, lastName) => async dispatch => {
   let res
-  console.log('ya')
   try {
     res = await axios.post(`http://${MASTER_IP_ADDRESS}:8080/auth/${method}`, {email, password, locationStr, firstName, lastName})
+    dispatch(getUser(res.data))
     return res
   } catch (authError) {
     return dispatch(getUser({error: authError}))
