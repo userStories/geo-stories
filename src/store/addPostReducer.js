@@ -1,6 +1,9 @@
 import axios from 'axios'
 import { ImageManipulator } from 'expo'
-import qs from 'qs'
+// import 'whatwg-fetch'
+
+
+
 
 const ADD_NEW_POST = 'ADD_NEW_POST'
 
@@ -17,37 +20,71 @@ export const addNewPostThunk = (info) => {
 
     // "change method to post"
     // "change header to form data???"
-    // "deploy api to heroku and adjust url"
+    // "deploy api to heroku and asssssdjust url"
     try {
+
+      // MEDIA POST PART
+      const formData = new FormData()
+      const uriParts = info.uri.split('.')
+      let fileType = uriParts[uriParts.length - 1]
+
+      console.log('info.uri', info.uri)
+      console.log('filetype', fileType)
+      if (fileType === 'jpg') {
+        fileType = 'image/jpg'
+        console.log('entered here')
+      } else if (fileType === 'mov') {
+        fileType = 'video/quicktime'
+      }
+      if (fileType === 'image/jpg') {
+        formData.append('mediaPost', {
+          uri: info.uri,
+          // doesnt work as file
+          name: `${info.uri}`,
+          type: fileType,
+        })
+        let options = {
+          method: 'POST',
+          body: formData,
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+
+        const url = 'http://172.17.20.5:8080/api/posts/media'
+        console.log('url', url)
+        console.log('options', options)
+        await fetch(url, options)
+      }
+
+      // if (fileType = 'video/quicktime') {
+
+      //   const myBlob = new Blob([info.uri], { type: fileType })
+
+      //   formData.append('mediaPost', {
+      //     file: Blob,
+      //     name: `${info.uri}`,
+      //     type: fileType,
+      //   })
+      //   let options = {
+      //     method: 'POST',
+      //     body: formData,
+      //     headers: {
+      //       Accept: 'application/json',
+      //       'Content-Type': 'multipart/form-data',
+      //     }
+      //   }
+      //   const url = 'http://172.17.20.5:8080/api/posts/media'
+      //   const mediaPost = await fetch(url, options)
+      // }
+
+
+
+        
       
-      let newObj = await Expo.ImageManipulator.manipulate(info.uri, null, { base64: true })
-      // let formData = new FormData()
-      console.log('newobj', newObj)
-      console.log('info object', info)
-      // console.log('specific uri', info.uri)
-      // formData.append('file', newObj)
 
 
-
-      const rawResponse = await fetch('http://localhost:8080/api/posts/', {
-        method: 'POST',
-        headers: {
-          'X-AYLIEN-TextAPI-Application-ID': '6aca562c',
-          'X-AYLIEN-TextAPI-Application-Key': '4cc1a266da1f4cc14396b900072e9a1d',
-          'content-type': 'application/x-www-form-urlencoded',
-        },
-        body: qs.stringify(newObj)
-      })
-
-
-
-
-
-      // const response = await axios.post(`http://localhost:8080/api/posts/1`, formData, )
-    const data = rawResponse.data
-    console.log('deettaaa', data)
-    const action = addNewPost(data)
-    dispatch(action)
     } catch (err) {
       console.error('error in thunk', err.message)
     }
