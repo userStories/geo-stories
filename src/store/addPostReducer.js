@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { ImageManipulator } from 'expo'
 // import 'whatwg-fetch'
+// import RNFetchBlob from 'rn-fetch-blob'
 
 
 
@@ -56,6 +57,26 @@ export const addNewPostThunk = (info) => {
         console.log('url', url)
         console.log('options', options)
         await fetch(url, options)
+      } else {
+        formData.append('mediaPost', {
+          uri: info.uri,
+          name: `${info.uri}`,
+          type: fileType,
+        })
+        let options = {
+          method: 'POST',
+          body: formData,
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+
+        const url = 'http://172.17.20.5:8080/api/posts/media'
+        console.log('url', url)
+        console.log('options', options)
+        await fetch(url, options)
+        
       }
 
       // if (fileType = 'video/quicktime') {
