@@ -1,11 +1,13 @@
 import fetch from 'fetch';
 import axios from 'axios';
+import {API_URL} from '../../IP_ADDRESS'
 
 const GET_SINGLE_POST = "GET_SINGLE_POST"
 const GET_ALL_POSTS = "GET_ALL_POSTS"
 const GET_POST_ID = "GET_POST_ID"
 const ADD_COMMENT = "ADD_COMMENT"
-const HOST_IP_ADDRESS='172.17.20.201'
+
+const HOST_IP_ADDRESS = 'localhost'
 
 const getSinglePost = post => {
     return {
@@ -29,7 +31,6 @@ const getPostId = postId => {
 }
 
 const addComment = comment => {
-    console.log('comment in addComment action creator: ', comment)
     return {
         type: ADD_COMMENT,
         comment
@@ -46,16 +47,7 @@ const initialState = {
 export const getSinglePostThunk = postId =>{
     return async dispatch => {
         try{
-            console.log('postId in thunk: ', postId)
-            const {data} = await axios.get(`http://localhost:8080/api/posts/${postId}`)
-
-            // const {data} = await axios.get(`http://localhost:8080/api/posts/${postId}`)
-
-            // const {data} = await axios.get(`http://172.17.20.159:8080/api/posts/${postId}`)
-            // const {data} = await axios.get(`http://192.168.1.106:8080/api/posts/${postId}`)
-            // const {data} = await axios.get(`http://172.31.98.214:8080/api/posts/${postId}`)
-            // const {data} = await axios.get(`http://${HOST_IP_ADDRESS}:8080/api/posts/${postId}`)
-
+            const {data} = await axios.get(`http://${API_URL}:8080/api/posts/${postId}`)
             console.log('data in thunk: ', data)
             dispatch(getSinglePost(data))
         } catch(err){
@@ -67,7 +59,6 @@ export const getSinglePostThunk = postId =>{
 export const popupThunk = postId =>{
     return async dispatch =>{
         try{
-            console.log('postId in popUpthunk: ', postId)
             dispatch(getPostId(postId))
         }catch(err){
             console.error(err)
@@ -78,8 +69,8 @@ export const popupThunk = postId =>{
 export const getAllPostsThunk = () => {
     return async (dispatch) =>{
         try{
-            const {data} = await axios.get('http://localhost:8080/api/posts')
-            // const {data} = await axios.get(`http://172.17.20.159:8080/api/posts`)
+            // const {data} = await axios.get('http://localhost:8080/api/posts')
+            const {data} = await axios.get(`http://${API_URL}:8080/api/posts`)
             // const {data} = await axios.get(`http://192.168.1.106:8080/api/posts`)
             // const {data} = await axios.get(`http://172.31.98.214:8080/api/posts)
             // const {data} = await axios.get(`http://${HOST_IP_ADDRESS}:8080/api/posts`)
@@ -95,7 +86,7 @@ export const getAllPostsThunk = () => {
 
 export const postComment = (comment, postId) => {
     return async dispatch => {
-        const {data} = await axios.post('http://localhost:8080/api/comments', {comment, postId})
+        const {data} = await axios.post(`http://${API_URL}:8080/api/comments`, {comment, postId})
         console.log('data in postCommentthunk: ', data)
         dispatch(addComment(data))
     }

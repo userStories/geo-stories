@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {StyleSheet, Text, MapView, View, Button, Image, FlatList, ScrollView, TextInput } from 'react-native';
+import {Animated, StyleSheet, Text, MapView, View, Image, FlatList, ScrollView, TextInput,  TouchableWithoutFeedback, Keyboard  } from 'react-native';
 import { Video } from 'expo'
-import { getSinglePostThunk, postComment } from '../store'
+import { getSinglePostThunk, postComment, getAllUsersThunk} from '../store'
+import {Button} from 'react-native-elements'
+import {ListItem} from 'native-base'
 
 
 class SinglePost extends Component {
@@ -11,36 +13,46 @@ class SinglePost extends Component {
     super();
     this.state = {
       comment: "",
+      descriptionToggle: -1,
+      commentToggle: -1
     };
   }
 
   componentDidMount() {
     const id = this.props.navigation.getParam('id', 'no input')
-    console.log('id in componentDidMount: ', id)
     this.props.singlePostMaker(id)
+    this.props.displayUsers()
   }
 
   handleChange = (event) => {
-    console.log('event in handleChange: ', event)
     this.setState({comment: event})
   }
 
   handleSubmit = () => {
     this.props.addComment(this.state.comment, this.props.singlePost.id)
-    // this.props.navigation.navigate('SinglePost', {id: this.props.singlePost.id})
+    this.setState({comment: ""})
+  }
+
+  changeDescription = () => {
+    let change = this.state.descriptionToggle *= -1
+    this.setState({
+      descriptionToggle: change
+    })
   }
 
   render() {
-    console.log('this.state.comment: ', this.state.comment)
     const imageExt = ['jpeg', 'jpg', 'png', 'gif']
     const videoExt = ['mp4', 'mp3', 'avi', 'flv', 'mov', 'wmv'];
     return (
-      <ScrollView
-        contentContainerStyle={{
-          justifyContent: 'space-between',
-        }}
-      >
-        {this.props.singlePost.mediaLink ?
+      // <ScrollView
+      // keyboardShouldPersistTaps={true}
+      // keyboardDismissMode="on-drag"
+      //   contentContainerStyle={{
+      //     justifyContent: 'space-between',
+      //   }}
+      // >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        {this.props.singlePost.mediaLink && !!this.props.allUsers.length ?
           <View style={styles.OuterViewWrap}>
             <Text style={styles.title}>{this.props.singlePost.title}</Text>
             {videoExt.indexOf(this.props.singlePost.mediaLink.slice(-3)) !== -1 ?
@@ -57,39 +69,53 @@ class SinglePost extends Component {
               : <Image style={styles.imageWrap} source={{ uri: this.props.singlePost.mediaLink }} />
             }
             <View>
-              <Text style={styles.descriptionTitle}>Description</Text>
+              <Text onPress={this.changeDescription} style={styles.descriptionTitle}>Description</Text>
               <View style={{ backgroundColor: 'white', marginRight: '5%', marginLeft: '5%', marginBottom: '2.5%' }}>
-                <Text multiline={true} style={styles.contentWrap}>{this.props.singlePost.text}</Text>
+                {this.state.descriptionToggle === 1 ? <Text multiline={true} style={styles.contentWrap}>{this.props.singlePost.text}</Text>:null}
               </View>
             </View>
             <Text style={styles.commentTitle}>Comments</Text>
-            <View style={{flexDirection: 'column',marginBottom: 10}}>
-              <Text>Add Comment:</Text>
+            <View
+            style={{marginBottom: 10}}>
               <TextInput
                 multiline={true}
                 onChangeText={this.handleChange}
                 value={this.state.comment}
+                placeholderTextColor='black'
                 placeholder='Write a comment!'
               />
-              <Button title="Submit Comment" onPress={this.handleSubmit}/>
             </View>
+            <View>
+              {!!this.state.comment.length? <Button 
+              title="Submit Comment" 
+              style={styles.commentButton}
+              onPress={this.handleSubmit}/>: null}
+            </View>
+            <Animated.ScrollView>
             {this.props.singlePost.comments
               .sort((a,b) => {
                 return ( (a.id < b.id) ? 1 : ((b.id < a.id) ? -1 : 0) );
               })
-              .map(comment => {
-              return (
-                <View style={{ width: "90%", backgroundColor: 'white' }}>
-                  <Text style={styles.comments}>{comment.content}</Text>
-                </View>
-              )
+              .map((comment, index) => {
+                  return (
+                    <View style={{backgroundColor: 'white'}}>
+                    <ListItem style={{width: '100%'}}>
+                    {this.props.allUsers.find(user => user.id === comment.userId) &&
+                    <Text>{this.props.allUsers.find(user => user.id === comment.userId).fullName}</Text>
+                    }
+                    <Text style={styles.comments}>{comment.content}</Text> 
+                    </ListItem>
+                    </View>
+                  )
+            })}</Animated.ScrollView>
             }
-            )}
           </View> :
           <View style={styles.OuterViewWrap}>
             <Text>{this.props.singlePost.title}</Text>
             <Text>{this.props.singlePost.text}</Text>
-          </View>}</ScrollView>
+          </View>}
+          </TouchableWithoutFeedback>
+
 
     )
   }
@@ -105,7 +131,7 @@ const styles = StyleSheet.create({
   },
   imageWrap: {
     width: '90%',
-    height: 300,
+    height: "40%",
     marginBottom: "2.5%"
   },
   contentWrap: {
@@ -142,19 +168,25 @@ const styles = StyleSheet.create({
     // alignSelf: 'stretch',
     // marginRight: '5%',
     // marginLeft: '5%'
+  },
+  commentButton: {
+    backgroundColor: 'red',
+    marginBottom: '5%'
   }
 })
 const mapStateToProps = state => {
   console.log('state in mapState: ', state)
   return {
-    singlePost: state.postReducer.singlePost
+    singlePost: state.postReducer.singlePost,
+    allUsers: state.userReducer.allUsers
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     singlePostMaker: (postId) => dispatch(getSinglePostThunk(postId)),
-    addComment: (comment, postId) => dispatch(postComment(comment, postId))
+    addComment: (comment, postId) => dispatch(postComment(comment, postId)),
+    displayUsers: () => dispatch(getAllUsersThunk())
   }
 }
 
