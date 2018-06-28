@@ -8,7 +8,8 @@ export default class TakePicture extends React.Component {
     this.state = {
       hasCameraPermission: null,
       type: Camera.Constants.Type.back,
-      video: null
+      video: null,
+      recording: false
     };
   }
 
@@ -22,16 +23,22 @@ export default class TakePicture extends React.Component {
 
 
   takePicture = async () => {
-    if (this.camera) {
-      const videoOptions = {
-        maxDuration: 5,
-        quality: '72dd0p'
+    if (this.state.recording) {
+        await this.camera.stopRecording()
+    } else {
+      if (this.camera) {
+        this.setState({ recording: true })
+        const videoOptions = {
+          maxDuration: 10,
+          quality: '72dd0p'
+        }
+        const data = await this.camera.recordAsync(videoOptions);
+        this.setState({ video: data })
+        console.log('data', data)
+        this.props.navigation.navigate('NewPost', { newVideo: data })
       }
-      const data = await this.camera.recordAsync(videoOptions);
-      this.setState({ video: data })
-      console.log('data', data)
-      this.props.navigation.navigate('NewPost', { newVideo: data })
     }
+    
   };
 
   

@@ -72,20 +72,20 @@ class NewPost extends React.Component {
   };
 
   submitImagePost = async () => {
-    let newVideo = this.props.navigation.getParam('newVideo', 'none')
+    let cameraPic = this.props.navigation.getParam('cameraPic', 'none')
     if (this.state.image) {
       this.props.addNewPostMethod(this.state.image)
     } else if (cameraPic !== 'none') {
-      this.props.addNewPostMethod(newVideo)
+      this.props.addNewPostMethod(cameraPic)
     }
   }
 
   submitVideoPost = async () => {
-    let cameraPic = this.props.navigation.getParam('cameraPic', 'none')
+    let newVideo = this.props.navigation.getParam('newVideo', 'none')
     if (this.state.video) {
       this.props.addNewPostMethod(this.state.video)
-    } else if (cameraPic !== 'none') {
-      this.props.addNewPostMethod(cameraPic)
+    } else if (newVideo !== 'none') {
+      this.props.addNewPostMethod(newVideo)
     }
   }
 
