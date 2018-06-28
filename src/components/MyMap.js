@@ -245,6 +245,7 @@ class MyMap extends Component {
                     <View><Button title="Post" buttonStyle={styles.buttonPost} onPress={() => this.props.navigation.navigate('NewPost')} /></View>
                     <View><Button title="Locate Me" buttonStyle={styles.buttonLocate} onPress={() => alert('Pick Location lat:' + this.state.focusedLocation.latitude + ' long:' + this.state.focusedLocation.longitude)} /></View>
                 </View>
+				</View> 
                     <PopupDialog
                         width={0.5}
                         height={0.3}
@@ -255,7 +256,7 @@ class MyMap extends Component {
                             <Text style={styles.title}>Category Filter</Text>
                              <Picker
                               selectedValue={this.props.filterId}
-                              style={{ height: 100, width: 100}}
+                              style={{ height: 100, width: 100, position: "absolute", top: 100}}
                               onValueChange={(itemValue, itemIndex) => this.props.changeFilterId(itemValue)}>
                               <Picker.Item label="All" value={0} />
                               {this.props.allCategories.map((category,index) =>{
@@ -264,7 +265,6 @@ class MyMap extends Component {
                           </Picker> 
                         </View>
                     </PopupDialog>
-				</View> 
 
 			</View> 
         )

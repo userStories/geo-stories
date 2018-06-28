@@ -5,9 +5,10 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import {createLogger} from 'redux-logger'
 import {postReducer} from './postReducer'
 import {categoryReducer} from './categoryReducer'
+import {userReducer} from './userReducer'
 
 const reducer = combineReducers({
-    postReducer, categoryReducer, newPost
+    postReducer, categoryReducer, newPost, userReducer
 })
 
 const middleware = composeWithDevTools(applyMiddleware(
@@ -21,3 +22,4 @@ export default store
 export * from './addPostReducer'
 export * from './postReducer'
 export * from './categoryReducer'
+export * from './userReducer'

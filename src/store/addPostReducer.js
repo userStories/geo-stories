@@ -1,10 +1,12 @@
 import axios from 'axios'
 import { ImageManipulator } from 'expo'
+import qs from 'qs'
+import {API_URL} from '../../IP_ADDRESS'
 // import 'whatwg-fetch'
 // import RNFetchBlob from 'rn-fetch-blob'
 
 const ADD_NEW_POST = 'ADD_NEW_POST'
-const HOST_IP_ADDRESS='172.17.20.201'
+const HOST_IP_ADDRESS = 'localhost'
 
 const addNewPost = (newPost) => {
   return {
@@ -16,11 +18,12 @@ const addNewPost = (newPost) => {
 // remove this comment
 export const addNewPostThunk = (info) => {
   return async (dispatch) => {
-    try {
+    try {   
       const formData = new FormData()
       const uriParts = info.uri.split('.')
       let fileType = uriParts[uriParts.length - 1]
       const fetcher = null
+
 
       if (fileType === 'jpg') {
         fileType = 'image/jpg'
@@ -43,7 +46,7 @@ export const addNewPostThunk = (info) => {
             'Content-Type': 'multipart/form-data',
           },
         }
-        const url = 'http://172.17.20.5:8080/api/posts/media'
+        const url = `http:${API_URL}:8080/api/posts/media`
         fetcher = await fetch(url, options)
       } else {
         formData.append('mediaPost', {
@@ -59,7 +62,7 @@ export const addNewPostThunk = (info) => {
             'Content-Type': 'multipart/form-data',
           },
         }
-        const url = 'http://172.17.20.5:8080/api/posts/media'
+        const url = `http://${API_URL}:8080/api/posts/media`
         fetcher = await fetch(url, options)
       }
       const response = await fetcher.json()
