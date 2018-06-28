@@ -69,11 +69,9 @@ export const popupThunk = postId =>{
 export const getAllPostsThunk = () => {
     return async (dispatch) =>{
         try{
-            // const {data} = await axios.get('http://localhost:8080/api/posts')
             const {data} = await axios.get(`http://${API_URL}:8080/api/posts`)
-            // const {data} = await axios.get(`http://192.168.1.106:8080/api/posts`)
-            // const {data} = await axios.get(`http://172.31.98.214:8080/api/posts)
-            // const {data} = await axios.get(`http://${HOST_IP_ADDRESS}:8080/api/posts`)
+
+
 
             console.log('data in all posts thunk: ', data)
             dispatch(getAllPosts(data))
