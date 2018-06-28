@@ -78,8 +78,10 @@ class SinglePost extends Component {
                 return ( (a.id < b.id) ? 1 : ((b.id < a.id) ? -1 : 0) );
               })
               .map(comment => {
+                console.log('Comments:', comment)
               return (
-                <View style={{ width: "90%", backgroundColor: 'white' }}>
+                <View key={comment.id} style={{ width: "90%", backgroundColor: 'white' }}>
+                  <Text style={styles.comments}>{comment.user.firstname}</Text>
                   <Text style={styles.comments}>{comment.content}</Text>
                 </View>
               )

@@ -16,6 +16,7 @@ import { connect } from 'react-redux'
 import { getAllPostsThunk, getSinglePostThunk, getAllCategoriesThunk, filterIdThunk } from '../store'
 import PopupDialog, { DialogTitle } from 'react-native-popup-dialog'
 import { Button } from 'react-native-elements'
+import GetLocationWeather from '../../utils/Weather'
 
 const { width, height } = Dimensions.get('window');
 
@@ -25,102 +26,106 @@ const CARD_HEIGHT = 105;
 const CARD_WIDTH = 140;
 
 class MyMap extends Component {
-		// constructor(){
-		// 	super()
-			state = {
-				currentMarker: null,
-        focusedLocation: {
-					latitude: 41.89557129,
-					longitude: -87.6386050932,
-					latitudeDelta: 0.00522,
-					longitudeDelta:
-					Dimensions.get('window').width /
-					Dimensions.get('window').height * 0.00522
-					
-				}
-			}
-			// this.callOutHide = this.callOutHide.bind(this)
-			// this.callOutShow = this.callOutShow.bind(this)
-		// }
-			
-		callOutShow = () => {
-			this.currentMarker.showCallout();
-		}
-	
-		callOutHide = () => {
-			this.currentMarker.hideCallout();
-		}
-	
-		componentWillMount() {
-			this.index = 0;
-			this.animation = new Animated.Value(0);
-		}
-
-		componentDidMount() {
-			this.props.viewAllPosts()
-			this.props.viewAllCategories()
-
-			let posts = this.props.allPosts
-
-			// We should detect when scrolling has stopped then animate
-			// We should just debounce the event listener here
-			this.animation.addListener(({ value }) => {
-				let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
-				if (index >= this.props.allPosts.length) {
-					index = this.props.allPosts.length - 1;
-				}
-				if (index <= 0) {
-					index = 0;
-				}
-	
-				clearTimeout(this.regionTimeout);
-				this.regionTimeout = setTimeout(() => {
-					if (this.index !== index) {
-						// this.callOutHide();
-						this.index = index;
-						const post = this.props.allPosts[index];
-
-						
-						this.setState({
-								focusedLocation: {
-									...this.state.focusedLocation,
-									latitude: this.props.allPosts[index].latitude,
-									longitude: this.props.allPosts[index].longitude,
-								}
-						})
-						
-						console.log( 'Pick Location lat:' + 
-							this.state.focusedLocation.latitude + ' long:' + 
-							this.state.focusedLocation.longitude
-						)
-
-						this.map.animateToRegion(
-							{
-								latitude: this.props.allPosts[index].latitude,
-								longitude: this.props.allPosts[index].longitude,
-								latitudeDelta: this.state.focusedLocation.latitudeDelta,
-								longitudeDelta: this.state.focusedLocation.longitudeDelta,
-							},
-							350
-						);
-						this.callOutShow();
-					}
-				}, 10);
-			});
-		}
-	
-    pickLocationHandler = (event) => {
-        const coords = event.nativeEvent.coordinate;
-        this.setState(prevState => {
-            return {
-                focusedLocation: {
-                    ...prevState.focusedLocation,
-                    latitude: coords.latitude,
-                    longitude: coords.longitude,
-                }
-            }
-        })
+  state = {
+    currentMarker: null,
+    currentWeather: null,
+    focusedLocation: {
+      latitude: 41.89557129,
+      longitude: -87.6386050932,
+      latitudeDelta: 0.00522,
+      longitudeDelta:
+      Dimensions.get('window').width /
+      Dimensions.get('window').height * 0.00522
+      
     }
+  }
+			
+  callOutShow = () => {
+    this.currentMarker.showCallout();
+  }
+
+  callOutHide = () => {
+    this.currentMarker.hideCallout();
+  }
+
+  setCurrentWeather = (weather) => {
+    console.log('My current weather is: ', weather)
+    this.setState({
+        currentWeather: weather
+    })
+  }
+	
+  componentWillMount() {
+    this.index = 0;
+    this.animation = new Animated.Value(0);
+  }
+
+  componentDidMount() {
+    this.props.viewAllPosts()
+    this.props.viewAllCategories()
+
+    // fetch the current weather for this location
+    GetLocationWeather(this.setCurrentWeather)
+
+    // We should detect when scrolling has stopped then animate
+    // We should just debounce the event listener here
+    this.animation.addListener(({ value }) => {
+      let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
+      if (index >= this.props.allPosts.length) {
+        index = this.props.allPosts.length - 1;
+      }
+      if (index <= 0) {
+        index = 0;
+      }
+
+      clearTimeout(this.regionTimeout);
+      this.regionTimeout = setTimeout(() => {
+        if (this.index !== index) {
+          // this.callOutHide();
+          this.index = index;
+          const post = this.props.allPosts[index];
+
+          
+          this.setState({
+              focusedLocation: {
+                ...this.state.focusedLocation,
+                latitude: this.props.allPosts[index].latitude,
+                longitude: this.props.allPosts[index].longitude,
+              }
+          })
+          
+          console.log( 'Pick Location lat:' + 
+            this.state.focusedLocation.latitude + ' long:' + 
+            this.state.focusedLocation.longitude
+          )
+
+          this.map.animateToRegion(
+            {
+              latitude: this.props.allPosts[index].latitude,
+              longitude: this.props.allPosts[index].longitude,
+              latitudeDelta: this.state.focusedLocation.latitudeDelta,
+              longitudeDelta: this.state.focusedLocation.longitudeDelta,
+            },
+            350
+          );
+          this.callOutShow();
+        }
+      }, 10);
+    });
+  }
+
+  pickLocationHandler = (event) => {
+      const coords = event.nativeEvent.coordinate;
+      this.setState(prevState => {
+          return {
+              focusedLocation: {
+                  ...prevState.focusedLocation,
+                  latitude: coords.latitude,
+                  longitude: coords.longitude,
+              }
+          }
+      })
+  }
 
     render() {
 			const videoExt = ['mp4', 'mp3', 'avi', 'flv', 'mov', 'wmv'];
@@ -223,7 +228,7 @@ class MyMap extends Component {
                 <Image 
 									style={styles.cardImage} 
 									source={{uri: marker.mediaLink}} 
-                  resizeMode='cover'
+                  resizeMode="cover"
 								/>
 
                 }
@@ -243,7 +248,7 @@ class MyMap extends Component {
                 <View style={styles.button}>
                     <View><Button title='Category Filter' buttonStyle={styles.filterButton} onPress={() => this.popupDialog2.show()}/></View>
                     <View><Button title="Post" buttonStyle={styles.buttonPost} onPress={() => this.props.navigation.navigate('NewPost')} /></View>
-                    <View><Button title="Locate Me" buttonStyle={styles.buttonLocate} onPress={() => alert('Pick Location lat:' + this.state.focusedLocation.latitude + ' long:' + this.state.focusedLocation.longitude)} /></View>
+                    <View><Button title="Locate Me" buttonStyle={styles.buttonLocate} onPress={() => alert('Pick Location lat:' + this.state.focusedLocation.latitude + ' long:' + this.state.focusedLocation.longitude + ' temp:' + this.state.currentWeather.main.temp )} /></View>
                 </View>
                     <PopupDialog
                         width={0.5}
@@ -272,9 +277,12 @@ class MyMap extends Component {
 }
 
 export function MyLocation(){
-	alert('Pick Location lat:' + 
-	this.state.focusedLocation.latitude + ' long:' + 
-	this.state.focusedLocation.longitude)
+  navigator.geolocation.getCurrentPosition(
+    position => {
+      console.log('CurrentPosition:', position)
+    },
+    (error) => { console.log(error) }
+  )
 }
 
 const styles = StyleSheet.create({

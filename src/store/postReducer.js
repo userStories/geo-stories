@@ -47,14 +47,14 @@ export const getSinglePostThunk = postId =>{
     return async dispatch => {
         try{
             console.log('postId in thunk: ', postId)
-            const {data} = await axios.get(`http://localhost:8080/api/posts/${postId}`)
+            // const {data} = await axios.get(`http://localhost:8080/api/posts/${postId}`)
 
             // const {data} = await axios.get(`http://localhost:8080/api/posts/${postId}`)
 
             // const {data} = await axios.get(`http://172.17.20.159:8080/api/posts/${postId}`)
             // const {data} = await axios.get(`http://192.168.1.106:8080/api/posts/${postId}`)
             // const {data} = await axios.get(`http://172.31.98.214:8080/api/posts/${postId}`)
-            // const {data} = await axios.get(`http://${HOST_IP_ADDRESS}:8080/api/posts/${postId}`)
+            const {data} = await axios.get(`http://${HOST_IP_ADDRESS}:8080/api/posts/${postId}`)
 
             console.log('data in thunk: ', data)
             dispatch(getSinglePost(data))
@@ -78,11 +78,11 @@ export const popupThunk = postId =>{
 export const getAllPostsThunk = () => {
     return async (dispatch) =>{
         try{
-            const {data} = await axios.get('http://localhost:8080/api/posts')
+            // const {data} = await axios.get('http://localhost:8080/api/posts')
             // const {data} = await axios.get(`http://172.17.20.159:8080/api/posts`)
             // const {data} = await axios.get(`http://192.168.1.106:8080/api/posts`)
             // const {data} = await axios.get(`http://172.31.98.214:8080/api/posts)
-            // const {data} = await axios.get(`http://${HOST_IP_ADDRESS}:8080/api/posts`)
+            const {data} = await axios.get(`http://${HOST_IP_ADDRESS}:8080/api/posts`)
 
             console.log('data in all posts thunk: ', data)
             dispatch(getAllPosts(data))
@@ -95,7 +95,8 @@ export const getAllPostsThunk = () => {
 
 export const postComment = (comment, postId) => {
     return async dispatch => {
-        const {data} = await axios.post('http://localhost:8080/api/comments', {comment, postId})
+        // const {data} = await axios.post('http://localhost:8080/api/comments', {comment, postId})
+        const {data} = await axios.post(`http://${HOST_IP_ADDRESS}:8080/api/comments`, {comment, postId})
         console.log('data in postCommentthunk: ', data)
         dispatch(addComment(data))
     }
