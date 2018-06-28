@@ -4,6 +4,8 @@ import axios from 'axios';
 const GET_SINGLE_POST = "GET_SINGLE_POST"
 const GET_ALL_POSTS = "GET_ALL_POSTS"
 const GET_POST_ID = "GET_POST_ID"
+const ADD_COMMENT = "ADD_COMMENT"
+const HOST_IP_ADDRESS='172.17.20.201'
 
 const getSinglePost = post => {
     return {
@@ -26,6 +28,14 @@ const getPostId = postId => {
     }
 }
 
+const addComment = comment => {
+    console.log('comment in addComment action creator: ', comment)
+    return {
+        type: ADD_COMMENT,
+        comment
+    }
+}
+
 
 const initialState = {
     singlePost: {},
@@ -38,11 +48,6 @@ export const getSinglePostThunk = postId =>{
         try{
             console.log('postId in thunk: ', postId)
             const {data} = await axios.get(`http://172.17.20.5:8080/api/posts/${postId}`)
-            // const {data} = await axios.get(`http://10.0.0.109:8080/api/posts/${postId}`)
-            // const {data} = await axios.get(`http://172.17.20.159:8080/api/posts/${postId}`)
-            // const {data} = await axios.get(`http://192.168.1.106:8080/api/posts/${postId}`)
-            // const {data} = await axios.get(`http://172.31.98.214:8080/api/posts/${postId}`)
-
             console.log('data in thunk: ', data)
             dispatch(getSinglePost(data))
         } catch(err){
@@ -70,6 +75,7 @@ export const getAllPostsThunk = () => {
             // const {data} = await axios.get(`http://172.17.20.159:8080/api/posts`)
             // const {data} = await axios.get(`http://192.168.1.106:8080/api/posts`)
             // const {data} = await axios.get(`http://172.31.98.214:8080/api/posts)
+            // const {data} = await axios.get(`http://${HOST_IP_ADDRESS}:8080/api/posts`)
 
             console.log('data in all posts thunk: ', data)
             dispatch(getAllPosts(data))
@@ -80,6 +86,14 @@ export const getAllPostsThunk = () => {
     
 }
 
+export const postComment = (comment, postId) => {
+    return async dispatch => {
+        const {data} = await axios.post('http://localhost:8080/api/comments', {comment, postId})
+        console.log('data in postCommentthunk: ', data)
+        dispatch(addComment(data))
+    }
+}
+
 export const postReducer = (state = initialState, action) =>{
     switch(action.type){
         case GET_SINGLE_POST:
@@ -88,6 +102,13 @@ export const postReducer = (state = initialState, action) =>{
             return {...state, allPosts: action.posts}
         case GET_POST_ID:
             return {...state, postId: action.postId}
+        case ADD_COMMENT:
+            let newCommentArr = state.singlePost.comments.concat(action.comment.newComment)
+            console.log('newCommentArr: ', newCommentArr)
+            return {...state, singlePost: {
+                ...state.singlePost, comments: newCommentArr
+                }
+            }
         default:
             return state
     }
