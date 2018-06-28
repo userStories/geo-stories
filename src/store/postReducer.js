@@ -84,6 +84,7 @@ export const getAllPostsThunk = () => {
 
 export const postComment = (comment, postId) => {
     return async dispatch => {
+
         const {data} = await axios.post(`http://${API_URL}:8080/api/comments`, {comment, postId})
         console.log('data in postCommentthunk: ', data)
         dispatch(addComment(data))

@@ -10,7 +10,8 @@ import SinglePost from './src/components/SinglePost'
 import store from './src/store/index'
 import MyMap, { MyLocation } from './src/components/MyMap'
 import UserProfile from './src/components/UserProfile'
-import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs'
+
+// import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs'
 
 class App extends React.Component {
   render() {
@@ -27,17 +28,17 @@ class App extends React.Component {
 
 console.log('store: ', store)
 
-const Tabs = createMaterialBottomTabNavigator({
-  Home: {screen: MyMap},
-  Post: {screen: NewPost},
-  Profile: {screen: UserProfile},
-  // Location: {screen: MyLocation},
-}, {
-  initialRouteName: 'Home',
-  activeTintColor: '#F44336',
-  barStyle: { paddingBottom: 20 }
+// const Tabs = createMaterialBottomTabNavigator({
+//   Home: {screen: MyMap},
+//   Post: {screen: NewPost},
+//   Profile: {screen: UserProfile},
+//   // Location: {screen: MyLocation},
+// }, {
+//   initialRouteName: 'Home',
+//   activeTintColor: '#F44336',
+//   barStyle: { paddingBottom: 20 }
   
-})
+// })
 
 // const MainStack = createSwitchNavigator({
 //   map: { 

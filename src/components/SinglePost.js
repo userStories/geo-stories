@@ -29,6 +29,7 @@ class SinglePost extends Component {
   }
 
   handleSubmit = () => {
+    console.log('this.props.singpostId', this.props.singlePost.id)
     this.props.addComment(this.state.comment, this.props.singlePost.id)
     this.setState({comment: ""})
   }
