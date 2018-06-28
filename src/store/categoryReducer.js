@@ -1,8 +1,10 @@
 import axios from 'axios';
+import {API_URL} from '../../IP_ADDRESS'
+
 
 const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
 const CHANGE_FILTER_ID = "CHANGE_FILTER_ID"
-const MASTER_IP_ADDRESS = "172.17.20.35"
+const HOST_IP_ADDRESS='localhost'
 
 const getAllCategories = categories => {
   return {
@@ -18,13 +20,14 @@ const changeFilterId = filterId => {
   }
 }
 
-export const getAllCategoriesThunk = () => {
-  return async dispatch => {
-    try {
-      const { data } = await axios.get(`http://${MASTER_IP_ADDRESS}:8080/api/categories`)
-      dispatch(getAllCategories(data))
-    } catch (err) {
-      console.error(err)
+export const getAllCategoriesThunk = () =>{
+    return async dispatch => {
+        try {
+            const {data} = await axios.get(`http://${API_URL}:8080/api/categories`)
+            dispatch(getAllCategories(data))
+        } catch(err){
+            console.error(err)
+        }
     }
   }
 }
