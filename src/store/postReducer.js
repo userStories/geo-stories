@@ -80,7 +80,8 @@ export const getAllPostsThunk = () => {
 export const getAllUserPostsThunk = userId => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`http://${MASTER_IP_ADDRESS}/api/posts/user/${userId}`)
+      console.log('here22', userId)
+      const { data } = await axios.get(`http://${MASTER_IP_ADDRESS}:8080/api/posts/user/${userId}`)
       console.log('data from getalluserpost thunk', data)
       dispatch(getAllUserPosts(data))
     } catch (err) {

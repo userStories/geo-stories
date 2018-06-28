@@ -25,7 +25,7 @@ class Login extends Component {
 
   login = () => {
     const { navigate } = this.props.navigation
-    navigate('Home')
+    navigate( 'Home')
   }
 
   render() {

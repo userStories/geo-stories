@@ -4,12 +4,10 @@ import { createStackNavigator } from 'react-navigation';
 import NewPost from './src/components/NewPost'
 import TakePicture from './src/components/TakePicture'
 import RecordVideo from './src/components/RecordVideo'
-// import Home from './src/components/Home'
 import SinglePost from './src/components/SinglePost'
 import store, { persistor } from './src/store/index'
 import MyMap from './src/components/MyMap'
 import UserProfile from './src/components/UserProfile'
-// import Login from './src/components/auth-form'
 import Signup from './src/components/Signup'
 import Login from './src/components/Login'
 import Home from './src/components/Home'
@@ -28,7 +26,6 @@ class App extends React.Component {
   }
 }
 
-console.log('store: ', store)
 const StackNav = createStackNavigator({
   Home: {
     screen: Home,
