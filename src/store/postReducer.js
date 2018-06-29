@@ -14,17 +14,24 @@ const HOST_IP_ADDRESS = 'localhost'
 const { width, height } = Dimensions.get('window');
 
 const getSinglePost = post => {
-    return {
-        type: GET_SINGLE_POST,
-        post
-    }
+  return {
+    type: GET_SINGLE_POST,
+    post
+  }
+}
+
+const getAllUserPosts = userPosts => {
+  return {
+    type: GET_ALL_USER_POSTS,
+    userPosts
+  }
 }
 
 const getAllPosts = posts => {
-    return {
-        type:GET_ALL_POSTS,
-        posts 
-    }
+  return {
+    type: GET_ALL_POSTS,
+    posts
+  }
 }
 
 const addNewPost = (newPost) => {
@@ -35,17 +42,17 @@ const addNewPost = (newPost) => {
   }
 
 const getPostId = postId => {
-    return {
-        type: GET_POST_ID,
-        postId
-    }
+  return {
+    type: GET_POST_ID,
+    postId
+  }
 }
 
 const addComment = comment => {
-    return {
-        type: ADD_COMMENT,
-        comment
-    }
+  return {
+    type: ADD_COMMENT,
+    comment
+  }
 }
 
 const changeLocation = (lat, long) => {
@@ -77,16 +84,18 @@ export const getSinglePostThunk = postId =>{
             console.error(err)
         }
     }
+  
 }
 
-export const popupThunk = postId =>{
-    return async dispatch =>{
-        try{
-            dispatch(getPostId(postId))
-        }catch(err){
-            console.error(err)
-        }
+
+export const popupThunk = postId => {
+  return async dispatch => {
+    try {
+      dispatch(getPostId(postId))
+    } catch (err) {
+      console.error(err)
     }
+  }
 }
 
 export const getAllPostsThunk = () => {

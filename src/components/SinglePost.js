@@ -121,7 +121,6 @@ class SinglePost extends Component {
   }
 }
 
-
 const styles = StyleSheet.create({
   OuterViewWrap: {
     justifyContent: 'center',
@@ -173,7 +172,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     marginBottom: '5%'
   }
-})
+});
 const mapStateToProps = state => {
   return {
     singlePost: state.postReducer.singlePost,
@@ -189,5 +188,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SinglePost)
-
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SinglePost);
