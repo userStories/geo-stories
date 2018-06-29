@@ -1,5 +1,6 @@
-import React from 'react'
-import { StyleSheet } from 'react-native'
+
+import React from 'react';
+import { StyleSheet, Text } from "react-native";
 import { Provider } from 'react-redux'
 import { createStackNavigator } from 'react-navigation'
 import NewPost from './src/components/NewPost'
@@ -50,6 +51,8 @@ class App extends React.Component {
 // }, {
 //   animationEnabled: true
 // })
+
+
 
 const StackNav = createStackNavigator({
   Home: {
