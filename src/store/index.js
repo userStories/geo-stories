@@ -7,28 +7,28 @@ import { postReducer } from './postReducer'
 import { categoryReducer } from './categoryReducer'
 import { userReducer } from './userReducer'
 import authReducer from './authReducer'
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
 
 const persistConfig = {
-    key: 'root',
-    storage: storage,
-    stateReconciler: autoMergeLevel2 // see "Merge Process" section for details.
-};
+  key: 'root',
+  storage: storage,
+  stateReconciler: autoMergeLevel2 // see "Merge Process" section for details.
+}
 
 const reducer = combineReducers({
-    postReducer, categoryReducer, newPost, authReducer, userReducer
+  postReducer, categoryReducer, newPost, authReducer, userReducer
 })
 
-const pReducer = persistReducer(persistConfig, reducer);
+const pReducer = persistReducer(persistConfig, reducer)
 
 // export const store = createStore(pReducer)
 
 
 const middleware = composeWithDevTools(applyMiddleware(
-    thunkMiddleware,
-    createLogger({ collapsed: true })
+  thunkMiddleware,
+  createLogger({ collapsed: true })
 ))
 
 const store = createStore(pReducer, middleware)

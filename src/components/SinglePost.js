@@ -190,8 +190,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SinglePost)
-
 export default connect(
   mapStateToProps,
   mapDispatchToProps

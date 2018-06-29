@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import LoginValidate from './LoginValidate'
 import LogoutButton from './LogoutButton'
 import Signup from './Signup'
-import store from '../store/index'
 
 
 class Home extends React.Component {
@@ -12,6 +11,7 @@ class Home extends React.Component {
     super()
     this.state = {
       loggedInUser: {},
+      loaded: false
     }
   }
 

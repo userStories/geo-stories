@@ -1,12 +1,12 @@
-import axios from 'axios'
-import { ImageManipulator } from 'expo'
-import qs from 'qs'
-import {API_URL} from '../../IP_ADDRESS'
+// import axios from 'axios'
+// import { ImageManipulator } from 'expo'
+// import qs from 'qs'
+// import {API_URL} from '../../IP_ADDRESS'
+const IP = '172.17.20.35'
 // import 'whatwg-fetch'
 // import RNFetchBlob from 'rn-fetch-blob'
 
 const ADD_NEW_POST = 'ADD_NEW_POST'
-const HOST_IP_ADDRESS = 'localhost'
 
 const addNewPost = (newPost) => {
   return {
@@ -18,16 +18,13 @@ const addNewPost = (newPost) => {
 // remove this comment
 export const addNewPostThunk = (info) => {
   return async (dispatch) => {
-    try {   
+    try {
       const formData = new FormData()
       const uriParts = info.uri.split('.')
       let fileType = uriParts[uriParts.length - 1]
-      const fetcher = null
-
-
+      let fetcher = null
       if (fileType === 'jpg') {
         fileType = 'image/jpg'
-
       } else if (fileType === 'mov') {
         fileType = 'video/quicktime'
       }
@@ -36,7 +33,7 @@ export const addNewPostThunk = (info) => {
           uri: info.uri,
           // doesnt work as file
           name: `${info.uri}`,
-          type: fileType,
+          type: fileType
         })
         let options = {
           method: 'POST',
@@ -44,30 +41,29 @@ export const addNewPostThunk = (info) => {
           headers: {
             Accept: 'application/json',
             'Content-Type': 'multipart/form-data',
-          },
+          }
         }
-        const url = `http:${API_URL}:8080/api/posts/media`
+        const url = `http:${IP}:8080/api/posts/media`
         fetcher = await fetch(url, options)
       } else {
         formData.append('mediaPost', {
           uri: info.uri,
           name: `${info.uri}`,
-          type: fileType,
+          type: fileType
         })
         let options = {
           method: 'POST',
           body: formData,
           headers: {
             Accept: 'application/json',
-            'Content-Type': 'multipart/form-data',
-          },
+            'Content-Type': 'multipart/form-data'
+          }
         }
-        const url = `http://${API_URL}:8080/api/posts/media`
+        const url = `http://${IP}:8080/api/posts/media`
         fetcher = await fetch(url, options)
       }
       const response = await fetcher.json()
       let mediaUrl = response.mediaUrl
-
     } catch (err) {
       console.error('error in thunk', err.message)
     }
@@ -75,7 +71,7 @@ export const addNewPostThunk = (info) => {
 }
 
 const initialState = {
-  newPost: {},
+  newPost: {}
 }
 
 export default function (state = initialState, action) {

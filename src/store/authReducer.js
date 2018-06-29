@@ -1,5 +1,7 @@
 import axios from 'axios'
-const MASTER_IP_ADDRESS = '172.17.20.35'
+// import {API_URL} from '../../IP_ADDRESS'
+const IP = '172.17.20.35'
+
 // import history from '../history'
 
 /**
@@ -20,7 +22,7 @@ const removeUser = () => ({type: REMOVE_USER})
  */
 export const me = () => async dispatch => {
   try {
-    const res = await axios.get(`http://${MASTER_IP_ADDRESS}:8080/auth/me`)
+    const res = await axios.get(`http://${IP}:8080/auth/me`)
     dispatch(getUser(res.data || defaultUser))
   } catch (err) {
     console.error(err)
@@ -30,7 +32,7 @@ export const me = () => async dispatch => {
 export const auth = (email, password, method, locationStr, firstName, lastName) => async dispatch => {
   let res
   try {
-    res = await axios.post(`http://${MASTER_IP_ADDRESS}:8080/auth/${method}`, {email, password, locationStr, firstName, lastName})
+    res = await axios.post(`http://${IP}:8080/auth/${method}`, {email, password, locationStr, firstName, lastName})
     dispatch(getUser(res.data))
     return res
   } catch (authError) {
@@ -40,7 +42,7 @@ export const auth = (email, password, method, locationStr, firstName, lastName) 
 
 export const logout = () => async dispatch => {
   try {
-    await axios.post(`http://${MASTER_IP_ADDRESS}:8080/auth/logout`)
+    await axios.post(`http://${IP}:8080/auth/logout`)
     dispatch(removeUser())
   } catch (err) {
     console.error(err)

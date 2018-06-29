@@ -38,7 +38,7 @@
     "redux-devtools-extension": "^2.13.5",
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.10.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
     "rn-fetch-blob": "^0.10.11",
     "whatwg-fetch": "^2.0.4"
   }
