@@ -5,6 +5,7 @@ import { Video } from 'expo'
 import { getSinglePostThunk, postComment, getAllUsersThunk} from '../store'
 import {Button} from 'react-native-elements'
 import {ListItem} from 'native-base'
+import CommentSection from './Comments'
 
 
 class SinglePost extends Component {
@@ -29,7 +30,6 @@ class SinglePost extends Component {
   }
 
   handleSubmit = () => {
-    console.log('this.props.singpostId', this.props.singlePost.id)
     this.props.addComment(this.state.comment, this.props.singlePost.id)
     this.setState({comment: ""})
   }
@@ -38,6 +38,12 @@ class SinglePost extends Component {
     let change = this.state.descriptionToggle *= -1
     this.setState({
       descriptionToggle: change
+    })
+  }
+  changeComment = () => {
+    let change2 = this.state.commentToggle *= -1
+    this.setState({
+      commentoggle: change2
     })
   }
 
@@ -53,6 +59,7 @@ class SinglePost extends Component {
       //   }}
       // >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <Animated.ScrollView>
         {this.props.singlePost.mediaLink && !!this.props.allUsers.length ?
           <View style={styles.OuterViewWrap}>
             <Text style={styles.title}>{this.props.singlePost.title}</Text>
@@ -75,49 +82,19 @@ class SinglePost extends Component {
                 {this.state.descriptionToggle === 1 ? <Text multiline={true} style={styles.contentWrap}>{this.props.singlePost.text}</Text>:null}
               </View>
             </View>
-            <Text style={styles.commentTitle}>Comments</Text>
-            <View
-            style={{marginBottom: 10}}>
-              <TextInput
-                multiline={true}
-                onChangeText={this.handleChange}
-                value={this.state.comment}
-                placeholderTextColor='black'
-                placeholder='Write a comment!'
-              />
-            </View>
-            <View>
-              {!!this.state.comment.length? <Button 
-              title="Submit Comment" 
-              style={styles.commentButton}
-              onPress={this.handleSubmit}/>: null}
-            </View>
-            <Animated.ScrollView>
-            {this.props.singlePost.comments
-              .sort((a,b) => {
-                return ( (a.id < b.id) ? 1 : ((b.id < a.id) ? -1 : 0) );
-              })
-              .map((comment, index) => {
-                  return (
-                    <View style={{backgroundColor: 'white'}}>
-                    <ListItem style={{width: '100%'}}>
-                    {this.props.allUsers.find(user => user.id === comment.userId) &&
-                    <Text>{this.props.allUsers.find(user => user.id === comment.userId).fullName}</Text>
-                    }
-                    <Text style={styles.comments}>{comment.content}</Text> 
-                    </ListItem>
-                    </View>
-                  )
-            })}</Animated.ScrollView>
+            <Text style={styles.commentTitle} onPress={this.changeComment}>Comments</Text>
+            {
+              this.state.commentToggle === 1 ? 
+              <CommentSection comments={this.props.singlePost.comments} users={this.props.allUsers} stateComment={this.state.comment} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>: null
+            }
             }
           </View> :
           <View style={styles.OuterViewWrap}>
             <Text>{this.props.singlePost.title}</Text>
             <Text>{this.props.singlePost.text}</Text>
           </View>}
+          </Animated.ScrollView>
           </TouchableWithoutFeedback>
-
-
     )
   }
 }
@@ -130,8 +107,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   imageWrap: {
-    width: '90%',
-    height: "40%",
+    width: 350,
+    height: 300,
     marginBottom: "2.5%"
   },
   contentWrap: {
@@ -159,23 +136,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: "5%"
   },
-  comments: {
-    marginBottom: "2%",
-    paddingTop: "2%",
-    paddingLeft: '5%',
-    paddingRight: "5%"
-    // textAlign: 'left',
-    // alignSelf: 'stretch',
-    // marginRight: '5%',
-    // marginLeft: '5%'
-  },
-  commentButton: {
-    backgroundColor: 'red',
-    marginBottom: '5%'
-  }
-});
+
+})
 const mapStateToProps = state => {
-  console.log("state in mapState: ", state);
   return {
     singlePost: state.postReducer.singlePost,
     allUsers: state.userReducer.allUsers

@@ -6,7 +6,7 @@ import { getAllUserPostsThunk } from '../store';
 
 const { height } = Dimensions.get('window')
 
-console.log(Dimensions.get('window'))
+// console.log(Dimensions.get('window'))
 
 class UserProfile extends Component {
 
