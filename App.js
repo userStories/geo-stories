@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import { Provider } from 'react-redux'
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 import NewPost from './src/components/NewPost'
@@ -50,6 +50,8 @@ console.log('store: ', store)
 // }, {
 //   animationEnabled: true
 // })
+
+
 
 const StackNav = createStackNavigator({
   MyMap: {
