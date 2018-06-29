@@ -1,27 +1,30 @@
-import React from 'react';
-import { StyleSheet } from "react-native";
+import React from 'react'
+import { StyleSheet } from 'react-native'
 import { Provider } from 'react-redux'
-import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation'
 import NewPost from './src/components/NewPost'
 import TakePicture from './src/components/TakePicture'
 import RecordVideo from './src/components/RecordVideo'
-// import Home from './src/components/Home'
 import SinglePost from './src/components/SinglePost'
-import store from './src/store/index'
+import store, { persistor } from './src/store'
 import MyMap, { MyLocation } from './src/components/MyMap'
 import UserProfile from './src/components/UserProfile'
+import Signup from './src/components/Signup'
+import Login from './src/components/Login'
+import Home from './src/components/Home'
+import { PersistGate } from 'redux-persist/lib/integration/react'
 
 // import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs'
 
 class App extends React.Component {
-  render() {
+  render () {
     return (
       <Provider store={store}>
-        {/* <Tabs /> */}
-        <StackNav />
-        {/* <MainStack /> */}
+        <PersistGate persistor={persistor}>
+          <StackNav />
+        </PersistGate>
       </Provider>
-    );
+    )
   }
 }
 
@@ -37,11 +40,9 @@ console.log('store: ', store)
 //   initialRouteName: 'Home',
 //   activeTintColor: '#F44336',
 //   barStyle: { paddingBottom: 20 }
-  
 // })
-
 // const MainStack = createSwitchNavigator({
-//   map: { 
+//   map: {
 //     screen: MyMap
 //   },
 //   main: {
@@ -52,13 +53,22 @@ console.log('store: ', store)
 // })
 
 const StackNav = createStackNavigator({
+  Home: {
+    screen: Home,
+    navigationOptions: ({ navigation, header }) => ({
+      ...header,
+      headerTintColor: 'white',
+      title: 'Map',
+      headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 },
+    })
+  },
   MyMap: {
     screen: MyMap,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
       headerTintColor: 'blue',
       title: 'Map',
-      headerStyle: styles.header,
+      headerStyle: styles.header
     })
   },
   SinglePost: {
@@ -67,7 +77,7 @@ const StackNav = createStackNavigator({
       ...header,
       headerTintColor: 'blue',
       title: 'Post',
-      headerStyle: styles.header,
+      headerStyle: styles.header
     })
   },
   UserProfile: {
@@ -76,14 +86,32 @@ const StackNav = createStackNavigator({
       ...header,
       headerTintColor: 'blue',
       title: 'Welcome',
-      headerStyle: styles.header,
+      headerStyle: styles.header
+    })
+  },
+  Signup: {
+    screen: Signup,
+    navigationOptions: ({ navigation, header }) => ({
+      ...header,
+      headerTintColor: 'white',
+      title: 'Welcome',
+      headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 },
+    })
+  },
+  Login: {
+    screen: Login,
+    navigationOptions: ({ navigation, header }) => ({
+      ...header,
+      headerTintColor: 'white',
+      title: 'Welcome',
+      headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 },
     })
   },
   TakePicture: {
-    screen: TakePicture,
+    screen: TakePicture
   },
   RecordVideo: {
-    screen: RecordVideo,
+    screen: RecordVideo
   },
   NewPost: {
     screen: NewPost,
@@ -91,18 +119,18 @@ const StackNav = createStackNavigator({
       ...header,
       headerTintColor: 'blue',
       title: 'Add New Post',
-      headerStyle: styles.header,
+      headerStyle: styles.header
     })
-  },
+  }
 })
 
 const styles = StyleSheet.create({
   header: {
     width: '100%',
-    backgroundColor: '#eee', 
-    borderWidth: 1, 
-    height: 40,
-	},
-});
+    backgroundColor: '#eee',
+    borderWidth: 1,
+    height: 40
+  }
+})
 
 export default App
