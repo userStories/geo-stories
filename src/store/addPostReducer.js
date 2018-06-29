@@ -1,8 +1,7 @@
 // import axios from 'axios'
 // import { ImageManipulator } from 'expo'
 // import qs from 'qs'
-// import {API_URL} from '../../IP_ADDRESS'
-const IP = '172.17.20.35'
+import {API_URL} from '../../IP_ADDRESS'
 // import 'whatwg-fetch'
 // import RNFetchBlob from 'rn-fetch-blob'
 
@@ -43,7 +42,7 @@ export const addNewPostThunk = (info) => {
             'Content-Type': 'multipart/form-data',
           }
         }
-        const url = `http:${IP}:8080/api/posts/media`
+        const url = `http:${API_URL}:8080/api/posts/media`
         fetcher = await fetch(url, options)
       } else {
         formData.append('mediaPost', {
@@ -59,7 +58,7 @@ export const addNewPostThunk = (info) => {
             'Content-Type': 'multipart/form-data'
           }
         }
-        const url = `http://${IP}:8080/api/posts/media`
+        const url = `http://${API_URL}:8080/api/posts/media`
         fetcher = await fetch(url, options)
       }
       const response = await fetcher.json()
