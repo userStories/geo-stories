@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, Button, TextInput, Image, Picker, Text } from 'react-native';
-import { Camera, Permissions, ImagePicker, ImageManipulator, Video } from 'expo';
+import { StyleSheet, View, Button, TextInput, Image, Picker, Text, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { Camera, Permissions, ImagePicker, ImageManipulator, Video, Location } from 'expo';
 import { connect } from 'react-redux'
 import { addNewPostThunk } from '../store'
 
@@ -13,6 +13,7 @@ class NewPost extends React.Component {
       image: null,
       video: null,
       media: 'Picture',
+      location: null
     }
   }
 
@@ -71,21 +72,57 @@ class NewPost extends React.Component {
     }
   };
 
+
+  _getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+
+    let location = await Location.getCurrentPositionAsync({});
+    this.setState({ location });
+  };
+
   submitImagePost = async () => {
+    await this._getLocationAsync()
+    let newObj = null
     let cameraPic = this.props.navigation.getParam('cameraPic', 'none')
     if (this.state.image) {
-      this.props.addNewPostMethod(this.state.image)
+      newObj = this.state.image
+      newObj.title = this.state.title
+      newObj.text = this.state.text
+      newObj.latitude = this.state.location.coords.latitude
+      newObj.longitude = this.state.location.coords.longitude
+      this.props.addNewPostMethod(newObj)
+      this.props.navigation.navigate('MyMap', { newPostNow: true })
     } else if (cameraPic !== 'none') {
+      newObj = cameraPic
+      newObj.title = this.state.title
+      newObj.text = this.state.text
+      newObj.latitude = this.state.location.coords.latitude
+      newObj.longitude = this.state.location.coords.longitude
+      newObj.location = this.state.location
       this.props.addNewPostMethod(cameraPic)
+      this.props.navigation.navigate('MyMap', { newPostNow: true })
     }
   }
 
   submitVideoPost = async () => {
+    await this._getLocationAsync()
     let newVideo = this.props.navigation.getParam('newVideo', 'none')
     if (this.state.video) {
+      newObj = this.state.video
+      newObj.title = this.state.title
+      newObj.text = this.state.text
+      newObj.latitude = this.state.location.coords.latitude
+      newObj.longitude = this.state.location.coords.longitude
       this.props.addNewPostMethod(this.state.video)
+      this.props.navigation.navigate('MyMap', { newPostNow: true })
     } else if (newVideo !== 'none') {
+      newObj = newVideo
+      newObj.title = this.state.title
+      newObj.text = this.state.text
+      newObj.latitude = this.state.location.coords.latitude
+      newObj.longitude = this.state.location.coords.longitude
       this.props.addNewPostMethod(newVideo)
+      this.props.navigation.navigate('MyMap', { newPostNow: true })
     }
   }
 
@@ -106,6 +143,7 @@ class NewPost extends React.Component {
         video = newVideo.uri
       }
       return (
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.ViewWrap}>
           <View style={styles.titleInput}>
             <TextInput
@@ -206,6 +244,7 @@ class NewPost extends React.Component {
             (this.state.media === 'Video' && video) ? <Button title="Submit Post!" color='black' onPress={this.submitVideoPost}/> : ''
           }
         </View>
+        </TouchableWithoutFeedback>
       );
     }
 }

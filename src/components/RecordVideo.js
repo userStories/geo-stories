@@ -34,7 +34,6 @@ export default class TakePicture extends React.Component {
         }
         const data = await this.camera.recordAsync(videoOptions);
         this.setState({ video: data })
-        console.log('data', data)
         this.props.navigation.navigate('NewPost', { newVideo: data })
       }
     }

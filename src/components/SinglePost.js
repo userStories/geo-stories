@@ -30,7 +30,6 @@ class SinglePost extends Component {
   }
 
   handleSubmit = () => {
-    console.log('this.props.singpostId', this.props.singlePost.id)
     this.props.addComment(this.state.comment, this.props.singlePost.id)
     this.setState({comment: ""})
   }
@@ -100,7 +99,6 @@ class SinglePost extends Component {
   }
 }
 
-
 const styles = StyleSheet.create({
   OuterViewWrap: {
     justifyContent: 'center',
@@ -138,9 +136,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: "5%"
   },
+
 })
 const mapStateToProps = state => {
-  console.log('state in mapState: ', state)
   return {
     singlePost: state.postReducer.singlePost,
     allUsers: state.userReducer.allUsers
@@ -155,5 +153,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SinglePost)
-
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SinglePost);
