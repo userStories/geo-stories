@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const { height } = Dimensions.get('window')
 
-console.log(Dimensions.get('window'))
+// console.log(Dimensions.get('window'))
 
 const user = {
   email: 'user@gmail.com',

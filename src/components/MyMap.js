@@ -29,15 +29,14 @@ class MyMap extends Component {
 		// 	super()
 			state = {
 				currentMarker: null,
-        focusedLocation: {
+        // focusedLocation: {
 					latitude: 41.89557129,
 					longitude: -87.6386050932,
-					latitudeDelta: 0.00522,
-					longitudeDelta:
-					Dimensions.get('window').width /
-					Dimensions.get('window').height * 0.00522
-					
-				}
+					// latitudeDelta: 0.00522,
+					// longitudeDelta:
+					// Dimensions.get('window').width /
+					// Dimensions.get('window').height * 0.00522
+				// }
 			}
 			// this.callOutHide = this.callOutHide.bind(this)
 			// this.callOutShow = this.callOutShow.bind(this)
@@ -57,6 +56,10 @@ class MyMap extends Component {
 		}
 
 		componentDidMount() {
+      this.setState({
+        latitude: this.props.defaultLocation.latitude,
+        longitude: this.props.defaultLocation.longitude
+      })
 			this.props.viewAllPosts()
 			this.props.viewAllCategories()
 
@@ -82,24 +85,21 @@ class MyMap extends Component {
 
 						
 						this.setState({
-								focusedLocation: {
-									...this.state.focusedLocation,
 									latitude: this.props.allPosts[index].latitude,
 									longitude: this.props.allPosts[index].longitude,
-								}
 						})
 						
 						console.log( 'Pick Location lat:' + 
-							this.state.focusedLocation.latitude + ' long:' + 
-							this.state.focusedLocation.longitude
+							this.state.latitude + ' long:' + 
+							this.state.longitude
 						)
 
 						this.map.animateToRegion(
 							{
 								latitude: this.props.allPosts[index].latitude,
 								longitude: this.props.allPosts[index].longitude,
-								latitudeDelta: this.state.focusedLocation.latitudeDelta,
-								longitudeDelta: this.state.focusedLocation.longitudeDelta,
+								// latitudeDelta: this.state.focusedLocation.latitudeDelta,
+								// longitudeDelta: this.state.focusedLocation.longitudeDelta,
 							},
 							350
 						);
@@ -113,26 +113,34 @@ class MyMap extends Component {
         const coords = event.nativeEvent.coordinate;
         this.setState(prevState => {
             return {
-                focusedLocation: {
-                    ...prevState.focusedLocation,
+                // focusedLocation: {
+                    // ...prevState.focusedLocation,
                     latitude: coords.latitude,
                     longitude: coords.longitude,
-                }
+                
             }
         })
     }
 
     render() {
-			const videoExt = ['mp4', 'mp3', 'avi', 'flv', 'mov', 'wmv'];
+      const videoExt = ['mp4', 'mp3', 'avi', 'flv', 'mov', 'wmv'];
+      // let newreg = this.state.focusedLocation
+      let newreg = {
+        latitude: this.state.latitude,
+        longitude: this.state.longitude,
+        latitudeDelta: 0.00522,
+        longitudeDelta: Dimensions.get('window').width /
+        Dimensions.get('window').height * 0.00522
+      }
+      
+      
 
-        console.log('this.props.allPosts in MyMap component: ', this.props.allPosts)
-        console.log('this.props.allCategories: ', this.props.allCategories)
         return (
             <View style={styles.container}>
                 <MapView
           				ref={map => this.map = map}
-                    initialRegion={this.state.focusedLocation}
-                    region={this.state.focusedLocation}
+                    initialRegion={newreg}
+                    region={newreg}
                     style={styles.map}
                     onPress={this.pickLocationHandler}
                 >
@@ -162,7 +170,7 @@ class MyMap extends Component {
                                 latitude: marker.latitude,
                                 longitude: marker.longitude
                             }
-														console.log('New Marker index: ', this.index )
+														// console.log('New Marker index: ', this.index )
                             if (marker.categoryId === this.props.filterId) {
                                 return (
                                     <MapView.Marker
@@ -212,7 +220,7 @@ class MyMap extends Component {
                 <Video 
 									source={{uri: marker.mediaLink}} 
 									rate={1.0}
-									volume={1.0}
+									volume={0}
 									muted={false}
 									resizeMode="cover"
 									shouldPlay
@@ -243,7 +251,7 @@ class MyMap extends Component {
                 <View style={styles.button}>
                     <View><Button title='Category Filter' buttonStyle={styles.filterButton} onPress={() => this.popupDialog2.show()}/></View>
                     <View><Button title="Post" buttonStyle={styles.buttonPost} onPress={() => this.props.navigation.navigate('NewPost')} /></View>
-                    <View><Button title="Locate Me" buttonStyle={styles.buttonLocate} onPress={() => alert('Pick Location lat:' + this.state.focusedLocation.latitude + ' long:' + this.state.focusedLocation.longitude)} /></View>
+                    <View><Button title="Locate Me" buttonStyle={styles.buttonLocate} onPress={() => alert('Pick Location lat:' + this.state.latitude + ' long:' + this.state.longitude)} /></View>
                 </View>
 				</View> 
                     <PopupDialog
@@ -273,8 +281,8 @@ class MyMap extends Component {
 
 export function MyLocation(){
 	alert('Pick Location lat:' + 
-	this.state.focusedLocation.latitude + ' long:' + 
-	this.state.focusedLocation.longitude)
+	this.state.latitude + ' long:' + 
+	this.state.longitude)
 }
 
 const styles = StyleSheet.create({
@@ -385,7 +393,8 @@ const mapStateToProps = state => {
         allPosts: state.postReducer.allPosts,
         singlePost: state.postReducer.singlePost,
         allCategories: state.categoryReducer.allCategories,
-        filterId: state.categoryReducer.filterId
+        filterId: state.categoryReducer.filterId,
+        defaultLocation: state.postReducer.currentLocation
     }
 }
 
