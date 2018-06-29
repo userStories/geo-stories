@@ -29,7 +29,6 @@ class App extends React.Component {
 }
 
 
-console.log('store: ', store)
 
 // const Tabs = createMaterialBottomTabNavigator({
 //   Home: {screen: MyMap},

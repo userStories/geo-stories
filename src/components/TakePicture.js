@@ -24,9 +24,7 @@ export default class TakePicture extends React.Component {
   takePicture = async () => {
 
     if (this.camera) {
-      // const pic = await this.camera.takePictureAsync({base64: true});
       const pic = await this.camera.takePictureAsync();
-      console.log('pic', pic)
       this.props.navigation.navigate('NewPost', { cameraPic: pic })
     }
   };
