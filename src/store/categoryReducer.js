@@ -1,6 +1,5 @@
 import axios from 'axios'
-// import { API_URL } from '../../IP_ADDRESS'
-const IP = '172.17.20.35'
+import { API_URL } from '../../IP_ADDRESS'
 
 
 const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES'
@@ -24,7 +23,7 @@ const changeFilterId = filterId => {
 export const getAllCategoriesThunk = () => {
   return async dispatch => {
     try {
-      const { data } = await axios.get(`http://${IP}:8080/api/categories`)
+      const { data } = await axios.get(`http://${API_URL}:8080/api/categories`)
       dispatch(getAllCategories(data))
     } catch (err) {
       console.error(err)
