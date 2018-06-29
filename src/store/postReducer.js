@@ -63,7 +63,6 @@ const changeLocation = (lat, long) => {
   }
 }
 
-
 const initialState = {
   singlePost: {},
   allPosts: [],
@@ -86,7 +85,6 @@ export const getSinglePostThunk = postId => {
   }
 }
 
-
 export const popupThunk = postId => {
   return async dispatch => {
     try {
@@ -107,7 +105,6 @@ export const getAllPostsThunk = () => {
       console.error(err);
     }
   }
-
 }
 
 export const postComment = (comment, postId) => {
@@ -207,6 +204,8 @@ export const postReducer = (state = initialState, action) => {
       return { ...state, allPosts: action.posts }
     case GET_POST_ID:
       return { ...state, postId: action.postId }
+    case GET_ALL_USER_POSTS:
+      return { ...state, allPosts: action.userPosts }
     case ADD_COMMENT:
       let newCommentArr = state.singlePost.comments.concat(action.comment.newComment)
       return {
