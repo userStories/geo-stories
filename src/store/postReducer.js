@@ -88,10 +88,9 @@ export const popupThunk = postId => {
   }
 }
 
-console.log('reached before thunk')
+
 export const getAllPostsThunk = () => {
   return async (dispatch) => {
-    console.log('entetred getallposts thunk')
     try {
       const { data } = await axios.get(`http://${API_URL}:8080/api/posts`)
       console.log('datata IN THUNK', data)
@@ -161,6 +160,7 @@ export const addNewPostThunk = (info) => {
       const response = await fetcher.json()
       let mediaUrl = response.mediaUrl
       info.mediaLink = mediaUrl
+      console.log('info', info)
       const newRes = await axios.post(`http://${API_URL}:8080/api/posts/`, info)
       const data = newRes.data.post
       let latitude = data.latitude
@@ -170,7 +170,7 @@ export const addNewPostThunk = (info) => {
       console.log('LONGITUDE', longitude)
       dispatch(changeLocation(latitude, longitude))
       dispatch(addNewPost(data))
-      // dispatch(getAllPosts)
+      dispatch(getAllPostsThunk())
     } catch (err) {
       console.error('error in thunk', err.message)
     }
