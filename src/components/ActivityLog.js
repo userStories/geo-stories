@@ -24,7 +24,7 @@ class ActivityLog extends Component {
                     .filter(post => loggedInUser.user.Friend.find(elem => post.userId === elem.id))
                     .map(post => {
                         return (
-                        <Card>
+                        <Card key={post.id}>
                             <CardItem>
                                 <Body>
                                     <Text>{post.user.fullName}</Text>
