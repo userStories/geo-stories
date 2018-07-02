@@ -114,6 +114,11 @@ class UserProfile extends Component {
   }
 }
 
+
+const styles = StyleSheet.create({
+
+})
+
 const mapStateToProps = state => {
   return {
     allPosts: state.postReducer.allPosts,

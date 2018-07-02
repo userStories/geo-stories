@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Animated, StyleSheet, Text, MapView, View, Image, FlatList, ScrollView, TextInput,  TouchableWithoutFeedback, Keyboard, TouchableHighlight  } from 'react-native';
+import {Animated, StyleSheet, Text, MapView, View, Image, FlatList, ScrollView, TextInput,  TouchableWithoutFeedback, Keyboard, TouchableOpacity, TouchableHighlight  } from 'react-native';
 import { Video } from 'expo'
 import { getSinglePostThunk, postComment, getAllUsersThunk} from '../store'
 import {Button} from 'react-native-elements'
@@ -17,15 +17,22 @@ export default class CommentSection extends Component {
                 multiline={true}
                 onChangeText={handleChange}
                 value={stateComment}
-                placeholderTextColor='black'
-                placeholder='Write a comment!'
+                style={{color: 'white', marginTop: 10}}
+                placeholderTextColor='white'
+                placeholder='Add a comment!'
               />
             </View>
             <View>
-              {!!stateComment.length? <Button 
-              title="Submit Comment" 
-              style={styles.commentButton}
-              onPress={handleSubmit}/>: null}
+              {
+                !!stateComment.length? 
+                <TouchableOpacity onPress={handleSubmit}>
+                    <View style={styles.submitButton}>
+                        <Text style={styles.sumbitText}>Submit Comment</Text>
+                    </View>
+                </TouchableOpacity>
+                : null
+                // !!stateComment.length? 
+            }
             </View>
             <View>
             {comments
@@ -34,17 +41,15 @@ export default class CommentSection extends Component {
               })
               .map((comment, index) => {
                   return (
-                    <View style={{backgroundColor: 'white'}}>
-                    <ListItem style={{width: '100%'}}>
-                    {users.find(user => user.id === comment.userId) &&
-                    <TouchableHighlight>
-                        <Text>{users.find(user => user.id === comment.userId).fullName}</Text>
-                    </TouchableHighlight>
-                    }
                     <View style={styles.commentWrap}>
-                        <Text style={styles.comments}>{comment.content}</Text> 
-                    </View>
-                    </ListItem>
+                        <View style={styles.innerViewWrap}>
+                            {users.find(user => user.id === comment.userId) &&
+                            <Text style={{fontWeight: 'bold', color: 'white', marginBottom: '1%'}}>{users.find(user => user.id === comment.userId).fullName}</Text>
+                            }
+                            <View style={styles.commentTextView}>
+                                <Text multiline={true} style={styles.comments}>{comment.content}</Text> 
+                            </View>
+                        </View>
                     </View>
                   )
             })}</View>
@@ -55,25 +60,47 @@ export default class CommentSection extends Component {
 
 const styles = StyleSheet.create({
     OuterView: {
-        justifyContent: 'center',
+        // justifyContent: 'center',
         alignItems: 'center',
         flex: 1,
     },
     userName: {
         paddingRight: 100
     },
-    comments: {
-        // marginBottom: "2%",
-        // paddingTop: "2%",
-        // paddingLeft: '5%',
-        // paddingRight: "5%",
-        // textAlign: 'left',
-        // alignSelf: 'stretch',
-        // marginRight: '5%',
-        // marginLeft: '5%'
-      },
+    innerViewWrap: {
+        width: 325
+    },
+    commentWrap: {
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 10,
+        paddingBottom: 10,
+        marginTop: 20,
+        marginLeft: 30,
+        marginRight: 30,
+        borderColor: 'white',
+        borderRadius: 5,
+        backgroundColor: '#4519aa',
+        borderWidth: 2,
+    },
       commentButton: {
         backgroundColor: 'red',
         marginBottom: '5%'
       },
+      submitButton: {
+        borderColor: 'white',
+        borderWidth: 3,
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingTop: 10,
+        paddingBottom: 10,
+        borderRadius: 10
+      },
+      sumbitText: {
+        fontWeight: "bold",
+        color: 'white'
+      },
+      comments: {
+          color: 'white'
+      }
 })
