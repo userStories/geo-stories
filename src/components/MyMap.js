@@ -158,7 +158,7 @@ class MyMap extends Component {
                                 key={index}
                                 coordinate={newCoord}
                                 title={marker.title}
-                                description={marker.text}
+                                description={'Click to See Post'}
                                 onCalloutPress={() => this.props.navigation.navigate('SinglePost', { id: marker.id })}
                             >
                             </MapView.Marker>

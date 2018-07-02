@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Animated, StyleSheet, Text, MapView, View, Image, FlatList, ScrollView, TextInput,  TouchableWithoutFeedback, Keyboard  } from 'react-native';
+import {Animated, StyleSheet, Text, MapView, View, Image, FlatList, ScrollView, TextInput,  TouchableWithoutFeedback, Keyboard, TouchableHighlight  } from 'react-native';
 import { Video } from 'expo'
 import { getSinglePostThunk, postComment, getAllUsersThunk} from '../store'
 import {Button} from 'react-native-elements'
@@ -30,7 +30,7 @@ class SinglePost extends Component {
   }
 
   handleSubmit = () => {
-    this.props.addComment(this.state.comment, this.props.singlePost.id)
+    this.props.addComment(this.state.comment, this.props.singlePost.id, this.props.loggedInUser.id)
     this.setState({comment: ""})
   }
 
@@ -45,6 +45,10 @@ class SinglePost extends Component {
     this.setState({
       commentoggle: change2
     })
+  }
+
+  commentNavigation = (profileId) => {
+    this.props.navigation.navigate('UserProfile', {id: profileId})
   }
 
   render() {
@@ -77,6 +81,12 @@ class SinglePost extends Component {
               : <Image style={styles.imageWrap} source={{ uri: this.props.singlePost.mediaLink }} />
             }
             <View>
+              {
+                this.props.allUsers.find(user => user.id === this.props.singlePost.userId) &&
+                <TouchableHighlight>
+                  <Text onPress={() => this.props.navigation.navigate('UserProfile', {id: this.props.singlePost.userId})}>{this.props.allUsers.find(user => user.id === this.props.singlePost.userId).fullName}</Text>
+                </TouchableHighlight>
+              }
               <Text onPress={this.changeDescription} style={styles.descriptionTitle}>Description</Text>
               <View style={{ backgroundColor: 'white', marginRight: '5%', marginLeft: '5%', marginBottom: '2.5%' }}>
                 {this.state.descriptionToggle === 1 ? <Text multiline={true} style={styles.contentWrap}>{this.props.singlePost.text}</Text>:null}
@@ -85,7 +95,7 @@ class SinglePost extends Component {
             <Text style={styles.commentTitle} onPress={this.changeComment}>Comments</Text>
             {
               this.state.commentToggle === 1 ? 
-              <CommentSection comments={this.props.singlePost.comments} users={this.props.allUsers} stateComment={this.state.comment} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>: null
+              <CommentSection comments={this.props.singlePost.comments} users={this.props.allUsers} commentNavigation={this.commentNavigation} stateComment={this.state.comment} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>: null
             }
             }
           </View> :
@@ -141,14 +151,15 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
   return {
     singlePost: state.postReducer.singlePost,
-    allUsers: state.userReducer.allUsers
+    allUsers: state.userReducer.allUsers,
+    loggedInUser: state.authReducer
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     singlePostMaker: (postId) => dispatch(getSinglePostThunk(postId)),
-    addComment: (comment, postId) => dispatch(postComment(comment, postId)),
+    addComment: (comment, postId, userId) => dispatch(postComment(comment, postId, userId)),
     displayUsers: () => dispatch(getAllUsersThunk())
   }
 }

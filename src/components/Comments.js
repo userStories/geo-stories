@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Animated, StyleSheet, Text, MapView, View, Image, FlatList, ScrollView, TextInput,  TouchableWithoutFeedback, Keyboard  } from 'react-native';
+import {Animated, StyleSheet, Text, MapView, View, Image, FlatList, ScrollView, TextInput,  TouchableWithoutFeedback, Keyboard, TouchableHighlight  } from 'react-native';
 import { Video } from 'expo'
 import { getSinglePostThunk, postComment, getAllUsersThunk} from '../store'
 import {Button} from 'react-native-elements'
@@ -8,7 +8,7 @@ import {ListItem} from 'native-base'
 
 export default class CommentSection extends Component {
     render(){
-        const {comments, users, stateComment, handleChange, handleSubmit} = this.props
+        const {comments, users, stateComment, handleChange, handleSubmit, loggedInUser, commentNavigation} = this.props
         return (
         <View style={styles.OuterView}>
             <View
@@ -37,7 +37,9 @@ export default class CommentSection extends Component {
                     <View style={{backgroundColor: 'white'}}>
                     <ListItem style={{width: '100%'}}>
                     {users.find(user => user.id === comment.userId) &&
-                    <Text>{users.find(user => user.id === comment.userId).fullName}</Text>
+                    <TouchableHighlight>
+                        <Text>{users.find(user => user.id === comment.userId).fullName}</Text>
+                    </TouchableHighlight>
                     }
                     <View style={styles.commentWrap}>
                         <Text style={styles.comments}>{comment.content}</Text> 

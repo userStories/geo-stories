@@ -111,10 +111,10 @@ export const getAllPostsThunk = () => {
     
 }
 
-export const postComment = (comment, postId) => {
+export const postComment = (comment, postId, userId) => {
     return async dispatch => {
 
-        const {data} = await axios.post(`http://${API_URL}:8080/api/comments`, {comment, postId})
+        const {data} = await axios.post(`http://${API_URL}:8080/api/comments`, {comment, postId, userId})
         dispatch(addComment(data))
     }
 }

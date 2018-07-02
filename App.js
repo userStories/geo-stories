@@ -14,6 +14,7 @@ import Signup from './src/components/Signup'
 import Login from './src/components/Login'
 import Home from './src/components/Home'
 import { PersistGate } from 'redux-persist/lib/integration/react'
+import ActivityLog from './src/components/ActivityLog'
 
 // import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs'
 
@@ -73,7 +74,7 @@ const StackNav = createStackNavigator({
       headerStyle: styles.header
     })
   },
-  SinglePost: {
+  SinglePost:{
     screen: SinglePost,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
@@ -121,6 +122,15 @@ const StackNav = createStackNavigator({
       ...header,
       headerTintColor: 'blue',
       title: 'Add New Post',
+      headerStyle: styles.header
+    })
+  },
+  ActivityLog: {
+    screen: ActivityLog,
+    navigationOptions: ({ navigation, header }) => ({
+      ...header,
+      headerTintColor: 'blue',
+      title: 'Activity Log',
       headerStyle: styles.header
     })
   }
