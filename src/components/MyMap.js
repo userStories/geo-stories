@@ -7,8 +7,9 @@ import {
 	Linking, 
 	Picker,
 	StyleSheet, 
-	Text, 
-	View, 
+  Text,
+  TouchableOpacity,
+	View,
 } from 'react-native';
 
 import { MapView, Video } from 'expo';
@@ -123,6 +124,11 @@ class MyMap extends Component {
         })
     }
 
+    _onPress = (index) => {
+      console.log('This index:', index)
+      this.props.navigation.navigate('SinglePost', { id: index })
+    }
+
     render() {
       const videoExt = ['mp4', 'mp3', 'avi', 'flv', 'mov', 'wmv'];
       // let newreg = this.state.focusedLocation
@@ -215,6 +221,8 @@ class MyMap extends Component {
             contentContainerStyle={styles.endPadding}
           >
             {this.props.allPosts.map((marker, index) => (
+              <TouchableOpacity onPress={() => this._onPress(marker.id)}>
+
               <View
                 style={(this.index===index) ? styles.cardRedBorder : styles.card}
                 key={index}
@@ -246,6 +254,9 @@ class MyMap extends Component {
                   </Text>
                 </View>
               </View>
+
+              </TouchableOpacity>
+
             ))}
           </Animated.ScrollView>
 				</View> 
