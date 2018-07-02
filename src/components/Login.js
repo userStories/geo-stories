@@ -66,11 +66,13 @@ class Login extends Component {
           </Text>
           ) 
         }
+
         <TouchableOpacity onPress={this.validateLogin}>
           <View style={styles.submitView}>
             <Text style={styles.submitText}>Submit</Text>
           </View>
         </TouchableOpacity>
+
         <Loader 
           loading={this.state.loading} />
       </View>

@@ -53,6 +53,7 @@ class App extends React.Component {
 
 
 
+
 // const StackNav = createStackNavigator({
 //   Home: {
 //     screen: Home,
@@ -133,6 +134,11 @@ const styles = StyleSheet.create({
     height: 40
   }
 })
+
+// const switchView = createSwitchNavigator({
+  
+// })
+
 
 
 export default App
