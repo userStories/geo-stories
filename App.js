@@ -5,8 +5,6 @@ import Router from './Routes'
 import store, { persistor } from './src/store'
 import { PersistGate } from 'redux-persist/lib/integration/react'
 
-// import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs'
-
 class App extends React.Component {
   constructor () {
     super()
@@ -26,32 +24,15 @@ class App extends React.Component {
   }
 }
 
+const styles = StyleSheet.create({
+  header: {
+    width: '100%',
+    backgroundColor: '#eee',
+    borderWidth: 1,
+    height: 40
+  }
+})
 
-
-// const Tabs = createMaterialBottomTabNavigator({
-//   Home: {screen: MyMap},
-//   Post: {screen: NewPost},
-//   Profile: {screen: UserProfile},
-//   // Location: {screen: MyLocation},
-// }, {
-//   initialRouteName: 'Home',
-//   activeTintColor: '#F44336',
-//   barStyle: { paddingBottom: 20 }
-// })
-// const MainStack = createSwitchNavigator({
-//   map: {
-//     screen: MyMap
-//   },
-//   main: {
-//     screen: Tabs
-//   },
-// }, {
-//   animationEnabled: true
-// })
-
-// const switchView = createSwitchNavigator({
-
-// })
 
 export default App
 

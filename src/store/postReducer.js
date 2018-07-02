@@ -20,13 +20,6 @@ const getSinglePost = post => {
   }
 }
 
-const getAllUserPosts = userPosts => {
-  return {
-    type: GET_ALL_USER_POSTS,
-    userPosts
-  }
-}
-
 const getAllPosts = posts => {
   return {
     type: GET_ALL_POSTS,
@@ -96,6 +89,7 @@ export const popupThunk = postId => {
   }
 }
 
+
 export const getAllPostsThunk = () => {
   return async (dispatch) => {
     try {
@@ -107,23 +101,13 @@ export const getAllPostsThunk = () => {
   }
 }
 
-export const postComment = (comment, postId) => {
-  return async dispatch => {
-    const { data } = await axios.post(`http://${API_URL}:8080/api/comments`, { comment, postId })
-    dispatch(addComment(data))
-  }
-}
-
-export const getAllUserPostsThunk = userId => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.get(`http://${API_URL}:8080/api/posts/user/${userId}`)
-      dispatch(getAllUserPosts(data))
-    } catch (err) {
-      console.error(err)
+export const postComment = (comment, postId, userId) => {
+    return async dispatch => {
+        const {data} = await axios.post(`http://${API_URL}:8080/api/comments`, {comment, postId, userId})
+        dispatch(addComment(data))
     }
   }
-}
+
 
 export const addNewPostThunk = (info) => {
   return async (dispatch) => {
@@ -176,12 +160,14 @@ export const addNewPostThunk = (info) => {
       const response = await fetcher.json()
       let mediaUrl = response.mediaUrl
       info.mediaLink = mediaUrl
+      console.log('info', info)
       const newRes = await axios.post(`http://${API_URL}:8080/api/posts/`, info)
       const data = newRes.data.post
       let latitude = data.latitude
       let longitude = data.longitude
       dispatch(changeLocation(latitude, longitude))
       dispatch(addNewPost(data))
+      dispatch(getAllPostsThunk())
     } catch (err) {
       console.error('error in thunk', err.message)
     }
@@ -198,8 +184,6 @@ export const postReducer = (state = initialState, action) => {
       return { ...state, allPosts: action.posts }
     case GET_POST_ID:
       return { ...state, postId: action.postId }
-    case GET_ALL_USER_POSTS:
-      return { ...state, allUserPosts: action.userPosts }
     case ADD_COMMENT:
       let newCommentArr = state.singlePost.comments.concat(action.comment.newComment)
       return {

@@ -14,6 +14,7 @@ import RecordVideo from './src/components/RecordVideo'
 import SinglePost from './src/components/SinglePost'
 import DrawerContent from './DrawerContent'
 import Logout from './src/components/Logout'
+import ActivityLog from './src/components/ActivityLog'
 
 export const StackNav = createStackNavigator({
   Login: {
@@ -119,6 +120,15 @@ export const MenuNav = createStackNavigator({
       headerTintColor: 'white',
       title: 'Welcome',
       headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 }
+    })
+  },
+  ActivityLog: {
+    screen: ActivityLog,
+    navigationOptions: ({ navigation, header }) => ({
+      ...header,
+      headerTintColor: 'blue',
+      title: 'Activity Log',
+      headerStyle: styles.header
     })
   }
 },

@@ -7,8 +7,9 @@ import {
 	Linking, 
 	Picker,
 	StyleSheet, 
-	Text, 
-	View, 
+  Text,
+  TouchableOpacity,
+	View,
 } from 'react-native';
 
 import { MapView, Video } from 'expo';
@@ -63,7 +64,8 @@ class MyMap extends Component {
 			this.props.viewAllPosts()
 			this.props.viewAllCategories()
 
-			let posts = this.props.allPosts
+      let posts = this.props.allPosts
+      this.index = 0
 
 			// We should detect when scrolling has stopped then animate
 			// We should just debounce the event listener here
@@ -122,6 +124,11 @@ class MyMap extends Component {
         })
     }
 
+    _onPress = (index) => {
+      console.log('This index:', index)
+      this.props.navigation.navigate('SinglePost', { id: index })
+    }
+
     render() {
       const videoExt = ['mp4', 'mp3', 'avi', 'flv', 'mov', 'wmv'];
       // let newreg = this.state.focusedLocation
@@ -158,7 +165,7 @@ class MyMap extends Component {
                                 key={index}
                                 coordinate={newCoord}
                                 title={marker.title}
-                                description={marker.text}
+                                description={'Click to See Post'}
                                 onCalloutPress={() => this.props.navigation.navigate('SinglePost', { id: marker.id })}
                             >
                             </MapView.Marker>
@@ -214,8 +221,12 @@ class MyMap extends Component {
             contentContainerStyle={styles.endPadding}
           >
             {this.props.allPosts.map((marker, index) => (
-              <View style={styles.card} key={index}>
+              <TouchableOpacity key={marker.id} onPress={() => this._onPress(marker.id)}>
 
+              <View
+                style={(this.index===index) ? styles.cardRedBorder : styles.card}
+                key={index}
+              >
                 {videoExt.indexOf(marker.mediaLink.slice(-3)) !== -1 ? 
                 <Video 
 									source={{uri: marker.mediaLink}} 
@@ -243,6 +254,9 @@ class MyMap extends Component {
                   </Text>
                 </View>
               </View>
+
+              </TouchableOpacity>
+
             ))}
           </Animated.ScrollView>
 				</View> 
@@ -365,8 +379,23 @@ scrollViewContainer: {
     height: CARD_HEIGHT,
     width: CARD_WIDTH,
     overflow: 'hidden',
-    // borderWidth: 1,
-    // borderColor: 'red',
+    opacity: 0.5
+  },
+  cardRedBorder: {
+    padding: 3,
+    elevation: 2,
+    backgroundColor: '#FFF',
+    marginHorizontal: 3,
+    shadowColor: '#000',
+    shadowRadius: 5,
+    shadowOpacity: 0.3,
+    shadowOffset: { x : 2, y : -2 },
+    height: CARD_HEIGHT,
+    width: CARD_WIDTH,
+    overflow: 'hidden',
+    borderWidth: 3,
+    borderColor: 'red',
+    opacity: 1.0
   },
   cardImage: {
     flex: 3,

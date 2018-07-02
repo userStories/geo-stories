@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Animated, StyleSheet, Text, MapView, View, Image, FlatList, ScrollView, TextInput,  TouchableWithoutFeedback, Keyboard  } from 'react-native';
+import {Animated, StyleSheet, Text, MapView, View, Image, FlatList, ScrollView, TextInput,  TouchableWithoutFeedback, Keyboard, TouchableOpacity, TouchableHighlight  } from 'react-native';
 import { Video } from 'expo'
 import { getSinglePostThunk, postComment, getAllUsersThunk} from '../store'
 import {Button} from 'react-native-elements'
@@ -30,7 +30,7 @@ class SinglePost extends Component {
   }
 
   handleSubmit = () => {
-    this.props.addComment(this.state.comment, this.props.singlePost.id)
+    this.props.addComment(this.state.comment, this.props.singlePost.id, this.props.loggedInUser.id)
     this.setState({comment: ""})
   }
 
@@ -47,6 +47,10 @@ class SinglePost extends Component {
     })
   }
 
+  commentNavigation = (profileId) => {
+    this.props.navigation.navigate('UserProfile', {id: profileId})
+  }
+
   render() {
     const imageExt = ['jpeg', 'jpg', 'png', 'gif']
     const videoExt = ['mp4', 'mp3', 'avi', 'flv', 'mov', 'wmv'];
@@ -58,7 +62,7 @@ class SinglePost extends Component {
       //     justifyContent: 'space-between',
       //   }}
       // >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <TouchableWithoutFeedback  onPress={Keyboard.dismiss}>
       <Animated.ScrollView>
         {this.props.singlePost.mediaLink && !!this.props.allUsers.length ?
           <View style={styles.OuterViewWrap}>
@@ -77,15 +81,30 @@ class SinglePost extends Component {
               : <Image style={styles.imageWrap} source={{ uri: this.props.singlePost.mediaLink }} />
             }
             <View>
-              <Text onPress={this.changeDescription} style={styles.descriptionTitle}>Description</Text>
-              <View style={{ backgroundColor: 'white', marginRight: '5%', marginLeft: '5%', marginBottom: '2.5%' }}>
-                {this.state.descriptionToggle === 1 ? <Text multiline={true} style={styles.contentWrap}>{this.props.singlePost.text}</Text>:null}
-              </View>
+
+              {
+                this.props.allUsers.find(user => user.id === this.props.singlePost.userId) &&
+                <TouchableHighlight>
+                  <Text onPress={() => this.props.navigation.navigate('UserProfile', {id: this.props.singlePost.userId})}>{this.props.allUsers.find(user => user.id === this.props.singlePost.userId).fullName}</Text>
+                </TouchableHighlight>
+              }
+
+
+                <Text style={styles.descriptionTitle}>Description</Text>
+                <Text multiline={true} style={styles.descriptionText}>{this.props.singlePost.text}</Text>
+
+
             </View>
-            <Text style={styles.commentTitle} onPress={this.changeComment}>Comments</Text>
             {
+              (this.state.commentToggle === -1) ? <TouchableOpacity onPress={this.changeComment}><View style={styles.commentButtons}><Text style={styles.commentText}>View Comments</Text></View></TouchableOpacity> :
+              <TouchableOpacity onPress={this.changeComment}><View style={styles.commentButtons}><Text style={styles.commentText}>Hide Comments</Text></View></TouchableOpacity>
+            }
+
+
+            {
+              // this.state.commentToggle === 1
               this.state.commentToggle === 1 ? 
-              <CommentSection comments={this.props.singlePost.comments} users={this.props.allUsers} stateComment={this.state.comment} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>: null
+              <CommentSection comments={this.props.singlePost.comments} users={this.props.allUsers} commentNavigation={this.commentNavigation} stateComment={this.state.comment} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>: null
             }
             }
           </View> :
@@ -105,50 +124,72 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     flexDirection: 'column',
+    backgroundColor: '#4519aa',
+    paddingBottom: 200
   },
   imageWrap: {
     width: 350,
     height: 300,
-    marginBottom: "2.5%"
+    marginBottom: "2.5%",
+    borderRadius: 6
   },
-  contentWrap: {
+  descriptionText: {
     fontSize: 15,
     marginRight: '5%',
     marginLeft: '5%',
     alignItems: 'center',
     marginTop: "2.5%",
     marginBottom: "5%",
+    color: 'white'
     // paddingRight: '5%',
     // paddingLeft: '5%'
 
   },
+  commentButtons: {
+    borderColor: 'white',
+    borderWidth: 3,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderRadius: 10
+  },
+  commentText: {
+    fontWeight: "bold",
+    color: 'white'
+  },
   title: {
     fontWeight: "bold",
     marginTop: "5%",
+    color: 'white',
     marginBottom: "5%"
   },
   descriptionTitle: {
     alignSelf: "center",
     fontWeight: "bold",
-    marginBottom: "2.5%"
+    marginBottom: "2.5%",
+    color: 'white'
   },
   commentTitle: {
+    marginTop: 40,
     fontWeight: "bold",
-    marginBottom: "5%"
+    marginBottom: "5%",
+    color: 'white'
   },
 
 })
 const mapStateToProps = state => {
   return {
     singlePost: state.postReducer.singlePost,
-    allUsers: state.userReducer.allUsers
+    allUsers: state.userReducer.allUsers,
+    loggedInUser: state.authReducer
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     singlePostMaker: (postId) => dispatch(getSinglePostThunk(postId)),
-    addComment: (comment, postId) => dispatch(postComment(comment, postId)),
+    addComment: (comment, postId, userId) => dispatch(postComment(comment, postId, userId)),
     displayUsers: () => dispatch(getAllUsersThunk())
   }
 }
