@@ -63,7 +63,8 @@ class MyMap extends Component {
 			this.props.viewAllPosts()
 			this.props.viewAllCategories()
 
-			let posts = this.props.allPosts
+      let posts = this.props.allPosts
+      this.index = 0
 
 			// We should detect when scrolling has stopped then animate
 			// We should just debounce the event listener here
@@ -214,8 +215,10 @@ class MyMap extends Component {
             contentContainerStyle={styles.endPadding}
           >
             {this.props.allPosts.map((marker, index) => (
-              <View style={styles.card} key={index}>
-
+              <View
+                style={(this.index===index) ? styles.cardRedBorder : styles.card}
+                key={index}
+              >
                 {videoExt.indexOf(marker.mediaLink.slice(-3)) !== -1 ? 
                 <Video 
 									source={{uri: marker.mediaLink}} 
@@ -365,8 +368,23 @@ scrollViewContainer: {
     height: CARD_HEIGHT,
     width: CARD_WIDTH,
     overflow: 'hidden',
-    // borderWidth: 1,
-    // borderColor: 'red',
+    opacity: 0.5
+  },
+  cardRedBorder: {
+    padding: 3,
+    elevation: 2,
+    backgroundColor: '#FFF',
+    marginHorizontal: 3,
+    shadowColor: '#000',
+    shadowRadius: 5,
+    shadowOpacity: 0.3,
+    shadowOffset: { x : 2, y : -2 },
+    height: CARD_HEIGHT,
+    width: CARD_WIDTH,
+    overflow: 'hidden',
+    borderWidth: 3,
+    borderColor: 'red',
+    opacity: 1.0
   },
   cardImage: {
     flex: 3,
