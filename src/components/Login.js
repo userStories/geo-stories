@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { View, Button, Text, StyleSheet, TouchableWithoutFeedback, Keyboard, TextInput, TouchableOpacity } from 'react-native';
 import { FormInput } from 'react-native-elements';
 import { auth } from '../store/authReducer';
+import Loader from './Loader'
 
 class Login extends Component {
   constructor () {
@@ -10,22 +11,26 @@ class Login extends Component {
     this.state = {
       email: '',
       password: '',
-      formError: false
+      formError: false,
+      loading: false
     }
   }
 
   validateLogin = async () => {
+    this.setState({loading: true})
     const { email, password } = this.state
     const res = await this.props.submitLoginData(email, password, 'login')
     console.log('RES', res)
       res.status === 200 
       ? this.login()
-      : this.setState({formError: true})
+      : this.setState({formError: true, loading: false})
   }
 
   login = () => {
-    const { navigate } = this.props.navigation
-    navigate( 'Home')
+    this.setState({loading: false})
+    const { push } = this.props.navigation
+    console.log('HEREO', this.props.navigation)
+    push('Home')
   }
 
   render() {
@@ -66,6 +71,8 @@ class Login extends Component {
             <Text style={styles.submitText}>Submit</Text>
           </View>
         </TouchableOpacity>
+        <Loader 
+          loading={this.state.loading} />
       </View>
       </TouchableWithoutFeedback>
     )

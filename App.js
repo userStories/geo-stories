@@ -1,24 +1,23 @@
-
-import React from 'react';
-import { StyleSheet, Text } from "react-native";
-import { Provider } from 'react-redux'
-import { createStackNavigator } from 'react-navigation'
-import NewPost from './src/components/NewPost'
-import TakePicture from './src/components/TakePicture'
-import RecordVideo from './src/components/RecordVideo'
-import SinglePost from './src/components/SinglePost'
+import React from 'react'
+import { StyleSheet } from 'react-native'
+import { Provider, connect } from 'react-redux'
+import StackNav from './StackNav'
 import store, { persistor } from './src/store'
-import MyMap, { MyLocation } from './src/components/MyMap'
-import UserProfile from './src/components/UserProfile'
-import Signup from './src/components/Signup'
-import Login from './src/components/Login'
-import Home from './src/components/Home'
 import { PersistGate } from 'redux-persist/lib/integration/react'
 
 // import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs'
 
 class App extends React.Component {
+  constructor () {
+    super()
+    this.state = {
+      loggedInUser: {}
+    }
+  }
+
   render () {
+    const isLoggedIn = !!this.state.loggedInUser.id
+    console.log(isLoggedIn)
     return (
       <Provider store={store}>
         <PersistGate persistor={persistor}>
@@ -135,4 +134,6 @@ const styles = StyleSheet.create({
   }
 })
 
+
 export default App
+
