@@ -53,77 +53,77 @@ class App extends React.Component {
 
 
 
-const StackNav = createStackNavigator({
-  Home: {
-    screen: Home,
-    navigationOptions: ({ navigation, header }) => ({
-      ...header,
-      headerTintColor: '#4519aa',
-      title: 'Map',
-      headerStyle: { backgroundColor: 'white', borderWidth: 1, height: 40 },
-    })
-  },
-  MyMap: {
-    screen: MyMap,
-    navigationOptions: ({ navigation, header }) => ({
-      ...header,
-      headerTintColor: '#4519aa',
-      title: 'Map',
-      headerStyle: styles.header
-    })
-  },
-  SinglePost: {
-    screen: SinglePost,
-    navigationOptions: ({ navigation, header }) => ({
-      ...header,
-      headerTintColor: '#4519aa',
-      title: 'Post',
-      headerStyle: styles.header
-    })
-  },
-  UserProfile: {
-    screen: UserProfile,
-    navigationOptions: ({ navigation, header }) => ({
-      ...header,
-      headerTintColor: '#4519aa',
-      title: 'Welcome',
-      headerStyle: styles.header
-    })
-  },
-  Signup: {
-    screen: Signup,
-    navigationOptions: ({ navigation, header }) => ({
-      ...header,
-      headerTintColor: '#4519aa',
-      title: 'Sign Up',
-      headerStyle: styles.header,
-    })
-  },
-  Login: {
-    screen: Login,
-    navigationOptions: ({ navigation, header }) => ({
-      ...header,
-      headerTintColor: '#4519aa',
-      title: 'Welcome',
-      headerStyle: styles.header,
-    })
-  },
-  TakePicture: {
-    screen: TakePicture
-  },
-  RecordVideo: {
-    screen: RecordVideo
-  },
-  NewPost: {
-    screen: NewPost,
-    navigationOptions: ({ navigation, header }) => ({
-      ...header,
-      headerTintColor: '#4519aa',
-      title: 'Add New Post',
-      headerStyle: styles.header
-    })
-  }
-})
+// const StackNav = createStackNavigator({
+//   Home: {
+//     screen: Home,
+//     navigationOptions: ({ navigation, header }) => ({
+//       ...header,
+//       headerTintColor: '#4519aa',
+//       title: 'Map',
+//       headerStyle: { backgroundColor: 'white', borderWidth: 1, height: 40 },
+//     })
+//   },
+//   MyMap: {
+//     screen: MyMap,
+//     navigationOptions: ({ navigation, header }) => ({
+//       ...header,
+//       headerTintColor: '#4519aa',
+//       title: 'Map',
+//       headerStyle: styles.header
+//     })
+//   },
+//   SinglePost: {
+//     screen: SinglePost,
+//     navigationOptions: ({ navigation, header }) => ({
+//       ...header,
+//       headerTintColor: '#4519aa',
+//       title: 'Post',
+//       headerStyle: styles.header
+//     })
+//   },
+//   UserProfile: {
+//     screen: UserProfile,
+//     navigationOptions: ({ navigation, header }) => ({
+//       ...header,
+//       headerTintColor: '#4519aa',
+//       title: 'Welcome',
+//       headerStyle: styles.header
+//     })
+//   },
+//   Signup: {
+//     screen: Signup,
+//     navigationOptions: ({ navigation, header }) => ({
+//       ...header,
+//       headerTintColor: '#4519aa',
+//       title: 'Sign Up',
+//       headerStyle: styles.header,
+//     })
+//   },
+//   Login: {
+//     screen: Login,
+//     navigationOptions: ({ navigation, header }) => ({
+//       ...header,
+//       headerTintColor: '#4519aa',
+//       title: 'Welcome',
+//       headerStyle: styles.header,
+//     })
+//   },
+//   TakePicture: {
+//     screen: TakePicture
+//   },
+//   RecordVideo: {
+//     screen: RecordVideo
+//   },
+//   NewPost: {
+//     screen: NewPost,
+//     navigationOptions: ({ navigation, header }) => ({
+//       ...header,
+//       headerTintColor: '#4519aa',
+//       title: 'Add New Post',
+//       headerStyle: styles.header
+//     })
+//   }
+// })
 
 const styles = StyleSheet.create({
   header: {
