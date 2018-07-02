@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, ImageBackground, View, Button, Text } from 'react-native';
 import { connect } from 'react-redux'
 import LoginValidate from './LoginValidate'
-import LogoutButton from './LogoutButton'
+import LogoutButton from './Logout'
 import Signup from './Signup'
 
 

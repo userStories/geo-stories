@@ -9,9 +9,8 @@ class LogoutButton extends Component {
   }
 
   onPress = () => {
-    // const { push } = this.props.navigation
-    console.log(this.props.navigation)
     this.props.logoutUser()
+    this.props.navigation.navigate('Signup')
   }
 
   render () {

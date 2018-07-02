@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
 import { Provider, connect } from 'react-redux'
-import StackNav from './StackNav'
+import Router from './Routes'
 import store, { persistor } from './src/store'
 import { PersistGate } from 'redux-persist/lib/integration/react'
 
@@ -11,17 +11,15 @@ class App extends React.Component {
   constructor () {
     super()
     this.state = {
-      loggedInUser: {}
+      signedIn: false
     }
   }
 
   render () {
-    const isLoggedIn = !!this.state.loggedInUser.id
-    console.log(isLoggedIn)
     return (
       <Provider store={store}>
         <PersistGate persistor={persistor}>
-          <StackNav />
+          <Router />
         </PersistGate>
       </Provider>
     )
@@ -52,7 +50,7 @@ class App extends React.Component {
 // })
 
 // const switchView = createSwitchNavigator({
-  
+
 // })
 
 export default App

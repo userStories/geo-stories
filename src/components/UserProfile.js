@@ -9,17 +9,10 @@ const { height } = Dimensions.get('window')
 // console.log(Dimensions.get('window'))
 
 class UserProfile extends Component {
-
-  componentDidMount = async () => {
-    const id = this.props.navigation.state.params.id
-    const posts = await this.props.viewAllUserPosts(id)
-  } 
-
-  render () { 
-    const posts = this.props.allPosts
-    console.log(posts)
+  render () {
+    const userPosts = this.props.allUserPosts
     const user = this.props.thisUser
-    console.log(user)
+    console.log(userPosts)
     return (
       <View>
         <View
@@ -27,15 +20,15 @@ class UserProfile extends Component {
           <Image
             source={{ uri: user.profileImg }}
             style={{ width: 125, height: 125, borderRadius: 62.5, margin: 4, borderWidth: 1.5, borderColor: 'rgb(117, 138, 175)' }} />
-            <View>
-              <Text
-                style={{fontFamily: 'Cochin-Bold', textAlign: 'center'}}
-              >{user.firstName + ' ' + user.lastName}</Text>
-              <Text
-                style={{fontFamily: 'Cochin', textAlign: 'center'}}>
+          <View>
+            <Text
+              style={{fontFamily: 'Cochin-Bold', textAlign: 'center'}}
+            >{user.firstName + ' ' + user.lastName}</Text>
+            <Text
+              style={{fontFamily: 'Cochin', textAlign: 'center'}}>
               {user.tagline}
-              </Text>
-            </View>
+            </Text>
+          </View>
         </View>
         <ScrollView
           vertical
@@ -48,10 +41,10 @@ class UserProfile extends Component {
               justifyContent: 'space-evenly'
             }}>
             {
-              posts.map(post =>
-                <View
+              userPosts.map(post =>
+                <View key={post.id}
                   style={{marginBottom: 4, marginTop: 4}}>
-                  <Image key={post.id}
+                  <Image
                     source={{ uri: post.mediaLink }}
                     style={{ width: 113, height: 113 }}
                   />
@@ -67,7 +60,7 @@ class UserProfile extends Component {
 
 const mapStateToProps = state => {
   return {
-    allPosts: state.postReducer.allPosts,
+    allUserPosts: state.postReducer.allUserPosts,
     thisUser: state.authReducer
   }
 }

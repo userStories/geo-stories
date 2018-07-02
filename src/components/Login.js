@@ -20,7 +20,6 @@ class Login extends Component {
     this.setState({loading: true})
     const { email, password } = this.state
     const res = await this.props.submitLoginData(email, password, 'login')
-    console.log('RES', res)
       res.status === 200 
       ? this.login()
       : this.setState({formError: true, loading: false})
@@ -28,9 +27,8 @@ class Login extends Component {
 
   login = () => {
     this.setState({loading: false})
-    const { push } = this.props.navigation
-    console.log('HEREO', this.props.navigation)
-    push('Home')
+    const { navigate } = this.props.navigation
+    navigate('MyMap')
   }
 
   render() {
@@ -60,6 +58,13 @@ class Login extends Component {
         <Button 
           title="Submit"
           onPress={this.validateLogin}
+        />
+        <Button
+          buttonStyle={{ marginTop: 20 }}
+          backgroundColor="transparent"
+          textStyle={{ color: "#bcbec1" }}
+          title="Sign Up"
+          onPress={() => this.props.navigation.navigate("Signup")}
         />
         <Loader 
           loading={this.state.loading} />

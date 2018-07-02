@@ -66,6 +66,7 @@ const changeLocation = (lat, long) => {
 const initialState = {
   singlePost: {},
   allPosts: [],
+  allUserPosts: [],
   postId: null,
   currentLocation: {
     currentMarker: null,
@@ -99,7 +100,6 @@ export const getAllPostsThunk = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`http://${API_URL}:8080/api/posts`)
-      console.log('datata IN THUNK', data)
       dispatch(getAllPosts(data))
     } catch (err) {
       console.error(err);
@@ -110,7 +110,6 @@ export const getAllPostsThunk = () => {
 export const postComment = (comment, postId) => {
   return async dispatch => {
     const { data } = await axios.post(`http://${API_URL}:8080/api/comments`, { comment, postId })
-    console.log('data in postCommentthunk: ', data)
     dispatch(addComment(data))
   }
 }
@@ -118,9 +117,7 @@ export const postComment = (comment, postId) => {
 export const getAllUserPostsThunk = userId => {
   return async (dispatch) => {
     try {
-      console.log('here22', userId)
       const { data } = await axios.get(`http://${API_URL}:8080/api/posts/user/${userId}`)
-      console.log('data from getalluserpost thunk', data)
       dispatch(getAllUserPosts(data))
     } catch (err) {
       console.error(err)
@@ -183,9 +180,6 @@ export const addNewPostThunk = (info) => {
       const data = newRes.data.post
       let latitude = data.latitude
       let longitude = data.longitude
-      console.log('DATA', data)
-      console.log('LATITUDE', latitude)
-      console.log('LONGITUDE', longitude)
       dispatch(changeLocation(latitude, longitude))
       dispatch(addNewPost(data))
     } catch (err) {
@@ -205,7 +199,7 @@ export const postReducer = (state = initialState, action) => {
     case GET_POST_ID:
       return { ...state, postId: action.postId }
     case GET_ALL_USER_POSTS:
-      return { ...state, allPosts: action.userPosts }
+      return { ...state, allUserPosts: action.userPosts }
     case ADD_COMMENT:
       let newCommentArr = state.singlePost.comments.concat(action.comment.newComment)
       return {
