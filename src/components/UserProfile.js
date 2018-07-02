@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, MapView, View, Button, Image, Dimensions, ScrollView, TouchableHighlight } from 'react-native';
-import { getAllUserPostsThunk, getSingleUserThunk, addFriendThunk, loggedInUserThunk, removeFriendThunk } from '../store';
+import { getAllUserPostsThunk, getSingleUserThunk, addFriendThunk, loggedInUserThunk, removeFriendThunk, getAllPostsThunk } from '../store';
 import {Video} from 'expo'
 
 const { height } = Dimensions.get('window')
@@ -18,10 +18,11 @@ class UserProfile extends Component {
   }
 
   componentDidMount = async () => {
+    this.props.viewAllPosts()
     const userId = this.props.navigation.getParam('id', 'no input')
     console.log('userId in component did mount: ', userId)
     this.props.singleUserMaker(userId)
-    console.log('this.props.loggInUserAuth: ', this.props.loggedInUserAuth.id)
+    console.log('this.props.loggInUserAuth component did mount: ', this.props.loggedInUserAuth.id)
     this.props.viewLoggedInUser(this.props.loggedInUserAuth.id)
   } 
 
@@ -30,9 +31,7 @@ class UserProfile extends Component {
     // const user = this.props.thisUser
     const imageExt = ['jpeg', 'jpg', 'png', 'gif']
     const videoExt = ['mp4', 'mp3', 'avi', 'flv', 'mov', 'wmv'];
-    console.log('singleUser in render method: ', singleUser)
-    console.log('this.props.loggInUserAuth: ', this.props.loggedInUserAuth.id)
-    console.log('loggedInUser: ', loggedInUser)
+    console.log('allposts', allPosts)
     return (
       !!loggedInUser ? 
       <View>
@@ -63,7 +62,9 @@ class UserProfile extends Component {
             }}>
             {
               allPosts
-                .filter(post => post.userId === singleUser.id)
+                .filter(post => {
+                  return post.userId === singleUser.id
+                })
                 .map(post =>
                 <View
                   style={{marginBottom: 4, marginTop: 4}}>
@@ -130,11 +131,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    viewAllUserPosts: (id) => dispatch(getAllUserPostsThunk(id)),
     singleUserMaker: (id) => dispatch(getSingleUserThunk(id)),
     addFriend: (userId, profileId) => dispatch(addFriendThunk(userId, profileId)),
     viewLoggedInUser: (id) => dispatch(loggedInUserThunk(id)),
-    removeFriend: (userId, profileId) => dispatch(removeFriendThunk(userId, profileId))
+    removeFriend: (userId, profileId) => dispatch(removeFriendThunk(userId, profileId)),
+    viewAllPosts: () => dispatch(getAllPostsThunk())
     }
   }
 

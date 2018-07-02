@@ -4,7 +4,7 @@ import { Provider, connect } from 'react-redux'
 import StackNav from './StackNav'
 import store, { persistor } from './src/store'
 import { PersistGate } from 'redux-persist/lib/integration/react'
-import ActivityLog from './src/components/ActivityLog'
+
 
 // import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs'
 
