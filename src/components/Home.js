@@ -34,8 +34,6 @@ class Home extends React.Component {
 
   render() {
     const isLoggedIn = !!this.state.loggedInUser.id
-    console.log(this.state.loggedInUser)
-    console.log(isLoggedIn)
     return (
       <View>
         <Text style={styles.titleText}>Home Component</Text>

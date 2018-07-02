@@ -1,6 +1,5 @@
 import axios from 'axios'
 import {API_URL} from '../../IP_ADDRESS'
-// const IP = '172.17.20.35'
 
 // import history from '../history'
 
@@ -52,6 +51,7 @@ export const logout = () => async dispatch => {
   /**
    * INITIAL STATE
    */
+  
 const defaultUser = {}
 
     /**
