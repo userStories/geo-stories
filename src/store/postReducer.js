@@ -168,6 +168,7 @@ export const addNewPostThunk = (info) => {
           const url = `http://${API_URL}:8080/api/posts/media`
           fetcher = await fetch(url, options)
         }
+        console.log('')
         const response = await fetcher.json()
         let mediaUrl = response.mediaUrl
         info.mediaLink = mediaUrl

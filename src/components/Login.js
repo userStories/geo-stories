@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Button, Text } from 'react-native';
+import { View, Button, Text, StyleSheet, TouchableWithoutFeedback, Keyboard, TextInput, TouchableOpacity } from 'react-native';
 import { FormInput } from 'react-native-elements';
 import { auth } from '../store/authReducer';
 
@@ -33,18 +33,27 @@ class Login extends Component {
       email, password
     } = this.state
     return (
-      <View>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.mainWrap}>
+
+      <Text style={styles.loginText}>Login</Text>
+      <View style={styles.inputWraps}>
         <FormInput
           value={email}
           onChangeText={email => this.setState({ email })}
           placeholder="Email"
+          placeholderTextColor='white'
+          inputStyle={{color: 'white'}}
         />
         <FormInput
           value={password}
           onChangeText={password => this.setState({ password })}
           placeholder="Password"
+          placeholderTextColor='white'
+          inputStyle={{color: 'white', marginTop: 10}}
           secureTextEntry
         />
+      </View>
         {this.state.formError &&
           (
           <Text>
@@ -52,14 +61,49 @@ class Login extends Component {
           </Text>
           ) 
         }
-        <Button 
-          title="Submit"
-          onPress={this.validateLogin}
-        />
+        <TouchableOpacity onPress={this.validateLogin}>
+          <View style={styles.submitView}>
+            <Text style={styles.submitText}>Submit</Text>
+          </View>
+        </TouchableOpacity>
       </View>
+      </TouchableWithoutFeedback>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  mainWrap: {
+    backgroundColor: '#4519aa',
+    flex: 1,
+    paddingTop: '15%',
+    alignItems: 'center',
+  },
+  inputWraps: {
+    width: '90%'
+  },
+  submitView: {
+    marginTop: '6%',
+    borderColor: 'white',
+    borderWidth: 3,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderRadius: 10
+  },
+  submitText: {
+    fontWeight: "bold",
+    color: 'white'
+  },
+  loginText: {
+    fontSize: 30,
+    color: 'white',
+    marginBottom: '2%'
+  },
+  
+})
+
 
 const mapDispatchToProps = dispatch => {
   return {
