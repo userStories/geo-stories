@@ -28,25 +28,25 @@ class UserProfile extends Component {
 
   render () { 
     const {singleUser, allPosts, addFriend, loggedInUser, removeFriend} = this.props
-    // const user = this.props.thisUser
     const imageExt = ['jpeg', 'jpg', 'png', 'gif']
     const videoExt = ['mp4', 'mp3', 'avi', 'flv', 'mov', 'wmv'];
-    console.log('allposts', allPosts)
+    console.log('Following: ', singleUser.user.Friend.length)
+    console.log('Followers: ', singleUser.friends.length)
     return (
       !!loggedInUser ? 
       <View>
         <View
           style={{flexDirection: 'column', width: 125, justifyContent: 'center'}}>
           <Image
-            source={{ uri: singleUser.profileImg }}
+            source={{ uri: singleUser.user.profileImg }}
             style={{ width: 125, height: 125, borderRadius: 62.5, margin: 4, borderWidth: 1.5, borderColor: 'rgb(117, 138, 175)' }} />
             <View>
               <Text
                 style={{fontFamily: 'Cochin-Bold', textAlign: 'center'}}
-              >{singleUser.fullName}</Text>
+              >{singleUser.user.fullName}</Text>
               <Text
                 style={{fontFamily: 'Cochin', textAlign: 'center'}}>
-              {singleUser.tagline}
+              {singleUser.user.tagline}
               </Text>
             </View>
         </View>
@@ -63,7 +63,7 @@ class UserProfile extends Component {
             {
               allPosts
                 .filter(post => {
-                  return post.userId === singleUser.id
+                  return post.userId === singleUser.user.id
                 })
                 .map(post =>
                 <View
@@ -94,16 +94,16 @@ class UserProfile extends Component {
               )
             }
             {
-              loggedInUser.id !== singleUser.id && 
+              loggedInUser.user.id !== singleUser.user.id && 
             <TouchableHighlight>
-              { !loggedInUser.Friend.find(elem => elem.id === singleUser.id) ? 
-              <Text onPress={() => addFriend(loggedInUser.id, singleUser.id)}>Follow</Text>: 
-              <Text onPress={()=> removeFriend(loggedInUser.id, singleUser.id)}>UnFollow</Text>
+              { !loggedInUser.user.Friend.find(elem => elem.id === singleUser.user.id) ? 
+              <Text onPress={() => addFriend(loggedInUser.user.id, singleUser.user.id)}>Follow</Text>: 
+              <Text onPress={()=> removeFriend(loggedInUser.user.id, singleUser.user.id)}>UnFollow</Text>
               }
             </TouchableHighlight>
             }
             {
-              loggedInUser.id === singleUser.id &&
+              loggedInUser.user.id === singleUser.user.id &&
               <TouchableHighlight>
                 <Text onPress={()=> this.props.navigation.navigate('ActivityLog')}>Activity Log</Text>
               </TouchableHighlight>
