@@ -90,6 +90,7 @@ class NewPost extends React.Component {
       newObj.text = this.state.text
       newObj.latitude = this.state.location.coords.latitude
       newObj.longitude = this.state.location.coords.longitude
+      newObj.userId = this.props.userId
       this.props.addNewPostMethod(newObj)
       this.props.navigation.navigate('MyMap', { newPostNow: true })
     } else if (cameraPic !== 'none') {
@@ -99,6 +100,8 @@ class NewPost extends React.Component {
       newObj.latitude = this.state.location.coords.latitude
       newObj.longitude = this.state.location.coords.longitude
       newObj.location = this.state.location
+      newObj.userId = this.props.userId
+      console.log('newObj', newObj)
       this.props.addNewPostMethod(cameraPic)
       this.props.navigation.navigate('MyMap', { newPostNow: true })
     }
@@ -113,6 +116,7 @@ class NewPost extends React.Component {
       newObj.text = this.state.text
       newObj.latitude = this.state.location.coords.latitude
       newObj.longitude = this.state.location.coords.longitude
+      newObj.userId = this.props.userId
       this.props.addNewPostMethod(this.state.video)
       this.props.navigation.navigate('MyMap', { newPostNow: true })
     } else if (newVideo !== 'none') {
@@ -121,6 +125,7 @@ class NewPost extends React.Component {
       newObj.text = this.state.text
       newObj.latitude = this.state.location.coords.latitude
       newObj.longitude = this.state.location.coords.longitude
+      newObj.userId = this.props.userId
       this.props.addNewPostMethod(newVideo)
       this.props.navigation.navigate('MyMap', { newPostNow: true })
     }
@@ -251,13 +256,20 @@ class NewPost extends React.Component {
     }
 }
 
+mapState = (state) => {
+  console.log('state.authReducer', state.authReducer)
+  return {
+    userId: state.authReducer.id
+  }
+}
+
 mapDispatch = (dispatch) => {
   return {
     addNewPostMethod: (info) => dispatch(addNewPostThunk(info))
   }
 }
 
-export default connect (null, mapDispatch)(NewPost)
+export default connect (mapState, mapDispatch)(NewPost)
 
 const styles = StyleSheet.create({
   ViewWrap: {
