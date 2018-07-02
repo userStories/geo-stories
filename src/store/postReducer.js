@@ -20,13 +20,6 @@ const getSinglePost = post => {
   }
 }
 
-const getAllUserPosts = userPosts => {
-  return {
-    type: GET_ALL_USER_POSTS,
-    userPosts
-  }
-}
-
 const getAllPosts = posts => {
   return {
     type: GET_ALL_POSTS,
@@ -95,8 +88,10 @@ export const popupThunk = postId => {
   }
 }
 
+console.log('reached before thunk')
 export const getAllPostsThunk = () => {
   return async (dispatch) => {
+    console.log('entetred getallposts thunk')
     try {
       const { data } = await axios.get(`http://${API_URL}:8080/api/posts`)
       console.log('datata IN THUNK', data)
@@ -113,7 +108,7 @@ export const postComment = (comment, postId, userId) => {
         dispatch(addComment(data))
     }
   }
-}
+
 
 export const addNewPostThunk = (info) => {
   return async (dispatch) => {
@@ -175,6 +170,7 @@ export const addNewPostThunk = (info) => {
       console.log('LONGITUDE', longitude)
       dispatch(changeLocation(latitude, longitude))
       dispatch(addNewPost(data))
+      // dispatch(getAllPosts)
     } catch (err) {
       console.error('error in thunk', err.message)
     }
@@ -191,8 +187,6 @@ export const postReducer = (state = initialState, action) => {
       return { ...state, allPosts: action.posts }
     case GET_POST_ID:
       return { ...state, postId: action.postId }
-    case GET_ALL_USER_POSTS:
-      return { ...state, allPosts: action.userPosts }
     case ADD_COMMENT:
       let newCommentArr = state.singlePost.comments.concat(action.comment.newComment)
       return {

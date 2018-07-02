@@ -9,6 +9,7 @@ import NewPost from './src/components/NewPost'
 import TakePicture from './src/components/TakePicture'
 import RecordVideo from './src/components/RecordVideo'
 import SinglePost from './src/components/SinglePost'
+import ActivityLog from './src/components/ActivityLog'
 
 const StackNav = createStackNavigator({
   Home: {
@@ -77,6 +78,15 @@ const StackNav = createStackNavigator({
       ...header,
       headerTintColor: 'blue',
       title: 'Add New Post',
+      headerStyle: styles.header
+    })
+  },
+  ActivityLog: {
+    screen: ActivityLog,
+    navigationOptions: ({ navigation, header }) => ({
+      ...header,
+      headerTintColor: 'blue',
+      title: 'Activity Log',
       headerStyle: styles.header
     })
   }
