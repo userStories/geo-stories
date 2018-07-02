@@ -221,7 +221,7 @@ class MyMap extends Component {
             contentContainerStyle={styles.endPadding}
           >
             {this.props.allPosts.map((marker, index) => (
-              <TouchableOpacity onPress={() => this._onPress(marker.id)}>
+              <TouchableOpacity key={marker.id} onPress={() => this._onPress(marker.id)}>
 
               <View
                 style={(this.index===index) ? styles.cardRedBorder : styles.card}

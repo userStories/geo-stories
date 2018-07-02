@@ -31,10 +31,10 @@ addFriend = newUser =>{
   }
 }
 
-loggedInUser = user => {
+loggedInUser = newUser => {
   return {
     type: LOGGED_IN_USER,
-    user
+    newUser
   }
 }
 
@@ -75,7 +75,7 @@ export const addFriendThunk = (userId, profileId) => {
       const {data} = await axios.get(`http://${API_URL}:8080/api/users/${userId}`)
       dispatch(addFriend(data))
     } catch(err){
-
+      console.error(err)
     }
   }
 }
@@ -115,14 +115,14 @@ export const userReducer = (state = initialState, action) => {
     case DISPLAY_SINGLE_USER:
       return {...state, singleUser: action.user}
     case ADD_FRIEND:
-    console.log('action.newUser.user.Friend in ADD_FRIEND: ', action.newUser.user.Friend)
+    // console.log('action.newUser.user.Friend in ADD_FRIEND: ', action.newUser.user.Friend)
       return {...state, loggedInUser: {
         ...state.loggedInUser, user: {
           ...state.loggedInUser.user, Friend: action.newUser.user.Friend
         }
       }}
-    case LOGGED_IN_USER: 
-      return {...state, loggedInUser: action.user}
+    case LOGGED_IN_USER:
+      return {...state, loggedInUser: action.newUser}
     case REMOVE_FRIEND:
     return {...state, loggedInUser: {
       ...state.loggedInUser, user: {

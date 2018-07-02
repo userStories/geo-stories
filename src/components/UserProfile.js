@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { StyleSheet, Text, MapView, View, Button, Image, Dimensions, ScrollView, TouchableHighlight } from 'react-native';
 import { getAllUserPostsThunk, getSingleUserThunk, addFriendThunk, loggedInUserThunk, removeFriendThunk, getAllPostsThunk } from '../store';
 import {Video} from 'expo'
+console.log('here')
 
 const { height } = Dimensions.get('window')
 
@@ -17,7 +18,8 @@ class UserProfile extends Component {
     }
   }
 
-  componentDidMount = async () => {
+  componentWillMount = async () => {
+    console.log('userId', userId)
     this.props.viewAllPosts()
     const userId = this.props.navigation.getParam('id', 'no input')
     console.log('userId in component did mount: ', userId)
@@ -67,7 +69,7 @@ class UserProfile extends Component {
                 })
                 .map(post =>
                 <View
-                  style={{marginBottom: 4, marginTop: 4}}>
+                  key={post.id} style={{marginBottom: 4, marginTop: 4}}>
                   {
                     imageExt.indexOf(post.mediaLink.slice(-3)) !== -1 ?
                     //Ask shaheed how to break the navigation stack
