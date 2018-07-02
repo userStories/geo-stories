@@ -20,10 +20,6 @@ class Home extends React.Component {
     this.setState({loggedInUser: user})
   }
 
-  handlePress = () => {
-    this.props.navigation.navigate('SinglePost', {id: 5})
-  }
-
   handlePressUserProfile = () => {
     this.props.navigation.navigate('UserProfile', {id: this.state.loggedInUser.id})
   }
@@ -46,11 +42,10 @@ class Home extends React.Component {
             <View>
               <LoginValidate />
               <LogoutButton />
-              <Button onPress={this.handlePressUserProfile} title="UserProfile" />
             </View>
           )
         }
-        <Button onPress={this.handlePress} title="SinglePost" />
+        <Button onPress={this.handlePressUserProfile} title="UserProfile" />
         <Button onPress={()=> this.props.navigation.navigate('MyMap')} title="Map" />
         {
           !isLoggedIn && (

@@ -107,23 +107,10 @@ export const getAllPostsThunk = () => {
   }
 }
 
-export const postComment = (comment, postId) => {
-  return async dispatch => {
-    const { data } = await axios.post(`http://${API_URL}:8080/api/comments`, { comment, postId })
-    console.log('data in postCommentthunk: ', data)
-    dispatch(addComment(data))
-  }
-}
-
-export const getAllUserPostsThunk = userId => {
-  return async (dispatch) => {
-    try {
-      console.log('here22', userId)
-      const { data } = await axios.get(`http://${API_URL}:8080/api/posts/user/${userId}`)
-      console.log('data from getalluserpost thunk', data)
-      dispatch(getAllUserPosts(data))
-    } catch (err) {
-      console.error(err)
+export const postComment = (comment, postId, userId) => {
+    return async dispatch => {
+        const {data} = await axios.post(`http://${API_URL}:8080/api/comments`, {comment, postId, userId})
+        dispatch(addComment(data))
     }
   }
 }

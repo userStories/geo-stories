@@ -4,6 +4,7 @@ import { Provider, connect } from 'react-redux'
 import StackNav from './StackNav'
 import store, { persistor } from './src/store'
 import { PersistGate } from 'redux-persist/lib/integration/react'
+import ActivityLog from './src/components/ActivityLog'
 
 // import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs'
 
@@ -126,6 +127,7 @@ class App extends React.Component {
 //   }
 // })
 
+
 const styles = StyleSheet.create({
   header: {
     width: '100%',
@@ -134,11 +136,6 @@ const styles = StyleSheet.create({
     height: 40
   }
 })
-
-// const switchView = createSwitchNavigator({
-  
-// })
-
 
 
 export default App

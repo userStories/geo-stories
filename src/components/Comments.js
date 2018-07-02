@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Animated, StyleSheet, Text, MapView, View, Image, FlatList, ScrollView, TextInput,  TouchableWithoutFeedback, Keyboard, TouchableOpacity  } from 'react-native';
+import {Animated, StyleSheet, Text, MapView, View, Image, FlatList, ScrollView, TextInput,  TouchableWithoutFeedback, Keyboard, TouchableOpacity, TouchableHighlight  } from 'react-native';
 import { Video } from 'expo'
 import { getSinglePostThunk, postComment, getAllUsersThunk} from '../store'
 import {Button} from 'react-native-elements'
@@ -8,7 +8,7 @@ import {ListItem} from 'native-base'
 
 export default class CommentSection extends Component {
     render(){
-        const {comments, users, stateComment, handleChange, handleSubmit} = this.props
+        const {comments, users, stateComment, handleChange, handleSubmit, loggedInUser, commentNavigation} = this.props
         return (
         <View style={styles.OuterView}>
             <View
