@@ -18,7 +18,7 @@ class UserProfile extends Component {
     }
   }
 
-  componentWillMount = async () => {
+  componentDidMount = async () => {
     console.log('userId', userId)
     this.props.viewAllPosts()
     const userId = this.props.navigation.getParam('id', 'no input')
