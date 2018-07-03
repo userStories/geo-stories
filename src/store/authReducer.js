@@ -51,7 +51,7 @@ export const logout = () => async dispatch => {
   /**
    * INITIAL STATE
    */
-  
+
 const defaultUser = {}
 
     /**

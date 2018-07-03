@@ -26,13 +26,12 @@ class Signup extends Component {
       res.status === 200 
       ? this.signup()
       : this.setState({ formError: true, loading: false })
-
   }
 
   signup = () => {
     this.setState({ loading: false })
-    const { push } = this.props.navigation
-    push('Home')
+    const { navigate } = this.props.navigation
+    navigate('MyMap')
   }
 
   render () {

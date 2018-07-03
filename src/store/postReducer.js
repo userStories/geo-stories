@@ -59,6 +59,7 @@ const changeLocation = (lat, long) => {
 const initialState = {
   singlePost: {},
   allPosts: [],
+  allUserPosts: [],
   postId: null,
   currentLocation: {
     currentMarker: null,
@@ -93,7 +94,6 @@ export const getAllPostsThunk = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`http://${API_URL}:8080/api/posts`)
-      console.log('datata IN THUNK', data)
       dispatch(getAllPosts(data))
     } catch (err) {
       console.error(err);
@@ -165,9 +165,6 @@ export const addNewPostThunk = (info) => {
       const data = newRes.data.post
       let latitude = data.latitude
       let longitude = data.longitude
-      console.log('DATA', data)
-      console.log('LATITUDE', latitude)
-      console.log('LONGITUDE', longitude)
       dispatch(changeLocation(latitude, longitude))
       dispatch(addNewPost(data))
       dispatch(getAllPostsThunk())
