@@ -64,9 +64,9 @@ export const DrawerNav = createDrawerNavigator({
     screen: ActivityLog
   },
   SinglePost: {
-    screen: SinglePost
+    screen: SinglePost,
   }
-
+  
 
 }, {
   contentComponent: DrawerContent,
@@ -94,6 +94,15 @@ export const MenuNav = createStackNavigator({
   },
   TakePicture: {
     screen: TakePicture,
+    navigationOptions: ({ navigation, header }) => ({
+      ...header,
+      headerTintColor: '#4519aa',
+      title: 'Profile',
+      headerStyle: styles.header
+    })
+  },
+  SinglePost: {
+    screen: SinglePost,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
       headerTintColor: '#4519aa',
@@ -144,15 +153,6 @@ export const MenuNav = createStackNavigator({
       headerTintColor: '#4519aa',
       title: 'Welcome',
       headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 }
-    })
-  },
-  SinglePost: {
-    screen: SinglePost,
-    navigationOptions: ({ navigation, header }) => ({
-      ...header,
-      headerTintColor: '#4519aa',
-      title: 'Welcome',
-      headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 },
     })
   },
   NewPost: {

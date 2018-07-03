@@ -160,7 +160,7 @@ class NewPost extends React.Component {
             value={this.state.newDate}
             placeholder='Add a title!'
             onChangeText={this.handleTitlePress}
-            placeholderTextColor='white'
+            placeholderTextColor='#00a8ff'
             />
           </View>
           <View style={styles.textWrap}>
@@ -170,17 +170,17 @@ class NewPost extends React.Component {
             onChangeText={this.handleTextPress}
             value={this.state.text}
             placeholder='Write a message!'
-            placeholderTextColor='white'
+            placeholderTextColor='#00a8ff'
             />
           </View>
           <View style={styles.pickerWrapper}>
-            <Text style={{color: 'white'}}>Please Select A Media Type To Post</Text>
+            <Text style={{color: '#00a8ff'}}>Please Select A Media Type To Post</Text>
             <View style={styles.smallerPickWrapper}>
               <Picker
               onValueChange={(item) => this.setState({ media: item })}
               selectedValue={this.state.media}>
-              <Picker.Item label='Picture' color='white' value='Picture' />
-              <Picker.Item label='Video' color='white' value='Video' />
+              <Picker.Item label='Picture' color='#00a8ff' value='Picture' />
+              <Picker.Item label='Video' color='#00a8ff' value='Video' />
               </Picker>
             </View>
           </View>
@@ -190,23 +190,23 @@ class NewPost extends React.Component {
             <View style={styles.imageWrapper}>
               {!image && <View style={styles.imageButtonWrapper}><Button
               title="Add from Photos"
-              color='white'
+              color='#00a8ff'
               onPress={this.pickImage}
               /><Button
               title="Take a Picture"
-              color='white'
+              color='#00a8ff'
               onPress={this.snap}
               /></View>}
               {image &&
               <Image source={{ uri: image }} style={styles.image} />}
               {this.state.image && <Button
                 title="Remove Image"
-                color='white'
+                color='#00a8ff'
                 onPress={() => this.setState({ image: null })}
                 />}
               {cameraPic !== 'none' && <Button
                 title="Remove Image"
-                color='white'
+                color='#00a8ff'
                 onPress={this.handleRemoveImageTwo}
                 />}
             </View> : ''
@@ -216,11 +216,11 @@ class NewPost extends React.Component {
             <View style={styles.videoWrapper}>
               {!video && <View style={styles.imageButtonWrapper}><Button
               title="Add from Videos"
-              color='white'
+              color='#00a8ff'
               onPress={this.pickVideo}
               /><Button
               title="Record a Video"
-              color='white'
+              color='#00a8ff'
               onPress={this.record}
               /></View>}
               {video &&
@@ -237,22 +237,22 @@ class NewPost extends React.Component {
             }
               {this.state.video && <Button
                 title="Remove Video"
-                color='white'
+                color='#00a8ff'
                 onPress={() => this.setState({ video: null })}
                 />}
               {newVideo !== 'none' && <Button
                 title="Remove Video"
-                color='white'
+                color='#00a8ff'
                 onPress={this.handleRemoveVideo}
                 />}
             </View> : ''
           }
           </View>
           {
-            (this.state.media === 'Picture' && image) ? <Button title="Submit Post!" color='white' onPress={this.submitImagePost}/> : ''
+            (this.state.media === 'Picture' && image) ? <Button title="Submit Post!" color='#00a8ff' onPress={this.submitImagePost}/> : ''
           }
           {
-            (this.state.media === 'Video' && video) ? <Button title="Submit Post!" color='white' onPress={this.submitVideoPost}/> : ''
+            (this.state.media === 'Video' && video) ? <Button title="Submit Post!" color='#00a8ff' onPress={this.submitVideoPost}/> : ''
           }
         </View>
         </TouchableWithoutFeedback>
@@ -278,18 +278,18 @@ export default connect (mapState, mapDispatch)(NewPost)
 const styles = StyleSheet.create({
   ViewWrap: {
     flex: 1,
-    backgroundColor: '#4519aa',
+    backgroundColor: '#EEE',
   },
   image: {
     width: 200,
     height: 200,
   },
   titleText: {
-    color: 'white',
-    backgroundColor: '#4519aa',
+    color: '#00a8ff',
+    backgroundColor: '#EEE',
   },
   input: {
-    color: 'white',
+    color: '#00a8ff',
     // backgroundColor: '#4519aa',
   },
   titleInput: {
@@ -303,9 +303,9 @@ const styles = StyleSheet.create({
     height: 35,
     borderColor: 'white',
     // color: 'white',
-    backgroundColor: '#4519aa',
+    backgroundColor: '#EEE',
     borderRadius: 5,
-    borderWidth: 1,
+    borderWidth: 3,
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -346,7 +346,7 @@ const styles = StyleSheet.create({
     height: 100,
     borderColor: 'white',
     borderRadius: 5,
-    backgroundColor: '#4519aa',
-    borderWidth: 1
+    backgroundColor: '#EEE',
+    borderWidth: 3
   },
 });
