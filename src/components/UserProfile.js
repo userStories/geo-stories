@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { StyleSheet, Text, MapView, View, Button, Image, Dimensions, ScrollView, TouchableHighlight, TouchableOpacity } from 'react-native';
 import { getAllUserPostsThunk, getSingleUserThunk, addFriendThunk, loggedInUserThunk, removeFriendThunk, getAllPostsThunk } from '../store';
 import {Video} from 'expo'
+console.log('here')
 
 const { height } = Dimensions.get('window')
 

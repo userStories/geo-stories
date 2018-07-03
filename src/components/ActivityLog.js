@@ -21,12 +21,13 @@ class ActivityLog extends Component {
             <Content>
             {
                 allPosts
-                    .filter(post => loggedInUser.Friend.find(elem => post.userId === elem.id))
+                    .filter(post => loggedInUser.user.Friend.find(elem => post.userId === elem.id))
                     .map(post => {
                         return (
-                        <Card>
+                        <Card key={post.id}>
                             <CardItem>
                                 <Body>
+                                    <Text>{post.user.fullName}</Text>
                                     <Text>{post.title}</Text>
                                 </Body>
                             </CardItem>
