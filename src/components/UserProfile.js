@@ -23,7 +23,7 @@ class UserProfile extends Component {
     const userId = this.props.navigation.getParam('id', 'no input')
     console.log('userId in component did mount: ', userId)
     this.props.singleUserMaker(userId)
-    console.log('this.props.loggInUserAuth component did mount: ', this.props.loggedInUserAuth.id)
+    console.log('this.props.loggInUserAuth component did mount else block: ', this.props.loggedInUserAuth.id)
     this.props.viewLoggedInUser(this.props.loggedInUserAuth.id)
   } 
 

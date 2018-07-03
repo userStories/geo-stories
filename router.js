@@ -15,6 +15,7 @@ import SinglePost from './src/components/SinglePost'
 import DrawerContent from './DrawerContent'
 import Logout from './src/components/Logout'
 import ActivityLog from './src/components/ActivityLog'
+import UserProfileAuth from './src/components/UserProfileAuth'
 
 export const StackNav = createStackNavigator({
   Login: {
@@ -53,13 +54,25 @@ export const DrawerNav = createDrawerNavigator({
   Logout: {
     screen: Logout
   },
+  UserProfileAuth: {
+    screen: UserProfileAuth
+  },
   UserProfile: {
     screen: UserProfile
+  }, 
+  ActivityLog: {
+    screen: ActivityLog
   },
   SinglePost: {
+<<<<<<< HEAD
     screen: SinglePost,
   }
   
+=======
+    screen: SinglePost
+  }
+
+>>>>>>> 6ebc8e8b0052a441990581422311104fec379820
 
 }, {
   contentComponent: DrawerContent,
@@ -121,6 +134,15 @@ export const MenuNav = createStackNavigator({
       headerStyle: styles.header
     })
   },
+  UserProfileAuth: {
+    screen: UserProfileAuth,
+    navigationOptions: ({ navigation, header }) => ({
+      ...header,
+      headerTintColor: 'white',
+      title: 'Welcome',
+      headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 }
+    })
+  },
   UserProfile: {
     screen: UserProfile,
     navigationOptions: ({ navigation, header }) => ({
@@ -164,8 +186,12 @@ export const MenuNav = createStackNavigator({
     headerLeft: <Icon
       name="navicon"
       size={34}
-      onPress={() => { navigation.toggleDrawer() }}
+      onPress={() => { 
+        navigation.toggleDrawer() 
+      }}
     />,
     gesturesEnabled: false
- })})
+  })
+})
+
 
