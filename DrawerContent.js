@@ -29,7 +29,7 @@ class DrawerContent extends Component {
             icon={{ name: 'user-circle', type: 'font-awesome', size: 20 }}
             title='My Profile'
             buttonStyle={styles.button}
-            onPress={this.navigateToScreen('UserProfile')} />
+            onPress={this.navigateToScreen('UserProfileAuth')} />
           <Button
             raised
             icon={{ name: 'user-circle', type: 'font-awesome', size: 20 }}
@@ -42,6 +42,7 @@ class DrawerContent extends Component {
             title='Logout'
             buttonStyle={styles.button}
             onPress={this.navigateToScreen('Logout')} />
+        
         </ScrollView>
       </View>
     );

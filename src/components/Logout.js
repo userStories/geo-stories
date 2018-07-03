@@ -28,7 +28,10 @@ class LogoutButton extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    logoutUser: () => dispatch(logout())
+    logoutUser: () => {
+      console.log('mapdispatch logout')
+      dispatch(logout())
+    }
   }
 }
 
