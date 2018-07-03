@@ -64,15 +64,9 @@ export const DrawerNav = createDrawerNavigator({
     screen: ActivityLog
   },
   SinglePost: {
-<<<<<<< HEAD
     screen: SinglePost,
   }
   
-=======
-    screen: SinglePost
-  }
-
->>>>>>> 6ebc8e8b0052a441990581422311104fec379820
 
 }, {
   contentComponent: DrawerContent,
@@ -100,6 +94,15 @@ export const MenuNav = createStackNavigator({
   },
   TakePicture: {
     screen: TakePicture,
+    navigationOptions: ({ navigation, header }) => ({
+      ...header,
+      headerTintColor: '#4519aa',
+      title: 'Profile',
+      headerStyle: styles.header
+    })
+  },
+  SinglePost: {
+    screen: SinglePost,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
       headerTintColor: '#4519aa',
