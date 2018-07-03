@@ -50,6 +50,9 @@ export const DrawerNav = createDrawerNavigator({
   TakePicture: {
     screen: TakePicture
   },
+  RecordVideo: {
+    screen: RecordVideo
+  },
   NewPost: {
     screen: NewPost
   }

@@ -16,6 +16,7 @@ class LogoutButton extends Component {
   render () {
     return (
       <View>
+        <Text>Are you sure you want to logout?</Text>
         <Button
           onPress={this.onPress}
           title="Logout"
