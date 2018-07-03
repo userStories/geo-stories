@@ -91,16 +91,20 @@ class NewPost extends React.Component {
       newObj.latitude = this.state.location.coords.latitude
       newObj.longitude = this.state.location.coords.longitude
       newObj.userId = this.props.userId
+      console.log('this.state', this.state)
+      console.log('newObj', newObj)
       this.props.addNewPostMethod(newObj)
       this.props.navigation.navigate('MyMap', { newPostNow: true })
     } else if (cameraPic !== 'none') {
       newObj = cameraPic
+
       newObj.title = this.state.title
       newObj.text = this.state.text
       newObj.latitude = this.state.location.coords.latitude
       newObj.longitude = this.state.location.coords.longitude
       newObj.location = this.state.location
       newObj.userId = this.props.userId
+      console.log('this.state', this.state)
       console.log('newObj', newObj)
       this.props.addNewPostMethod(cameraPic)
       this.props.navigation.navigate('MyMap', { newPostNow: true })

@@ -5,22 +5,26 @@ import { Video } from 'expo'
 import { getSinglePostThunk, postComment, getAllUsersThunk} from '../store'
 import {Button} from 'react-native-elements'
 import {ListItem} from 'native-base'
+import Loader from './Loader'
 import CommentSection from './Comments'
 
 
 class SinglePost extends Component {
-
   constructor(){
+    console.log('in construct')
     super();
     this.state = {
       comment: "",
       descriptionToggle: -1,
-      commentToggle: -1
+      commentToggle: -1,
+      loading: true
     };
   }
 
   componentDidMount() {
+    console.log('HERERERE')
     const id = this.props.navigation.getParam('id', 'no input')
+    console.log('comp di dmountthe id', id)
     this.props.singlePostMaker(id)
     this.props.displayUsers()
   }
@@ -52,6 +56,8 @@ class SinglePost extends Component {
   }
 
   render() {
+    console.log('reached render')
+    // console.log('singlepost', this.props.singlePost)
     const imageExt = ['jpeg', 'jpg', 'png', 'gif']
     const videoExt = ['mp4', 'mp3', 'avi', 'flv', 'mov', 'wmv'];
     return (
@@ -64,6 +70,8 @@ class SinglePost extends Component {
       // >
       <TouchableWithoutFeedback  onPress={Keyboard.dismiss}>
       <Animated.ScrollView>
+      <Loader 
+          loading={this.state.loading} />
         {this.props.singlePost.mediaLink && !!this.props.allUsers.length ?
           <View style={styles.OuterViewWrap}>
             <Text style={styles.title}>{this.props.singlePost.title}</Text>
@@ -73,40 +81,37 @@ class SinglePost extends Component {
                 rate={1.0}
                 volume={1.0}
                 muted={false}
+                loading={true}
                 resizeMode="cover"
                 shouldPlay
                 isLooping
+                onLoad={() => this.setState({loading: false})}
                 style={styles.imageWrap}
               />
-              : <Image style={styles.imageWrap} source={{ uri: this.props.singlePost.mediaLink }} />
+              : <Image onLoad={() => this.setState({loading: false})} style={styles.imageWrap} source={{ uri: this.props.singlePost.mediaLink }} />
             }
             <View>
 
               {
                 this.props.allUsers.find(user => user.id === this.props.singlePost.userId) &&
-                <TouchableHighlight>
-                  <Text onPress={() => this.props.navigation.navigate('UserProfile', {id: this.props.singlePost.userId})}>{this.props.allUsers.find(user => user.id === this.props.singlePost.userId).fullName}</Text>
+                <TouchableHighlight style={{ alignItems: 'center' }}>
+                  <View style={styles.profileLink}>
+                    <Text style={styles.linkText} onPress={() => this.props.navigation.navigate('UserProfile', {id: this.props.singlePost.userId})}>{this.props.allUsers.find(user => user.id === this.props.singlePost.userId).firstName}'s Profile</Text>
+                  </View>
                 </TouchableHighlight>
               }
-
-
                 <Text style={styles.descriptionTitle}>Description</Text>
                 <Text multiline={true} style={styles.descriptionText}>{this.props.singlePost.text}</Text>
-
-
             </View>
             {
               (this.state.commentToggle === -1) ? <TouchableOpacity onPress={this.changeComment}><View style={styles.commentButtons}><Text style={styles.commentText}>View Comments</Text></View></TouchableOpacity> :
               <TouchableOpacity onPress={this.changeComment}><View style={styles.commentButtons}><Text style={styles.commentText}>Hide Comments</Text></View></TouchableOpacity>
             }
-
-
             {
-              // this.state.commentToggle === 1
               this.state.commentToggle === 1 ? 
               <CommentSection comments={this.props.singlePost.comments} users={this.props.allUsers} commentNavigation={this.commentNavigation} stateComment={this.state.comment} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>: null
             }
-            }
+            
           </View> :
           <View style={styles.OuterViewWrap}>
             <Text>{this.props.singlePost.title}</Text>
@@ -115,6 +120,7 @@ class SinglePost extends Component {
           </Animated.ScrollView>
           </TouchableWithoutFeedback>
     )
+
   }
 }
 
@@ -167,7 +173,7 @@ const styles = StyleSheet.create({
   descriptionTitle: {
     alignSelf: "center",
     fontWeight: "bold",
-    marginBottom: "2.5%",
+    // marginBottom: "2.5%",
     color: 'white'
   },
   commentTitle: {
@@ -176,6 +182,24 @@ const styles = StyleSheet.create({
     marginBottom: "5%",
     color: 'white'
   },
+  profileLink: {
+    alignItems: "center",
+    marginTop: '2%',
+    marginBottom: '2%',
+    borderColor: 'white',
+    borderWidth: 2,
+    // paddingLeft: 3,
+    // paddingRight: 3,
+    width: 80,
+    paddingTop: 3,
+    paddingBottom: 3,
+    borderRadius: 10
+  },
+  linkText: {
+    fontWeight: "bold",
+    color: 'white',
+    textAlign: 'center'
+  }
 
 })
 const mapStateToProps = state => {

@@ -7,9 +7,9 @@ import {
 	Linking, 
 	Picker,
 	StyleSheet, 
-  Text,
-  TouchableOpacity,
-	View,
+	Text, 
+  View,
+  TouchableOpacity
 } from 'react-native';
 
 import { MapView, Video } from 'expo';
@@ -139,9 +139,6 @@ class MyMap extends Component {
         longitudeDelta: Dimensions.get('window').width /
         Dimensions.get('window').height * 0.00522
       }
-      
-      
-
         return (
             <View style={styles.container}>
                 <MapView
@@ -197,9 +194,8 @@ class MyMap extends Component {
 
                     }
                 </MapView>
-
 				<View style={styles.container}>
-
+                
           <Animated.ScrollView
             horizontal
             scrollEventThrottle={1}

@@ -21,18 +21,18 @@ export const StackNav = createStackNavigator({
     screen: Login,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: 'white',
-      title: 'Welcome',
-      headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 }
+      headerTintColor: '#4519aa',
+      title: 'Map',
+      headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 },
     })
   },
   Signup: {
     screen: Signup,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: 'white',
-      title: 'Welcome',
-      headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 }
+      headerTintColor: '#4519aa',
+      title: 'Map',
+      headerStyle: styles.header
     })
   }
 })
@@ -41,18 +41,22 @@ export const DrawerNav = createDrawerNavigator({
   MyMap: {
     screen: MyMap
   },
+  SinglePost: {
+    screen: SinglePost,
+    navigationOptions: ({ navigation, header }) => ({
+      ...header,
+      headerTintColor: '#4519aa',
+      title: 'Post',
+      headerStyle: styles.header
+    })
+  },
   Logout: {
     screen: Logout
   },
   UserProfile: {
     screen: UserProfile
   },
-  TakePicture: {
-    screen: TakePicture
-  },
-  NewPost: {
-    screen: NewPost
-  }
+  
 
 }, {
   contentComponent: DrawerContent,
@@ -75,14 +79,42 @@ const styles = StyleSheet.create({
 
 export const MenuNav = createStackNavigator({
   drawer: {
-    screen: DrawerNav
+    screen: DrawerNav,
+    
+  },
+  TakePicture: {
+    screen: TakePicture,
+    navigationOptions: ({ navigation, header }) => ({
+      ...header,
+      headerTintColor: '#4519aa',
+      title: 'Profile',
+      headerStyle: styles.header
+    })
+  },
+  RecordVideo: {
+    screen: RecordVideo,
+    navigationOptions: ({ navigation, header }) => ({
+      ...header,
+      headerTintColor: '#4519aa',
+      title: 'Profile',
+      headerStyle: styles.header
+    })
+  },
+  NewPost: {
+    screen: NewPost,
+    navigationOptions: ({ navigation, header }) => ({
+      ...header,
+      headerTintColor: '#4519aa',
+      title: 'Profile',
+      headerStyle: styles.header
+    })
   },
   MyMap: {
     screen: MyMap,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: 'blue',
-      title: 'MyMap',
+      headerTintColor: '#4519aa',
+      title: 'Profile',
       headerStyle: styles.header
     })
   },
@@ -90,7 +122,7 @@ export const MenuNav = createStackNavigator({
     screen: UserProfile,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: 'white',
+      headerTintColor: '#4519aa',
       title: 'Welcome',
       headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 }
     })
@@ -99,17 +131,17 @@ export const MenuNav = createStackNavigator({
     screen: SinglePost,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: 'blue',
-      title: 'Post',
-      headerStyle: styles.header
+      headerTintColor: '#4519aa',
+      title: 'Welcome',
+      headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 },
     })
   },
   NewPost: {
     screen: NewPost,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: 'blue',
-      title: 'Post',
+      headerTintColor: '#4519aa',
+      title: 'Add New Post',
       headerStyle: styles.header
     })
   },
@@ -126,7 +158,7 @@ export const MenuNav = createStackNavigator({
     screen: ActivityLog,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: 'blue',
+      headerTintColor: '#4519aa',
       title: 'Activity Log',
       headerStyle: styles.header
     })
@@ -141,11 +173,5 @@ export const MenuNav = createStackNavigator({
       onPress={() => { navigation.toggleDrawer() }}
     />,
     gesturesEnabled: false
-
-  })
-})
-
-
-
-
+ })})
 
