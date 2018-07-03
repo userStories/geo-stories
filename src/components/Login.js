@@ -39,21 +39,21 @@ class Login extends Component {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.mainWrap}>
 
-      <Text style={styles.loginText}>Login</Text>
+      <Text style={styles.loginText}>GeoStories</Text>
       <View style={styles.inputWraps}>
         <FormInput
           value={email}
           onChangeText={email => this.setState({ email })}
           placeholder="Email"
-          placeholderTextColor='white'
-          inputStyle={{color: 'white'}}
+          placeholderTextColor='#00a8ff'
+          inputStyle={{color: '#00a8ff'}}
         />
         <FormInput
           value={password}
           onChangeText={password => this.setState({ password })}
           placeholder="Password"
-          placeholderTextColor='white'
-          inputStyle={{color: 'white', marginTop: 10}}
+          placeholderTextColor='#00a8ff'
+          inputStyle={{color: '#00a8ff', marginTop: 10}}
           secureTextEntry
         />
       </View>
@@ -70,13 +70,11 @@ class Login extends Component {
             <Text style={styles.submitText}>Submit</Text>
           </View>
         </TouchableOpacity>
-        <Button
-          buttonStyle={{ marginTop: 20 }}
-          backgroundColor="transparent"
-          textStyle={{ color: "#bcbec1" }}
-          title="Sign Up"
-          onPress={() => this.props.navigation.navigate("Signup")}
-        />
+        <TouchableOpacity onPress={() => this.props.navigation.navigate("Signup")}>
+          <View style={styles.submitView}>
+            <Text style={styles.submitText}>Sign Up</Text>
+          </View>
+        </TouchableOpacity>
         <Loader 
           loading={this.state.loading} />
       </View>
@@ -87,7 +85,7 @@ class Login extends Component {
 
 const styles = StyleSheet.create({
   mainWrap: {
-    backgroundColor: '#4519aa',
+    backgroundColor: '#eee',
     flex: 1,
     paddingTop: '15%',
     alignItems: 'center',
@@ -107,11 +105,12 @@ const styles = StyleSheet.create({
   },
   submitText: {
     fontWeight: "bold",
-    color: 'white'
+    color: '#00a8ff'
   },
   loginText: {
-    fontSize: 30,
-    color: 'white',
+    fontSize: 35,
+    fontWeight: 'bold',
+    color: '#00a8ff',
     marginBottom: '2%'
   },
   

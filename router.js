@@ -22,31 +22,53 @@ export const StackNav = createStackNavigator({
     screen: Login,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: '#4519aa',
-      title: 'Map',
-      headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 },
+      headerTintColor: '#00a8ff',
+      title: 'Log In',
+      headerStyle: { backgroundColor: 'white', borderWidth: 1, height: 60 },
     })
   },
   Signup: {
     screen: Signup,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: '#4519aa',
-      title: 'Map',
+      headerTintColor: '#00a8ff',
+      title: 'Sign Up',
       headerStyle: styles.header
     })
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 })
 
 export const DrawerNav = createDrawerNavigator({
   MyMap: {
-    screen: MyMap
+    screen: MyMap,
   },
   SinglePost: {
     screen: SinglePost,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: '#4519aa',
+      headerTintColor: '#00a8ff',
       title: 'Post',
       headerStyle: styles.header
     })
@@ -96,7 +118,7 @@ export const MenuNav = createStackNavigator({
     screen: TakePicture,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: '#4519aa',
+      headerTintColor: '#00a8ff',
       title: 'Profile',
       headerStyle: styles.header
     })
@@ -105,7 +127,7 @@ export const MenuNav = createStackNavigator({
     screen: SinglePost,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: '#4519aa',
+      headerTintColor: '#00a8ff',
       title: 'Profile',
       headerStyle: styles.header
     })
@@ -114,7 +136,7 @@ export const MenuNav = createStackNavigator({
     screen: RecordVideo,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: '#4519aa',
+      headerTintColor: '#00a8ff',
       title: 'Profile',
       headerStyle: styles.header
     })
@@ -123,7 +145,7 @@ export const MenuNav = createStackNavigator({
     screen: NewPost,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: '#4519aa',
+      headerTintColor: '#00a8ff',
       title: 'Profile',
       headerStyle: styles.header
     })
@@ -132,7 +154,7 @@ export const MenuNav = createStackNavigator({
     screen: MyMap,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: '#4519aa',
+      headerTintColor: '#00a8ff',
       title: 'Profile',
       headerStyle: styles.header
     })
@@ -141,7 +163,7 @@ export const MenuNav = createStackNavigator({
     screen: UserProfileAuth,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: 'white',
+      headerTintColor: '00a8ff',
       title: 'Welcome',
       headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 }
     })
@@ -150,7 +172,7 @@ export const MenuNav = createStackNavigator({
     screen: UserProfile,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: '#4519aa',
+      headerTintColor: '#00a8ff',
       title: 'Welcome',
       headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 }
     })
@@ -159,7 +181,7 @@ export const MenuNav = createStackNavigator({
     screen: NewPost,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: '#4519aa',
+      headerTintColor: '#00a8ff',
       title: 'Add New Post',
       headerStyle: styles.header
     })
@@ -168,7 +190,7 @@ export const MenuNav = createStackNavigator({
     screen: Logout,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: 'white',
+      headerTintColor: '00a8ff',
       title: 'Welcome',
       headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 }
     })
@@ -177,7 +199,7 @@ export const MenuNav = createStackNavigator({
     screen: ActivityLog,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: '#4519aa',
+      headerTintColor: '#00a8ff',
       title: 'Activity Log',
       headerStyle: styles.header
     })

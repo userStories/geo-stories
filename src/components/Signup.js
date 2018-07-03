@@ -41,43 +41,43 @@ class Signup extends Component {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.mainWrap}>
-        <Text style={styles.signupText}>Sign Up</Text>
+        <Text style={styles.signupText}>GeoStories</Text>
           <View style={styles.inputWraps}>
             <FormInput
               value={firstName}
               onChangeText={firstName => this.setState({ firstName })}
               placeholder="First Name"
-              placeholderTextColor='white'
-              inputStyle={{color: 'white'}}
+              placeholderTextColor='#00a8ff'
+              inputStyle={{color: '#00a8ff'}}
             />
             <FormInput
               value={lastName}
               onChangeText={lastName => this.setState({ lastName })}
               placeholder="Last Name"
-              placeholderTextColor='white'
-              inputStyle={{color: 'white'}}
+              placeholderTextColor='#00a8ff'
+              inputStyle={{color: '#00a8ff'}}
             />
             <FormInput
               value={email}
               onChangeText={email => this.setState({ email })}
               placeholder="Email"
-              placeholderTextColor='white'
-              inputStyle={{color: 'white'}}
+              placeholderTextColor='#00a8ff'
+              inputStyle={{color: '#00a8ff'}}
             />
             <FormInput
               value={password}
               onChangeText={password => this.setState({ password })}
               placeholder="Password"
               secureTextEntry
-              placeholderTextColor='white'
-              inputStyle={{color: 'white'}}
+              placeholderTextColor='#00a8ff'
+              inputStyle={{color: '#00a8ff'}}
             />
             <FormInput
               value={location}
               onChangeText={location => this.setState({ location })}
               placeholder="Location"
-              placeholderTextColor='white'
-              inputStyle={{color: 'white'}}
+              placeholderTextColor='#00a8ff'
+              inputStyle={{color: '#00a8ff'}}
             />
           </View>
           {this.state.formError && 
@@ -102,7 +102,7 @@ class Signup extends Component {
 
 const styles = StyleSheet.create({
   mainWrap: {
-    backgroundColor: '#4519aa',
+    backgroundColor: '#eee',
     flex: 1,
     paddingTop: '15%',
     alignItems: 'center',
@@ -111,8 +111,9 @@ const styles = StyleSheet.create({
     width: '90%'
   },
   signupText: {
-    fontSize: 30,
-    color: 'white',
+    fontSize: 35,
+    fontWeight: 'bold',
+    color: '#00a8ff',
     marginBottom: '2%'
   },
   submitView: {
@@ -127,7 +128,7 @@ const styles = StyleSheet.create({
   },
   submitText: {
     fontWeight: "bold",
-    color: 'white'
+    color: '#00a8ff'
   },
 })
 

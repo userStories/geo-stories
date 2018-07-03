@@ -17,29 +17,41 @@ class ActivityLog extends Component {
         console.log('loggedInUser in activityLog: ', loggedInUser)
         console.log('loggedInUserAuth in activityLog: ', loggedInUserAuth)
         return (
-            <Container>
-            <Content>
+            <View style={{flex: 1, backgroundColor: '#eee', alignItems: 'center'}}>
             {
                 allPosts
                     .filter(post => loggedInUser.Friend.find(elem => post.userId === elem.id))
                     .map(post => {
                         return (
-                        <Card key={post.id}>
-                            <CardItem>
-                                <Body>
-                                    <Text>{post.fullName}</Text>
-                                    <Text>{post.title}</Text>
-                                </Body>
-                            </CardItem>
-                        </Card>
+                        <View style={styles.elemWrapper} key={post.id}>
+                                    <Text >{post.fullName}</Text>
+                                    <Text style={styles.elemText}>{post.title}</Text>
+                        </View>
                         ) 
                     })
             }    
-            </Content>
-          </Container>
+
+          </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    elemWrapper: {
+        width: '90%',
+        borderColor: 'white',
+        borderWidth: 5,
+        borderRadius: 6,
+        marginTop: 10,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    elemText: {
+        color: '#00a8ff',
+        fontSize: 18,
+        marginBottom: 14
+    }
+})
 
 const MapStateToProps = state =>{
     return {
