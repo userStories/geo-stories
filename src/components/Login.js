@@ -64,6 +64,7 @@ class Login extends Component {
           </Text>
           ) 
         }
+
         <TouchableOpacity onPress={this.validateLogin}>
           <View style={styles.submitView}>
             <Text style={styles.submitText}>Submit</Text>
@@ -76,7 +77,6 @@ class Login extends Component {
           title="Sign Up"
           onPress={() => this.props.navigation.navigate("Signup")}
         />
-
         <Loader 
           loading={this.state.loading} />
       </View>

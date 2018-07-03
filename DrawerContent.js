@@ -21,9 +21,9 @@ class DrawerContent extends Component {
           <Button
             raised
             icon={{ name: 'umbrella', type: 'font-awesome', size: 20 }}
-            title='Map'
+            title='MyMap'
             buttonStyle={styles.button}
-            onPress={this.navigateToScreen('Map')} />
+            onPress={this.navigateToScreen('MyMap')} />
           <Button
             raised
             icon={{ name: 'user-circle', type: 'font-awesome', size: 20 }}

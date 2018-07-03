@@ -38,7 +38,7 @@ export const StackNav = createStackNavigator({
 })
 
 export const DrawerNav = createDrawerNavigator({
-  Map: {
+  MyMap: {
     screen: MyMap
   },
   Logout: {
@@ -82,7 +82,7 @@ export const MenuNav = createStackNavigator({
     navigationOptions: ({ navigation, header }) => ({
       ...header,
       headerTintColor: 'blue',
-      title: 'Map',
+      title: 'MyMap',
       headerStyle: styles.header
     })
   },
@@ -143,7 +143,6 @@ export const MenuNav = createStackNavigator({
     gesturesEnabled: false
 
   })
-
 })
 
 
