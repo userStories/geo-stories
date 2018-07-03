@@ -20,12 +20,9 @@ class UserProfile extends Component {
 
   componentDidMount = async () => {
     this.props.viewAllPosts()
-    const userId = this.props.navigation.getParam('id', 'no input')
-    console.log('userId in component did mount: ', userId)
-    this.props.singleUserMaker(userId)
-    console.log('this.props.loggInUserAuth component did mount else block: ', this.props.loggedInUserAuth.id)
+    this.props.singleUserMaker(this.props.loggedInUserAuth.id)
     this.props.viewLoggedInUser(this.props.loggedInUserAuth.id)
-  } 
+  }
 
   render () { 
     const {singleUser, allPosts, addFriend, loggedInUser, removeFriend} = this.props

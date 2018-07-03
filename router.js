@@ -15,6 +15,7 @@ import SinglePost from './src/components/SinglePost'
 import DrawerContent from './DrawerContent'
 import Logout from './src/components/Logout'
 import ActivityLog from './src/components/ActivityLog'
+import UserProfileAuth from './src/components/UserProfileAuth'
 
 export const StackNav = createStackNavigator({
   Login: {
@@ -44,14 +45,23 @@ export const DrawerNav = createDrawerNavigator({
   Logout: {
     screen: Logout
   },
+  UserProfileAuth: {
+    screen: UserProfileAuth
+  },
   UserProfile: {
     screen: UserProfile
-  },
+  }, 
   TakePicture: {
     screen: TakePicture
   },
   NewPost: {
     screen: NewPost
+  },
+  ActivityLog: {
+    screen: ActivityLog
+  },
+  SinglePost: {
+    screen: SinglePost
   }
 
 }, {
@@ -84,6 +94,15 @@ export const MenuNav = createStackNavigator({
       headerTintColor: 'blue',
       title: 'MyMap',
       headerStyle: styles.header
+    })
+  },
+  UserProfileAuth: {
+    screen: UserProfileAuth,
+    navigationOptions: ({ navigation, header }) => ({
+      ...header,
+      headerTintColor: 'white',
+      title: 'Welcome',
+      headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 }
     })
   },
   UserProfile: {
@@ -138,14 +157,12 @@ export const MenuNav = createStackNavigator({
     headerLeft: <Icon
       name="navicon"
       size={34}
-      onPress={() => { navigation.toggleDrawer() }}
+      onPress={() => { 
+        navigation.toggleDrawer() 
+      }}
     />,
     gesturesEnabled: false
 
   })
 })
-
-
-
-
 

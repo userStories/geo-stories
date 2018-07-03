@@ -41,6 +41,7 @@ export const auth = (email, password, method, locationStr, firstName, lastName) 
 
 export const logout = () => async dispatch => {
   try {
+    console.log('logout thunk')
     await axios.post(`http://${API_URL}:8080/auth/logout`)
     dispatch(removeUser())
   } catch (err) {
