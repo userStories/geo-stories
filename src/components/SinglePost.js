@@ -21,6 +21,8 @@ class SinglePost extends Component {
     };
   }
 
+
+  //last try
   componentDidMount() {
     console.log('HERERERE')
     const id = this.props.navigation.getParam('id', 'no input')
@@ -130,7 +132,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#4519aa',
+    backgroundColor: '#EEE',
     paddingBottom: 200
   },
   imageWrap: {
@@ -152,11 +154,12 @@ const styles = StyleSheet.create({
 
   },
   commentButtons: {
-    borderColor: 'white',
+    borderColor: '00a8ff',
     borderWidth: 3,
     paddingLeft: 10,
     paddingRight: 10,
     paddingTop: 10,
+
     paddingBottom: 10,
     borderRadius: 10
   },
