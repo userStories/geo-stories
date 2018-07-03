@@ -16,7 +16,7 @@ const StackNav = createStackNavigator({
     screen: Home,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: 'white',
+      headerTintColor: '#4519aa',
       title: 'Map',
       headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 },
     })
@@ -25,7 +25,7 @@ const StackNav = createStackNavigator({
     screen: MyMap,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: 'blue',
+      headerTintColor: '#4519aa',
       title: 'Map',
       headerStyle: styles.header
     })
@@ -34,7 +34,7 @@ const StackNav = createStackNavigator({
     screen: SinglePost,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: 'blue',
+      headerTintColor: '#4519aa',
       title: 'Post',
       headerStyle: styles.header
     })
@@ -43,8 +43,8 @@ const StackNav = createStackNavigator({
     screen: UserProfile,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: 'blue',
-      title: 'Welcome',
+      headerTintColor: '#4519aa',
+      title: 'Profile',
       headerStyle: styles.header
     })
   },
@@ -52,7 +52,7 @@ const StackNav = createStackNavigator({
     screen: Signup,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: 'white',
+      headerTintColor: '#4519aa',
       title: 'Welcome',
       headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 },
     })
@@ -61,7 +61,7 @@ const StackNav = createStackNavigator({
     screen: Login,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: 'white',
+      headerTintColor: '#4519aa',
       title: 'Welcome',
       headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 },
     })
@@ -76,7 +76,7 @@ const StackNav = createStackNavigator({
     screen: NewPost,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: 'blue',
+      headerTintColor: '#4519aa',
       title: 'Add New Post',
       headerStyle: styles.header
     })
@@ -85,7 +85,7 @@ const StackNav = createStackNavigator({
     screen: ActivityLog,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
-      headerTintColor: 'blue',
+      headerTintColor: '#4519aa',
       title: 'Activity Log',
       headerStyle: styles.header
     })
@@ -95,7 +95,8 @@ const StackNav = createStackNavigator({
 const styles = StyleSheet.create({
   header: {
     width: '100%',
-    backgroundColor: '#eee',
+    
+    backgroundColor: 'white',
     borderWidth: 1,
     height: 40
   }
