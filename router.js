@@ -56,6 +56,9 @@ export const DrawerNav = createDrawerNavigator({
   UserProfile: {
     screen: UserProfile
   },
+  SinglePost: {
+    screen: SinglePost,
+  }
   
 
 }, {
@@ -125,15 +128,6 @@ export const MenuNav = createStackNavigator({
       headerTintColor: '#4519aa',
       title: 'Welcome',
       headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 }
-    })
-  },
-  SinglePost: {
-    screen: SinglePost,
-    navigationOptions: ({ navigation, header }) => ({
-      ...header,
-      headerTintColor: '#4519aa',
-      title: 'Welcome',
-      headerStyle: { backgroundColor: 'gray', borderWidth: 1, height: 60 },
     })
   },
   NewPost: {
