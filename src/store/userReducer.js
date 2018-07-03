@@ -117,18 +117,16 @@ export const userReducer = (state = initialState, action) => {
     case ADD_FRIEND:
     // console.log('action.newUser.user.Friend in ADD_FRIEND: ', action.newUser.user.Friend)
       return {...state, loggedInUser: {
-        ...state.loggedInUser, user: {
-          ...state.loggedInUser.user, Friend: action.newUser.user.Friend
+          ...state.loggedInUser, Friend: action.newUser.Friend
         }
-      }}
+      }
     case LOGGED_IN_USER:
       return {...state, loggedInUser: action.newUser}
     case REMOVE_FRIEND:
     return {...state, loggedInUser: {
-      ...state.loggedInUser, user: {
-        ...state.loggedInUser.user, Friend: action.newUser.user.Friend
+        ...state.loggedInUser, Friend: action.newUser.Friend
       }
-    }}
+    }
     default:
       return state
   }

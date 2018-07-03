@@ -43,7 +43,7 @@ class UserProfile extends Component {
           <View style={styles.followerSectionWrap}>
             <Image
             source={{ uri: singleUser.profileImg }}
-            style={{ width: 150, height: 150, borderRadius: 75, marginTop: 25, marginLeft: 25, borderWidth: 1.5, borderColor: 'white' }} />
+            style={{ width: 150, height: 150, borderRadius: 75, marginTop: 25, marginLeft: 25, borderWidth: 3, borderColor: 'white' }} />
             <View>
               
               <Text>
@@ -52,8 +52,8 @@ class UserProfile extends Component {
             </View>
             <View style={styles.subsection}>
               <View style={styles.subsubsection}>
-                <Text style={{color: 'white', fontWeight: 'bold', marginLeft: '6%', marginBottom: '10%'}}>Followers:</Text>
-                <Text  style={{color: 'white', fontWeight: 'bold', marginLeft: '6%', marginBottom: '10%'}}>Following:</Text>
+                <Text style={{color: '#0097E6', fontWeight: 'bold', marginLeft: '6%', marginBottom: '10%'}}>Followers:</Text>
+                <Text  style={{color: '#0097E6', fontWeight: 'bold', marginLeft: '6%', marginBottom: '10%'}}>Following:</Text>
               </View>
               {
                 loggedInUser.id !== singleUser.id && 
@@ -138,7 +138,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     // alignSelf: 'center',
     marginTop: 10,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    color: '#0097E6'
   },
   followerSectionWrap: {
     flexDirection: 'row',
@@ -203,7 +204,7 @@ const styles = StyleSheet.create({
   },
   mediaView: {
     marginTop: 20,
-    borderWidth: 1,
+    borderWidth: 3,
     borderColor: 'white',
     backgroundColor: '#EEE',
     borderRadius: 10

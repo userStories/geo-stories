@@ -4,6 +4,8 @@ export default {
     flex: 1,
   },
   button: {
-    backgroundColor: '#E71D36',
+    backgroundColor: '#00a8ff',
+    marginBottom: 15,
+    borderRadius: 10
   }
 };
