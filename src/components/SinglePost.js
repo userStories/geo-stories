@@ -148,36 +148,36 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: "2.5%",
     marginBottom: "5%",
-    color: 'white'
+    color: '#00a8ff'
     // paddingRight: '5%',
     // paddingLeft: '5%'
 
   },
   commentButtons: {
-    borderColor: '00a8ff',
+    borderColor: '#eee',
     borderWidth: 3,
     paddingLeft: 10,
     paddingRight: 10,
     paddingTop: 10,
-
+    borderColor: 'white',
     paddingBottom: 10,
     borderRadius: 10
   },
   commentText: {
     fontWeight: "bold",
-    color: 'white'
+    color: '#00a8ff'
   },
   title: {
     fontWeight: "bold",
     marginTop: "5%",
-    color: 'white',
+    color: '#00a8ff',
     marginBottom: "5%"
   },
   descriptionTitle: {
     alignSelf: "center",
     fontWeight: "bold",
     // marginBottom: "2.5%",
-    color: 'white'
+    color: '#00a8ff'
   },
   commentTitle: {
     marginTop: 40,
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
   },
   linkText: {
     fontWeight: "bold",
-    color: 'white',
+    color: '#00a8ff',
     textAlign: 'center'
   }
 

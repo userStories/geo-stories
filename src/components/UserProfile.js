@@ -52,8 +52,8 @@ class UserProfile extends Component {
             </View>
             <View style={styles.subsection}>
               <View style={styles.subsubsection}>
-                <Text style={{color: '#0097E6', fontWeight: 'bold', marginLeft: '6%', marginBottom: '10%'}}>Followers:</Text>
-                <Text  style={{color: '#0097E6', fontWeight: 'bold', marginLeft: '6%', marginBottom: '10%'}}>Following:</Text>
+                <Text style={{color: '#0097E6', fontWeight: 'bold', marginLeft: '6%', marginBottom: '10%'}}>Followers: 0</Text>
+                <Text  style={{color: '#0097E6', fontWeight: 'bold', marginLeft: '6%', marginBottom: '10%'}}>Following: {singleUser.Friend.length}</Text>
               </View>
               {
                 loggedInUser.id !== singleUser.id && 
@@ -66,7 +66,7 @@ class UserProfile extends Component {
               </View>
               </TouchableOpacity>
               }
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('ActivityLog')}><View style={styles.activityView}><Text style={styles.activityText}>Activity Log</Text></View></TouchableOpacity>
+              {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('ActivityLog')}><View style={styles.activityView}><Text style={styles.activityText}>Activity Log</Text></View></TouchableOpacity> */}
             </View>
           </View>
         <View>
@@ -127,8 +127,6 @@ class UserProfile extends Component {
 
 const styles = StyleSheet.create({
   mainWrap: {
-    // flex: 1,
-    // alignItems: 'center'
     backgroundColor: '#eee',
     flex: 1
   },
@@ -136,7 +134,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     fontSize: 24,
-    // alignSelf: 'center',
     marginTop: 10,
     alignSelf: 'center',
     color: '#0097E6'
@@ -157,7 +154,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-evenly',
     marginBottom: 620
-    
   },
   followView: {
     borderColor: 'white',
@@ -167,7 +163,6 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
     borderRadius: 10,
-    // width: 120,
     alignItems: 'center'
   },
   followText: {
@@ -182,7 +177,6 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
     borderRadius: 10,
-    // width: 120,
     marginTop: '8%',
     alignItems: 'center'
   },
@@ -196,11 +190,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     alignSelf: 'center',
     marginTop: 20
-  },
-  mediaWrapper: {
-    // width: 50,
-    // height: 50
-    
   },
   mediaView: {
     marginTop: 20,
@@ -217,10 +206,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginTop: 10,
     marginBottom: 10,
-    
-
   },
-  
 })
 
 const mapStateToProps = state => {

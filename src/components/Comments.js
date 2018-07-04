@@ -17,8 +17,8 @@ export default class CommentSection extends Component {
                 multiline={true}
                 onChangeText={handleChange}
                 value={stateComment}
-                style={{color: 'white', marginTop: 10}}
-                placeholderTextColor='white'
+                style={{color: '#00a8ff', marginTop: 10}}
+                placeholderTextColor='#00a8ff'
                 placeholder='Add a comment!'
               />
             </View>
@@ -44,7 +44,7 @@ export default class CommentSection extends Component {
                     <View style={styles.commentWrap}>
                         <View style={styles.innerViewWrap}>
                             {users.find(user => user.id === comment.userId) &&
-                            <Text style={{fontWeight: 'bold', color: 'white', marginBottom: '1%'}}>{users.find(user => user.id === comment.userId).fullName}</Text>
+                            <Text style={{fontWeight: 'bold', color: '#00a8ff', marginBottom: '1%'}}>{users.find(user => user.id === comment.userId).fullName}</Text>
                             }
                             <View style={styles.commentTextView}>
                                 <Text multiline={true} style={styles.comments}>{comment.content}</Text> 
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         marginRight: 30,
         borderColor: 'white',
         borderRadius: 5,
-        backgroundColor: '#4519aa',
+        backgroundColor: '#eee',
         borderWidth: 2,
     },
       commentButton: {
@@ -98,9 +98,9 @@ const styles = StyleSheet.create({
       },
       sumbitText: {
         fontWeight: "bold",
-        color: 'white'
+        color: '#00a8ff'
       },
       comments: {
-          color: 'white'
+          color: '#00a8ff'
       }
 })
