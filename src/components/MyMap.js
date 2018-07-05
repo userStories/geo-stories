@@ -20,8 +20,14 @@ import { Button } from 'react-native-elements'
 
 const { width, height } = Dimensions.get('window');
 
-const CARD_HEIGHT = 133;
-const CARD_WIDTH = 170;
+// const CARD_HEIGHT = 105;
+// const CARD_WIDTH = 140;
+
+// const CARD_HEIGHT = 133;
+// const CARD_WIDTH = 170;
+const CARD_HEIGHT = 135;
+const CARD_WIDTH = 160;
+
 const LATITUDE_DELTA = 0.00522;
 const LONGITUDE_DELTA = Dimensions.get('window').width / Dimensions.get('window').height * 0.00522
 
