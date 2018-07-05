@@ -36,27 +36,6 @@ export const StackNav = createStackNavigator({
       headerStyle: styles.header
     })
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
 })
 
@@ -87,8 +66,10 @@ export const DrawerNav = createDrawerNavigator({
   },
   SinglePost: {
     screen: SinglePost,
+  },
+  NewPost: {
+    screen: NewPost
   }
-  
 
 }, {
   contentComponent: DrawerContent,

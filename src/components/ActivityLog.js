@@ -13,18 +13,15 @@ class ActivityLog extends Component {
 
     render(){
         const {allPosts, loggedInUser, loggedInUserAuth} = this.props
-        console.log('allPosts in ActivityLog: ', allPosts)
-        console.log('loggedInUser in activityLog: ', loggedInUser)
-        console.log('loggedInUserAuth in activityLog: ', loggedInUserAuth)
         return (
             <View style={{flex: 1, backgroundColor: '#eee', alignItems: 'center'}}>
             {
                 allPosts
-                    .filter(post => loggedInUser.Friend.find(elem => post.userId === elem.id))
+                    .filter(post => loggedInUser.user.Friend.find(elem => post.userId === elem.id))
                     .map(post => {
                         return (
                         <View style={styles.elemWrapper} key={post.id}>
-                                    <Text >{post.fullName}</Text>
+                                    <Text >{post.user.fullName}</Text>
                                     <Text style={styles.elemText}>{post.title}</Text>
                         </View>
                         ) 

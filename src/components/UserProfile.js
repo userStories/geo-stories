@@ -39,29 +39,29 @@ class UserProfile extends Component {
       {
       !!loggedInUser ? 
       <View>
-      <Text style={styles.userName}>{singleUser.fullName}</Text>
+      <Text style={styles.userName}>{singleUser.user.fullName}</Text>
           <View style={styles.followerSectionWrap}>
             <Image
-            source={{ uri: singleUser.profileImg }}
+            source={{ uri: singleUser.user.profileImg }}
             style={{ width: 150, height: 150, borderRadius: 75, marginTop: 25, marginLeft: 25, borderWidth: 3, borderColor: 'white' }} />
             <View>
               
               <Text>
-              {singleUser.tagline}
+              {singleUser.user.tagline}
               </Text>
             </View>
             <View style={styles.subsection}>
               <View style={styles.subsubsection}>
                 <Text style={{color: '#0097E6', fontWeight: 'bold', marginLeft: '6%', marginBottom: '10%'}}>Followers: 0</Text>
-                <Text  style={{color: '#0097E6', fontWeight: 'bold', marginLeft: '6%', marginBottom: '10%'}}>Following: {singleUser.Friend.length}</Text>
+                <Text  style={{color: '#0097E6', fontWeight: 'bold', marginLeft: '6%', marginBottom: '10%'}}>Following: {singleUser.user.Friend.length}</Text>
               </View>
               {
-                loggedInUser.id !== singleUser.id && 
+                loggedInUser.user.id !== singleUser.user.id && 
               <TouchableOpacity>
               <View style={styles.followView}>
-                { !loggedInUser.Friend.find(elem => elem.id === singleUser.id) ? 
-                <Text style={styles.followText} onPress={() => addFriend(loggedInUser.id, singleUser.id)}>Follow</Text>: 
-                <Text style={styles.followText} onPress={()=> removeFriend(loggedInUser.id, singleUser.id)}>UnFollow</Text>
+                { !loggedInUser.user.Friend.find(elem => elem.id === singleUser.user.id) ? 
+                <Text style={styles.followText} onPress={() => addFriend(loggedInUser.user.id, singleUser.user.id)}>Follow</Text>: 
+                <Text style={styles.followText} onPress={()=> removeFriend(loggedInUser.user.id, singleUser.user.id)}>UnFollow</Text>
                 }
               </View>
               </TouchableOpacity>
@@ -76,7 +76,7 @@ class UserProfile extends Component {
             {
               allPosts
                 .filter(post => {
-                  return post.userId === singleUser.id
+                  return post.userId === singleUser.user.id
                 })
                 .map(post =>
                 <View

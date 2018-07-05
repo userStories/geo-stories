@@ -16,11 +16,11 @@ const getAllUsers = users => {
   }
 }
 
-getSingleUser = user =>{
-  console.log('user in action creator: ', user)
+getSingleUser = newUser =>{
+  console.log('user in action creator: ', newUser)
   return {
     type: DISPLAY_SINGLE_USER,
-    user
+    newUser
   }
 }
 
@@ -113,20 +113,24 @@ export const userReducer = (state = initialState, action) => {
     case DISPLAY_ALL_USERS:
       return { ...state, allUsers: action.users }
     case DISPLAY_SINGLE_USER:
-      return {...state, singleUser: action.user}
+      return {...state, singleUser: action.newUser}
     case ADD_FRIEND:
     // console.log('action.newUser.user.Friend in ADD_FRIEND: ', action.newUser.user.Friend)
       return {...state, loggedInUser: {
-          ...state.loggedInUser, Friend: action.newUser.Friend
+          ...state.loggedInUser, user: {
+            ...state.loggedInUser.user, Friend: action.newUser.user.Friend
+          }
         }
       }
     case LOGGED_IN_USER:
       return {...state, loggedInUser: action.newUser}
     case REMOVE_FRIEND:
     return {...state, loggedInUser: {
-        ...state.loggedInUser, Friend: action.newUser.Friend
+      ...state.loggedInUser, user: {
+        ...state.loggedInUser.user, Friend: action.newUser.user.Friend
       }
     }
+  }
     default:
       return state
   }
