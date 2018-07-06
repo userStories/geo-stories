@@ -21,7 +21,7 @@ class ActivityLog extends Component {
     nowLoaded = () => {
         this.setState({loading: false})
     }
-
+    //recommit
     render(){
         const {allPosts, loggedInUser, loggedInUserAuth} = this.props
         const imageExt = ['jpeg', 'jpg', 'png', 'gif']
