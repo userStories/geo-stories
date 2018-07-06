@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
         // flexDirection: 'c',
         
         marginRight: 40,
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         alignSelf: 'center',
         alignItems: 'center',
         paddingRight: 15
@@ -125,11 +125,10 @@ const styles = StyleSheet.create({
     elemText: {
         alignSelf: 'center',
         color: '#00a8ff',
-        fontSize: 18,
+        fontSize: 12,
         marginTop: 10,
         marginBottom: 10,
-        fontWeight: 'bold'
-
+        width: 160
     },
     imageWrap: {
         width: 110,

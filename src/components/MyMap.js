@@ -40,6 +40,7 @@ class MyMap extends Component {
         longitude: -87.6386050932,
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA,
+        loading: true
 			}
 			
 		callOutShow = () => {
@@ -248,7 +249,9 @@ class MyMap extends Component {
 
                 <Image 
 									style={styles.cardImage} 
-									source={{uri: marker.mediaLink}} 
+                  source={{uri: marker.mediaLink}} 
+                  onLoadStart={this.notLoaded}
+                  onLoad={this.nowLoaded}
                   resizeMode='cover'
 								/>
 
