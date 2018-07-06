@@ -125,6 +125,7 @@ const styles = StyleSheet.create({
     elemText: {
         alignSelf: 'center',
         color: '#00a8ff',
+        textAlign: 'center',
         fontSize: 12,
         marginTop: 10,
         marginBottom: 10,
