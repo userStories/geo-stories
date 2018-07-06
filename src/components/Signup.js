@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, Button, TouchableWithoutFeedback, Keyboard, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableWithoutFeedback, Keyboard, TouchableOpacity, Image } from 'react-native';
 import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
 import { auth } from '../store/authReducer';
 import Loader from './Loader'
@@ -41,7 +41,7 @@ class Signup extends Component {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.mainWrap}>
-        <Text style={styles.signupText}>GeoStories</Text>
+        <Image style={styles.logo} source={{ uri: 'http://res.cloudinary.com/dhktg6yis/image/upload/v1530895276/geostories/Draft_2_logo.png' }} />
           <View style={styles.inputWraps}>
             <FormInput
               value={firstName}
@@ -104,17 +104,16 @@ const styles = StyleSheet.create({
   mainWrap: {
     backgroundColor: '#eee',
     flex: 1,
-    paddingTop: '15%',
+    paddingTop: '10%',
     alignItems: 'center',
   },
   inputWraps: {
     width: '90%'
   },
-  signupText: {
-    fontSize: 35,
-    fontWeight: 'bold',
-    color: '#00a8ff',
-    marginBottom: '2%'
+  logo: {
+    height: 200,
+    width: 200,
+    alignItems: 'center',
   },
   submitView: {
     marginTop: '6%',

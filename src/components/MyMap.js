@@ -17,7 +17,7 @@ import { connect } from 'react-redux'
 import { getAllPostsThunk, getSinglePostThunk, getAllCategoriesThunk, filterIdThunk } from '../store'
 import PopupDialog, { DialogTitle } from 'react-native-popup-dialog'
 import { Button } from 'react-native-elements'
-
+import Loader from './Loader'
 const { width, height } = Dimensions.get('window');
 
 // const CARD_HEIGHT = height / 4;
@@ -32,7 +32,8 @@ class MyMap extends Component {
 				currentMarker: null,
         // focusedLocation: {
 					latitude: 41.89557129,
-					longitude: -87.6386050932,
+          longitude: -87.6386050932,
+          lading: true
 					// latitudeDelta: 0.00522,
 					// longitudeDelta:
 					// Dimensions.get('window').width /
@@ -129,6 +130,15 @@ class MyMap extends Component {
       this.props.navigation.navigate('SinglePost', { id: index })
     }
 
+
+    notLoaded = () => {
+      this.setState({loading: true})
+    }
+
+    nowLoaded = () => {
+      this.setState({loading: false})
+    }
+
     render() {
       const videoExt = ['mp4', 'mp3', 'avi', 'flv', 'mov', 'wmv'];
       // let newreg = this.state.focusedLocation
@@ -141,6 +151,8 @@ class MyMap extends Component {
       }
         return (
             <View style={styles.container}>
+            <Loader 
+          loading={this.state.loading} />
                 <MapView
           				ref={map => this.map = map}
                     initialRegion={newreg}
@@ -229,7 +241,9 @@ class MyMap extends Component {
 									rate={1.0}
 									volume={0}
 									muted={false}
-									resizeMode="cover"
+                  resizeMode="cover"
+                  onLoadStart={this.notLoaded}
+                  onLoad={this.nowLoaded}
 									shouldPlay
 									isLooping
 									style={styles.cardImage} 

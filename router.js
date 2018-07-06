@@ -42,9 +42,6 @@ export const StackNav = createStackNavigator({
 export const DrawerNav = createDrawerNavigator({
   MyMap: {
     screen: MyMap,
-  },
-  SinglePost: {
-    screen: SinglePost,
     navigationOptions: ({ navigation, header }) => ({
       ...header,
       headerTintColor: '#00a8ff',
@@ -52,6 +49,15 @@ export const DrawerNav = createDrawerNavigator({
       headerStyle: styles.header
     })
   },
+  // SinglePost: {
+  //   screen: SinglePost,
+  //   navigationOptions: ({ navigation, header }) => ({
+  //     ...header,
+  //     headerTintColor: '#00a8ff',
+  //     title: 'Post',
+  //     headerStyle: styles.header
+  //   })
+  // },
   Logout: {
     screen: Logout
   },

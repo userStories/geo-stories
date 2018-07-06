@@ -4,7 +4,7 @@ import { Provider, connect } from 'react-redux'
 import Router from './Routes'
 import store, { persistor } from './src/store'
 import { PersistGate } from 'redux-persist/lib/integration/react'
-
+console.disableYellowBox = true
 class App extends React.Component {
   constructor () {
     super()
