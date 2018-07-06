@@ -94,7 +94,7 @@ class NewPost extends React.Component {
       console.log('this.state', this.state)
       console.log('newObj', newObj)
       this.props.addNewPostMethod(newObj)
-      this.props.navigation.navigate('MyMap', { newPostNow: true })
+      this.props.navigation.navigate('MyMap')
     } else if (cameraPic !== 'none') {
       newObj = cameraPic
 
@@ -107,7 +107,8 @@ class NewPost extends React.Component {
       console.log('this.state', this.state)
       console.log('newObj', newObj)
       this.props.addNewPostMethod(cameraPic)
-      this.props.navigation.navigate('MyMap', { newPostNow: true })
+
+      this.props.navigation.navigate('MyMap')
     }
   }
 
@@ -122,7 +123,7 @@ class NewPost extends React.Component {
       newObj.longitude = this.state.location.coords.longitude
       newObj.userId = this.props.userId
       this.props.addNewPostMethod(this.state.video)
-      this.props.navigation.navigate('MyMap', { newPostNow: true })
+      this.props.navigation.navigate('MyMap')
     } else if (newVideo !== 'none') {
       newObj = newVideo
       newObj.title = this.state.title
@@ -131,7 +132,7 @@ class NewPost extends React.Component {
       newObj.longitude = this.state.location.coords.longitude
       newObj.userId = this.props.userId
       this.props.addNewPostMethod(newVideo)
-      this.props.navigation.navigate('MyMap', { newPostNow: true })
+      this.props.navigation.navigate('MyMap')
     }
   }
 
@@ -300,7 +301,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginLeft: 80,
     marginRight: 80,
-    height: 35,
+    height: 40,
     borderColor: 'white',
     // color: 'white',
     backgroundColor: '#EEE',
@@ -343,7 +344,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginLeft: 30,
     marginRight: 30,
-    height: 100,
+    height: 90,
     borderColor: 'white',
     borderRadius: 5,
     backgroundColor: '#EEE',
